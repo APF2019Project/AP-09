@@ -1,3 +1,5 @@
+package model;
+
 public class Zombie extends Card{
     private int speed;
     private int healthPoint;

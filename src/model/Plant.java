@@ -1,3 +1,5 @@
+package model;
+
 public class Plant extends Card{
     private int plantedTurn;
     private int healthPoint;
