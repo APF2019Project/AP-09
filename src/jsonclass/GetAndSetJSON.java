@@ -24,19 +24,33 @@ public class GetAndSetJSON {
     }
     public void setJson() {
         try {
-            FileWriter fileWriter1 = new FileWriter("zombie.json");
+            FileWriter fileWriter1 = new FileWriter("json/zombie.json");
             YaGson gson = new YaGson();
+
+            for (int i = 0; i < 15; i++) {
+                Zombie zombie = new Zombie();
+                zombie.setZombieType(ZombieType.WATER);
+                zombie.setTruckType(TruckType.STRONG);
+                zombie.setHelmetType(HelmetType.BUCKETHEAD);
+            }
 
             String z = gson.toJson(Zombie.getZombies());
             fileWriter1.write(z);
             fileWriter1.flush();
+            FileWriter fileWriter = new FileWriter("json/plant.json");
 
-            FileWriter fileWriter = new FileWriter("plant.json");
+            for (int i = 0; i < 24; i++) {
+                Plant plant = new Plant();
+                plant.setPlantType(PlantType.WATER);
+                plant.setBombType(BombType.CHERRY);
+                plant.setBulletType(BulletType.GATLINGPEA);
+                plant.setNutType(NutType.EXPLODEONUT);
+                plant.setSunflowerType(SunflowerType.SINGLE);
+            }
 
             String p = gson.toJson(Plant.getPlants());
             fileWriter.write(p);
             fileWriter.flush();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
