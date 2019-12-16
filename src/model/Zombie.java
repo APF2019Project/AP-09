@@ -1,6 +1,9 @@
 package model;
 
-public class Zombie extends Card{
+import java.util.ArrayList;
+
+public class Zombie extends Card {
+    private static ArrayList<Zombie> zombies = new ArrayList<>();
     private int speed;
     private int healthPoint;
     private int attackPower;
@@ -17,6 +20,33 @@ public class Zombie extends Card{
     private boolean hasDuck;
     private boolean hasArmor;
     private boolean hasShield;
+
+    public Zombie() {
+        zombies.add(this);
+    }
+
+    public Zombie(int speed, int healthPoint, int attackPower, int shieldHP, ZombieType zombieType, HelmetType helmetType,
+                  TruckType truckType, boolean hasHelmet, boolean hasTruck, boolean isBungeeZombie, boolean isBalloonZombie,
+                  boolean isGigaGargantuar, boolean isPogoZombie, boolean hasDuck, boolean hasArmor, boolean hasShield) {
+        this.speed = speed;
+        this.healthPoint = healthPoint;
+        this.attackPower = attackPower;
+        this.shieldHP = shieldHP;
+        this.zombieType = zombieType;
+        this.helmetType = helmetType;
+        this.truckType = truckType;
+        this.hasHelmet = hasHelmet;
+        this.hasTruck = hasTruck;
+        this.isBungeeZombie = isBungeeZombie;
+        this.isBalloonZombie = isBalloonZombie;
+        this.isGigaGargantuar = isGigaGargantuar;
+        this.isPogoZombie = isPogoZombie;
+        this.hasDuck = hasDuck;
+        this.hasArmor = hasArmor;
+        this.hasShield = hasShield;
+        zombies.add(this);
+    }
+
 
     public int getSpeed() {
         return speed;
@@ -144,5 +174,9 @@ public class Zombie extends Card{
 
     public void setTruckType(TruckType truckType) {
         this.truckType = truckType;
+    }
+
+    public static ArrayList<Zombie> getZombies() {
+        return zombies;
     }
 }

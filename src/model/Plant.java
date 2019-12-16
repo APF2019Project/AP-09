@@ -1,6 +1,9 @@
 package model;
 
-public class Plant extends Card{
+import java.util.ArrayList;
+
+public class Plant extends Card {
+    private static ArrayList<Plant> plants = new ArrayList<>();
     private int plantedTurn;
     private int healthPoint;
     private int attackPower;
@@ -23,6 +26,40 @@ public class Plant extends Card{
     private boolean isTangleKelp;
     private boolean isCattail;
     private boolean hasMagnet;
+
+    public Plant(){
+        plants.add(this);
+    }
+
+    public Plant(int plantedTurn, int healthPoint, int attackPower, int coolDown, int sunUsage, PlantType plantType,
+                 BulletType bulletType, BombType bombType, NutType nutType, SunflowerType sunflowerType,
+                 boolean hasBullet, boolean isBomb, boolean isNut, boolean isSunflower, boolean isSnowy, boolean doesFreeze,
+                 boolean isCactus, boolean isScared, boolean isLilyPad, boolean isTangleKelp, boolean isCattail,
+                 boolean hasMagnet) {
+        this.plantedTurn = plantedTurn;
+        this.healthPoint = healthPoint;
+        this.attackPower =attackPower;
+        this.coolDown =coolDown;
+        this.sunUsage = sunUsage;
+        this.plantType = plantType;
+        this.bulletType = bulletType;
+        this.bombType = bombType;
+        this.nutType = nutType;
+        this.sunflowerType =sunflowerType;
+        this.hasBullet = hasBullet;
+        this.isBomb = isBomb;
+        this.isNut = isNut;
+        this.isSunflower = isSunflower;
+        this.isSnowy = isSnowy;
+        this.doesFreeze = doesFreeze;
+        this.isCactus = isCactus;
+        this.isScared = isScared;
+        this.isLilyPad = isLilyPad;
+        this.isTangleKelp = isTangleKelp;
+        this.isCattail = isCattail;
+        this.hasMagnet = hasMagnet;
+        plants.add(this);
+    }
 
     public int getPlantedTurn() {
         return plantedTurn;
@@ -198,5 +235,9 @@ public class Plant extends Card{
 
     public void setPlantType(PlantType plantType) {
         this.plantType = plantType;
+    }
+
+    public static ArrayList<Plant> getPlants() {
+        return plants;
     }
 }
