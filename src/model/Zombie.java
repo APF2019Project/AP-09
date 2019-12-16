@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class Zombie extends Card {
     private static ArrayList<Zombie> zombies = new ArrayList<>();
+    private String zombieName ;
+    private String zombieId = null;
     private int speed;
     private int healthPoint;
     private int attackPower;
@@ -25,9 +27,10 @@ public class Zombie extends Card {
         zombies.add(this);
     }
 
-    public Zombie(int speed, int healthPoint, int attackPower, int shieldHP, ZombieType zombieType, HelmetType helmetType,
+    public Zombie(String zombieName, int speed, int healthPoint, int attackPower, int shieldHP, ZombieType zombieType, HelmetType helmetType,
                   TruckType truckType, boolean hasHelmet, boolean hasTruck, boolean isBungeeZombie, boolean isBalloonZombie,
                   boolean isGigaGargantuar, boolean isPogoZombie, boolean hasDuck, boolean hasArmor, boolean hasShield) {
+        this.zombieName = zombieName ;
         this.speed = speed;
         this.healthPoint = healthPoint;
         this.attackPower = attackPower;
@@ -178,5 +181,22 @@ public class Zombie extends Card {
 
     public static ArrayList<Zombie> getZombies() {
         return zombies;
+    }
+
+    public String getZombieName() {
+        return zombieName;
+    }
+
+    public void setZombieName(String zombieName) {
+        this.zombieName = zombieName;
+    }
+
+
+    public String getZombieId() {
+        return zombieId;
+    }
+
+    public void setZombieId(String zombieId) {
+        this.zombieId = zombieId;
     }
 }

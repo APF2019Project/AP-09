@@ -1,7 +1,9 @@
-package jsonclass;
+package warriorJSON;
 
 import model.Plant;
 import model.Zombie;
+
+import static model.ZombieType.LAND;
 
 public class MakePlantAndZombie {
     private static MakePlantAndZombie instance = new MakePlantAndZombie();

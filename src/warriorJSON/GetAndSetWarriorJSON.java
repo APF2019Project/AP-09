@@ -1,4 +1,4 @@
-package jsonclass;
+package warriorJSON;
 
 import com.gilecode.yagson.YaGson;
 import model.*;
@@ -6,9 +6,9 @@ import model.*;
 import java.io.FileReader;
 import java.io.FileWriter;
 
-public class GetAndSetJSON {
-    private static GetAndSetJSON instance = new GetAndSetJSON();
-    private GetAndSetJSON(){
+public class GetAndSetWarriorJSON {
+    private static GetAndSetWarriorJSON instance = new GetAndSetWarriorJSON();
+    private GetAndSetWarriorJSON(){
 
     }
     public void getJson() {
@@ -42,7 +42,7 @@ public class GetAndSetJSON {
     }
 
 
-    public static GetAndSetJSON getInstance() {
+    public static GetAndSetWarriorJSON getInstance() {
         return instance;
     }
 }
