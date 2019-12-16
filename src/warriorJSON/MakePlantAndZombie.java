@@ -1,11 +1,7 @@
 
 package warriorJSON;
 
-import model.HelmetType;
-import model.TruckType;
-import model.Plant;
-import model.Zombie;
-import model.ZombieType;
+import model.*;
 
 public class MakePlantAndZombie {
     private static MakePlantAndZombie instance = new MakePlantAndZombie();
@@ -37,6 +33,31 @@ public class MakePlantAndZombie {
     }
 
     private void plantMaker() {
+        new Plant("Peashooter", 2, 2, 1, 2, 2, PlantType.LAND, BulletType.PEA, BombType.NONE, NutType.NONE, SunflowerType.NONE, true, false, false, false, false, false, false, false, false, false, false, false, false);//Peashooter
+        new Plant("Snow Pea", 3, 3, 1, 3, 3, PlantType.LAND, BulletType.PEA, BombType.NONE, NutType.NONE, SunflowerType.NONE, true, false, false, false, true, false, false, false, false, false, false, false, false);//Snow Pea
+        new Plant("Cabbage-pult", 2, 2, 2, 3, 2, PlantType.LAND, BulletType.PROJECTILE, BombType.NONE, NutType.NONE, SunflowerType.NONE, true, false, false, false, false, false, false, false, false, false, false, false, false);//Cabbage-pult
+        new Plant("Repeater", 3, 4, 1, 4, 3, PlantType.LAND, BulletType.REPEATER, BombType.NONE, NutType.NONE, SunflowerType.NONE, true, false, false, false, false, false, false, false, false, false, false, false, false);//Repeater
+        new Plant("Threepeater", 4, 5, 1, 4, 4, PlantType.LAND, BulletType.THREEPEATER, BombType.NONE, NutType.NONE, SunflowerType.NONE, true, false, false, false, false, false, false, false, false, false, false, false, false);//Threepeater
+        new Plant("Cactus", 2, 5, 1, 4, 5, PlantType.LAND, BulletType.PEA, BombType.NONE, NutType.NONE, SunflowerType.NONE, true, false, false, false, false, false, true, false, false, false, false, false, false);//Cactus
+        new Plant("Gatling Pea", 5, 3, 1, 4, 5, PlantType.LAND, BulletType.GATLINGPEA, BombType.NONE, NutType.NONE, SunflowerType.NONE, true, false, false, false, false, false, false, false, false, false, false, false, false);//Gatling Pea
+        new Plant("Scaredy-shroom", 2, 1, 1, 2, 1, PlantType.LAND, BulletType.PEA, BombType.NONE, NutType.NONE, SunflowerType.NONE, true, false, false, false, false, false, false, true, false, false, false, false, false);//Scaredy-shroom
+        new Plant("Kernel-pult", 4, 2, 0, 3, 3, PlantType.LAND, BulletType.PROJECTILE, BombType.NONE, NutType.NONE, SunflowerType.NONE, true, false, false, false, false, false, false, false, false, false, false, false, true);//Kernel-pult
+        new Plant("Split Pea", 0, 3, 1, 4, 4, PlantType.LAND, BulletType.SPLITPEA, BombType.NONE, NutType.NONE, SunflowerType.NONE, true, false, false, false, false, false, false, false, false, false, false, false, false);//Split Pea
+        new Plant("Explode-o-nut", 0, 3, 1, 5, 4, PlantType.LAND, BulletType.NONE, BombType.NONE, NutType.EXPLODEONUT, SunflowerType.NONE, false, false, true, false, false, false, false, false, false, false, false, false, false);//Explode-o-nut
+        new Plant("Melon-pult", 4, 3, 3, 3, 3, PlantType.LAND, BulletType.PROJECTILE, BombType.NONE, NutType.NONE, SunflowerType.NONE, true, false, false, false, false, false, false, false, false, false, false, false, false);//Melon-pult
+        new Plant("Lily Pad", 0, 1, 0, 1, 0, PlantType.WATER, BulletType.NONE, BombType.NONE, NutType.NONE, SunflowerType.NONE, false, false, false, false, false, false, false, false, true, false, false, false, false);//Lily Pad
+        new Plant("Winter Melon", 4, 3, 3, 5, 4, PlantType.LAND, BulletType.PROJECTILE, BombType.NONE, NutType.NONE, SunflowerType.NONE, true, false, false, false, true, false, false, false, false, false, false, false, false);//Winter Melon
+        new Plant("Wall-nut", 0, 4, 0, 4, 2, PlantType.LAND, BulletType.NONE, BombType.NONE, NutType.WALLNUT, SunflowerType.NONE, false, false, true, false, false, false, false, false, false, false, false, false, false);//Wall-nut
+        new Plant("Tangle Kelp", 0, 1, 0, 3, 3, PlantType.WATER, BulletType.NONE, BombType.NONE, NutType.NONE, SunflowerType.NONE, false, false, false, false, false, false, false, false, false, true, false, false, false);//Tangle Kelp
+        new Plant("Tall-nut", 0, 6, 0, 6, 4, PlantType.LAND, BulletType.NONE, BombType.NONE, NutType.TALLNUT, SunflowerType.NONE, false, false, true, false, false, false, false, false, false, false, false, false, false);//Tall-nut
+        //new Plant("Cattail", 0, 3, 1, 5, 5, PlantType.LAND, BulletType.PEA, BombType.NONE, NutType.NONE, SunflowerType.NONE, true, false, false, false, false, false, false, false, false, false, true, false, false);//Cattail
+        new Plant("Potato Mine", 1, 1, 0, 3, 2, PlantType.LAND, BulletType.NONE, BombType.POTATO, NutType.NONE, SunflowerType.NONE, false, true, false, false, false, false, false, false, false, false, false, false, false);//Potato Mine
+        new Plant("Cherry Bomb", 0, 1, 0, 4, 2, PlantType.LAND, BulletType.NONE, BombType.CHERRY, NutType.NONE, SunflowerType.NONE, false, true, false, false, false, false, false, false, false, false, false, false, false);//Cherry Bomb
+        new Plant("Magnet-shroom", 3, 2, 0, 4, 4, PlantType.LAND, BulletType.NONE, BombType.NONE, NutType.NONE, SunflowerType.NONE, false, false, false, false, false, false, false, false, false, false, false, true, false);//Magnet-shroom
+        new Plant("Sunflower", 2, 2, 0, 2, 1, PlantType.LAND, BulletType.NONE, BombType.NONE, NutType.NONE, SunflowerType.SINGLE, false, false, false, true, false, false, false, false, false, false, false, false, false);//Sunflower
+        new Plant("Twin Sunflower", 2, 2, 0, 5, 3, PlantType.LAND, BulletType.NONE, BombType.NONE, NutType.NONE, SunflowerType.TWIN, false, false, false, true, false, false, false, false, false, false, false, false, false);//Twin Sunflower
+        new Plant("Jalapeno", 0, 1, 0, 5, 4, PlantType.LAND, BulletType.NONE, BombType.JALAPENO, NutType.NONE, SunflowerType.NONE, false, true, false, false, false, false, false, false, false, false, false, false, false);//Jalapeno
+
 
     }
 
