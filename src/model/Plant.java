@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class Plant extends Card {
     private static ArrayList<Plant> plants = new ArrayList<>();
+    private String plantName ;
+    private String plantId = null;
     private int plantedTurn;
     private int healthPoint;
     private int attackPower;
@@ -30,11 +32,13 @@ public class Plant extends Card {
     public Plant(){
         plants.add(this);
     }
-    public Plant(int plantedTurn, int healthPoint, int attackPower, int coolDown, int sunUsage, PlantType plantType,
+
+    public Plant(String plantName, int plantedTurn, int healthPoint, int attackPower, int coolDown, int sunUsage, PlantType plantType,
                  BulletType bulletType, BombType bombType, NutType nutType, SunflowerType sunflowerType,
                  boolean hasBullet, boolean isBomb, boolean isNut, boolean isSunflower, boolean isSnowy, boolean doesFreeze,
                  boolean isCactus, boolean isScared, boolean isLilyPad, boolean isTangleKelp, boolean isCattail,
                  boolean hasMagnet) {
+        this.plantName = plantName ;
         this.plantedTurn = plantedTurn;
         this.healthPoint = healthPoint;
         this.attackPower =attackPower;
@@ -238,5 +242,21 @@ public class Plant extends Card {
 
     public static ArrayList<Plant> getPlants() {
         return plants;
+    }
+
+    public String getPlantName() {
+        return plantName;
+    }
+
+    public void setPlantName(String plantName) {
+        this.plantName = plantName;
+    }
+
+    public String getPlantId() {
+        return plantId;
+    }
+
+    public void setPlantId(String plantId) {
+        this.plantId = plantId;
     }
 }
