@@ -1,5 +1,10 @@
 package controller;
 
+import command.LoginCommand;
+import command.Menu;
+import model.Account;
+import view.Input;
+
 import java.util.ArrayList;
 
 public class Controller {
@@ -15,14 +20,52 @@ public class Controller {
 
     public void main(){
         while (!endGame) {
-            //TODO call Input Class to get input's command and get an Enum
+            System.out.println(getCurrentMenu());
+            Input.getInstance().getCommandFromUserInConsole();
 
-            //TODO process
-
+            getCommandEnumFromInput();
             //TODO call Output
         }
     }
 
+
+
+    private void login(String command){
+
+
+    }
+
+    private void getCommandEnumFromInput(){
+        switch (getCurrentMenu()){
+            case LOGIN:
+                loginMenu(Input.getInstance().getLastLoginCommand());
+                break;
+        }
+    }
+
+    private void loginMenu(LoginCommand loginCommand){
+        switch (loginCommand){
+            case LOGIN:
+                login(loginCommand);
+                break;
+            case EXIT:
+                break;
+            case SIGN_UP:
+                break;
+        }
+    }
+
+    private void login(LoginCommand loginCommand){
+        String name  = loginCommand.getName();
+        String password = loginCommand.getPassword();
+        Account account = new Account(name,password);
+        Account.setLoggedAccount(account);
+        menus.add(Menu.MAIN);
+    }
+
+    public Menu getCurrentMenu(){
+        return menus.get(menus.size()-1);
+    }
     public void setEndGame(boolean endGame) {
         this.endGame = endGame;
     }

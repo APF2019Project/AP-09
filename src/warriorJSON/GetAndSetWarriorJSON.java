@@ -1,6 +1,7 @@
 package warriorJSON;
 
 import com.gilecode.yagson.YaGson;
+import model.Plant;
 import model.Zombie;
 import model.Plant;
 import java.io.FileReader;
