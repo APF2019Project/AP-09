@@ -1,5 +1,5 @@
 package model;
 
 public enum TruckType {
-    STRONG, WEAK
+    STRONG, WEAK, NONE
 }

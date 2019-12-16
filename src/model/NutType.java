@@ -1,5 +1,5 @@
 package model;
 
 public enum NutType {
-    WALLNUT, TALLNUT, EXPLODEONUT
+    WALLNUT, TALLNUT, EXPLODEONUT, NONE
 }

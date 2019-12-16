@@ -1,5 +1,5 @@
 package model;
 
 public enum HelmetType {
-    BUCKETHEAD, CONEHEAD
+    BUCKETHEAD, CONEHEAD, NONE
 }

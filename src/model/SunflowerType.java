@@ -1,5 +1,5 @@
 package model;
 
 public enum SunflowerType {
-    SINGLE, TWIN
+    SINGLE, TWIN, NONE
 }

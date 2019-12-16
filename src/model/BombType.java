@@ -1,5 +1,5 @@
 package model;
 
 public enum BombType {
-    JALAPENO, CHERRY, POTATO
+    JALAPENO, CHERRY, POTATO, NONE
 }
