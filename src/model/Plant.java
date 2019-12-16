@@ -30,7 +30,6 @@ public class Plant extends Card {
     public Plant(){
         plants.add(this);
     }
-
     public Plant(int plantedTurn, int healthPoint, int attackPower, int coolDown, int sunUsage, PlantType plantType,
                  BulletType bulletType, BombType bombType, NutType nutType, SunflowerType sunflowerType,
                  boolean hasBullet, boolean isBomb, boolean isNut, boolean isSunflower, boolean isSnowy, boolean doesFreeze,
