@@ -44,6 +44,7 @@ public class Zombie extends Card {
         this.hasDuck = hasDuck;
         this.hasArmor = hasArmor;
         this.hasShield = hasShield;
+        zombies.add(this);
     }
 
 
