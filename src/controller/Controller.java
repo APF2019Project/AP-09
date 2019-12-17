@@ -6,6 +6,7 @@ import model.Account;
 import view.Input;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Controller {
     private final static Controller instance  = new Controller();
@@ -49,10 +50,40 @@ public class Controller {
                 login(loginCommand);
                 break;
             case EXIT:
+                exit() ;
                 break;
             case SIGN_UP:
+                signUp(loginCommand);
                 break;
+            case LEADERBOARD:
+                leaderBoard();
         }
+    }
+    public void exit(){
+        endGame = true ;
+    }
+
+    private void leaderBoard() {
+        Collections.sort(Account.getAllAccount());
+        for (Account account:Account.getAllAccount()) {
+            System.out.println(account.getUserName() + " " + account.getKilledZombies());
+        }
+    }
+
+    private void signUp(LoginCommand loginCommand) {
+        String name  = loginCommand.getName();
+        String password = loginCommand.getPassword();
+        int flagOfExistence = 0 ;
+        for (Account account: Account.getAllAccount()) {
+            if (account.getUserName().equals(name)){
+                flagOfExistence = 1 ;
+            }
+        }
+        if (flagOfExistence==0){
+            Account.getAllAccount().add(new Account(name, password));
+        }else
+            System.out.println("already exist");
+
     }
 
     private void login(LoginCommand loginCommand){
@@ -65,8 +96,6 @@ public class Controller {
                 flagOfExistence = 1 ;
             }
         }
-//        Account account = new Account(name,password);
-//        Account.setLoggedAccount(account);
         if (flagOfExistence==1){
             menus.add(Menu.MAIN);
         }else

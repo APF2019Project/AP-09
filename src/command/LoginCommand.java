@@ -1,7 +1,7 @@
 package command;
 
 public enum LoginCommand {
-    LOGIN , SIGN_UP , EXIT;
+    LOGIN , SIGN_UP , EXIT, LEADERBOARD;
 
     private String name;
     private String password;

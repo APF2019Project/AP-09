@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class Account {
+public class Account implements Comparable<Account> {
     private static Account loggedAccount;
     private static ArrayList<Account> allAccount = new ArrayList<>();
     private String userName;
@@ -72,5 +72,10 @@ public class Account {
 
     public void setKilledZombies(int killedZombies) {
         this.killedZombies = killedZombies;
+    }
+
+    @Override
+    public int compareTo(Account o) {
+        return Integer.compare(o.killedZombies ,this.killedZombies);
     }
 }

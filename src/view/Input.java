@@ -41,9 +41,23 @@ public class Input {
                 loginCommand.setPassword(words[1]);
                 lastLoginCommand = loginCommand;
             }
-            else
-                System.out.println("invalid command");
-      }
+
+      }else if (command.toLowerCase().equals("sign up")){
+            String UserAndPass = scanner.nextLine() ;
+            if (UserAndPass.matches("\\w+ \\w+")) {
+                String[] words = UserAndPass.split(" ");
+                LoginCommand loginCommand = LoginCommand.SIGN_UP;
+                loginCommand.setName(words[0]);
+                loginCommand.setPassword(words[1]);
+                lastLoginCommand = loginCommand;
+            }
+        }else if (command.toLowerCase().equals("leader board")){
+            lastLoginCommand = LoginCommand.LEADERBOARD ;
+        }else if (command.toLowerCase().equals("exit")){
+            lastLoginCommand = LoginCommand.EXIT ;
+        }
+        else
+            System.out.println("invalid command");
     }
 
     public LoginCommand getLastLoginCommand() {
