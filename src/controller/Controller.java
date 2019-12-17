@@ -58,9 +58,19 @@ public class Controller {
     private void login(LoginCommand loginCommand){
         String name  = loginCommand.getName();
         String password = loginCommand.getPassword();
-        Account account = new Account(name,password);
-        Account.setLoggedAccount(account);
-        menus.add(Menu.MAIN);
+        int flagOfExistence = 0 ;
+        for (Account account: Account.getAllAccount()) {
+            if (account.getUserName().equals(name)){
+                Account.setLoggedAccount(account);
+                flagOfExistence = 1 ;
+            }
+        }
+//        Account account = new Account(name,password);
+//        Account.setLoggedAccount(account);
+        if (flagOfExistence==1){
+            menus.add(Menu.MAIN);
+        }else
+            System.out.println("invalid account");
     }
 
     public Menu getCurrentMenu(){

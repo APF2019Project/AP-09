@@ -32,12 +32,18 @@ public class Input {
     }
 
     private void login(String command){
-//        if (command.equals("login")){
-            LoginCommand loginCommand = LoginCommand.LOGIN;
-            loginCommand.setName();
-            loginCommand.setPassword();
-            lastLoginCommand = loginCommand;
-//        }
+        if (command.toLowerCase().equals("login")){
+            String UserAndPass = scanner.nextLine() ;
+            if (UserAndPass.matches("\\w+ \\w+")) {
+                String[] words = UserAndPass.split(" ");
+                LoginCommand loginCommand = LoginCommand.LOGIN;
+                loginCommand.setName(words[0]);
+                loginCommand.setPassword(words[1]);
+                lastLoginCommand = loginCommand;
+            }
+            else
+                System.out.println("invalid command");
+      }
     }
 
     public LoginCommand getLastLoginCommand() {
