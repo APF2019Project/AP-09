@@ -1,12 +1,15 @@
 package model;
 
+import model.Plant;
+
 import java.util.ArrayList;
 
 public class Plant extends Card {
     private static ArrayList<Plant> plants = new ArrayList<>();
-    private String plantName ;
+    private String plantName;
     private String plantId = null;
     private int plantedTurn;
+    private int bulletSpeed = 3;
     private int healthPoint;
     private int attackPower;
     private int coolDown;
@@ -19,6 +22,7 @@ public class Plant extends Card {
     private boolean hasBullet;
     private boolean isBomb;
     private boolean isNut;
+    private boolean isKernelpult;
     private boolean isSunflower;
     private boolean isSnowy;
     private boolean doesFreeze;
@@ -29,7 +33,7 @@ public class Plant extends Card {
     private boolean isCattail;
     private boolean hasMagnet;
 
-    public Plant(){
+    public Plant() {
         plants.add(this);
     }
 
@@ -37,18 +41,18 @@ public class Plant extends Card {
                  BulletType bulletType, BombType bombType, NutType nutType, SunflowerType sunflowerType,
                  boolean hasBullet, boolean isBomb, boolean isNut, boolean isSunflower, boolean isSnowy, boolean doesFreeze,
                  boolean isCactus, boolean isScared, boolean isLilyPad, boolean isTangleKelp, boolean isCattail,
-                 boolean hasMagnet) {
-        this.plantName = plantName ;
+                 boolean hasMagnet, boolean isKernelpult) {
+        this.plantName = plantName;
         this.plantedTurn = plantedTurn;
         this.healthPoint = healthPoint;
-        this.attackPower =attackPower;
-        this.coolDown =coolDown;
+        this.attackPower = attackPower;
+        this.coolDown = coolDown;
         this.sunUsage = sunUsage;
         this.plantType = plantType;
         this.bulletType = bulletType;
         this.bombType = bombType;
         this.nutType = nutType;
-        this.sunflowerType =sunflowerType;
+        this.sunflowerType = sunflowerType;
         this.hasBullet = hasBullet;
         this.isBomb = isBomb;
         this.isNut = isNut;
@@ -61,7 +65,12 @@ public class Plant extends Card {
         this.isTangleKelp = isTangleKelp;
         this.isCattail = isCattail;
         this.hasMagnet = hasMagnet;
+        this.isKernelpult = isKernelpult;
         plants.add(this);
+    }
+
+    public int getBulletSpeed() {
+        return bulletSpeed;
     }
 
     public int getPlantedTurn() {
@@ -114,6 +123,14 @@ public class Plant extends Card {
 
     public boolean isBomb() {
         return isBomb;
+    }
+
+    public boolean isKernelpult() {
+        return isKernelpult;
+    }
+
+    public void setKernelpult(boolean kernelpult) {
+        isKernelpult = kernelpult;
     }
 
     public void setBomb(boolean bomb) {
