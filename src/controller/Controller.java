@@ -12,7 +12,7 @@ public class Controller {
     private boolean endGame = false;
     private ArrayList<Menu> menus = new ArrayList<>();
     private Controller(){
-        menus.add(Menu.LOGIN);
+        menus.add(Menu.MAJORLOGIN);
     }
     public static Controller getInstance() {
         return instance;
@@ -37,7 +37,7 @@ public class Controller {
 
     private void getCommandEnumFromInput(){
         switch (getCurrentMenu()){
-            case LOGIN:
+            case MAJORLOGIN:
                 loginMenu(Input.getInstance().getLastLoginCommand());
                 break;
         }

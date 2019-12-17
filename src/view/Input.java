@@ -24,7 +24,7 @@ public class Input {
     private void identifyCommand(String command){
 
         switch (Controller.getInstance().getCurrentMenu()){
-            case LOGIN:
+            case MAJORLOGIN:
                 login(command);
                 break;
 
