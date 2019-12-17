@@ -12,6 +12,34 @@ public class Battle {
     private GameMode gameMode;
     private static Battle runningBattle;
     private boolean isSelectedSpace;
+    private Cell selectedCell;
+    private Map map;
+
+    public boolean checkSelectedCellForSpace() {
+        //TODO
+        return false;
+    }
+
+    public boolean checkSelectedCellIsValidForInsert() {
+        //TODO
+        return false;
+    }
+
+    public Map getMap() {
+        return map;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
+    }
+
+    public Cell getSelectedCell() {
+        return selectedCell;
+    }
+
+    public void setSelectedCell(Cell selectedCell) {
+        this.selectedCell = selectedCell;
+    }
 
     public void doAllAttacksInTurn() {
         //TODO

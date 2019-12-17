@@ -4,7 +4,6 @@ public class Card {
     private int price;
     private String name;
 
-
     public int getPrice() {
         return price;
     }
