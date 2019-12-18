@@ -32,6 +32,16 @@ public class Plant extends Card {
     private boolean isTangleKelp;
     private boolean isCattail;
     private boolean hasMagnet;
+    private int turnChecker = 0;
+
+    public int getTurnChecker() {
+        return turnChecker;
+    }
+
+    public void setTurnChecker(int turnChecker) {
+        this.turnChecker = turnChecker;
+    }
+
 
     public Plant() {
         plants.add(this);
@@ -113,7 +123,7 @@ public class Plant extends Card {
         this.sunUsage = sunUsage;
     }
 
-    public boolean isHasBullet() {
+    public boolean hasBullet() {
         return hasBullet;
     }
 
@@ -209,7 +219,7 @@ public class Plant extends Card {
         isCattail = cattail;
     }
 
-    public boolean isHasMagnet() {
+    public boolean hasMagnet() {
         return hasMagnet;
     }
 
@@ -275,5 +285,70 @@ public class Plant extends Card {
 
     public void setPlantId(String plantId) {
         this.plantId = plantId;
+    }
+
+    public void attack(Cell zombieCell, Cell plantCell) {
+        if(turnChecker == plantedTurn){
+            turnChecker = 0;
+            if(hasBullet){
+                if(this.isScared && zombieCell.getColumn() - plantCell.getColumn() <= 2) {
+                    ++turnChecker;
+                    return;
+                }
+                bulletAttack();
+            }
+            if(isBomb){
+                bombAttack();
+            }
+            attribute();
+        }
+        ++turnChecker;
+    }
+
+    private void bombAttack() {
+        if(this.bombType == BombType.JALAPENO){
+
+        }
+        else if(this.bombType == BombType.CHERRY){
+
+        }
+        else if(this.bombType == BombType.POTATO){
+
+        }
+    }
+
+    private void bulletAttack() {
+        if(this.bulletType == BulletType.PEA){
+            //check if it is snowy, freeze,......
+        }
+        else if(this.bulletType == BulletType.PROJECTILE){
+
+        }
+        else if(this.bulletType == BulletType.SPLITPEA){
+
+        }
+        else if(this.bulletType == BulletType.GATLINGPEA){
+
+        }
+        else if(this.bulletType == BulletType.THREEPEATER){
+
+        }
+        else if(this.bulletType == BulletType.REPEATER){
+
+        }
+    }
+
+    public void attribute() {
+        if(isSunflower){
+            if(this.sunflowerType == SunflowerType.SINGLE){
+
+            }
+            else if(this.sunflowerType == SunflowerType.TWIN){
+
+            }
+        }
+        if(hasMagnet){
+
+        }
     }
 }

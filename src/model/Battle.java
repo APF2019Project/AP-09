@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Battle {
     private Player firstPlayer;
     private Player secondPlayer;
@@ -18,6 +20,31 @@ public class Battle {
     public boolean checkSelectedCellForSpace() {
         //TODO
         return false;
+    }
+
+    public Cell closestZombie(Cell cell) {
+        for (Cell c : map.getCells()) {
+            if (c.getRow() != cell.getRow())
+                continue;
+            if(findZombie(c)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public boolean findZombie(Cell cell){
+       if(cell.hasZombie())
+           return true;
+       return false;
+    }
+
+    public void plantAttacks() {
+        for (Cell c : map.getCells()) {
+            if (c.hasPlant()) {
+                c.getPlant().attack(closestZombie(c), c);
+            }
+        }
     }
 
     public boolean checkSelectedCellIsValidForInsert() {
