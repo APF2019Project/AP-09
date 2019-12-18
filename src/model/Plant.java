@@ -295,7 +295,7 @@ public class Plant extends Card {
                     ++turnChecker;
                     return;
                 }
-                bulletAttack();
+                bulletAttack(zombieCell);
             }
             if(isBomb){
                 bombAttack();
@@ -317,7 +317,7 @@ public class Plant extends Card {
         }
     }
 
-    private void bulletAttack() {
+    private void bulletAttack(Cell zombieCell) {
         if(this.bulletType == BulletType.PEA){
             //check if it is snowy, freeze,......
         }

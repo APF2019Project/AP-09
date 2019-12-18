@@ -21,7 +21,13 @@ public class Battle {
         //TODO
         return false;
     }
-
+    public void zombieAttack(){
+        for(Cell c : map.getCells()){
+            if(c.hasPlant() && c.hasZombie()){
+                //TODO
+            }
+        }
+    }
     public Cell closestZombie(Cell cell) {
         for (Cell c : map.getCells()) {
             if (c.getRow() != cell.getRow())
