@@ -27,6 +27,7 @@ public class Controller {
             getCommandEnumFromInput();
             //TODO call Output
         }
+        Account.toJson();
     }
 
 
@@ -81,6 +82,7 @@ public class Controller {
         }
         if (flagOfExistence==0){
             Account.getAllAccount().add(new Account(name, password));
+
         }else
             System.out.println("already exist");
 

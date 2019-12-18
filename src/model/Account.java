@@ -1,5 +1,12 @@
 package model;
 
+import com.gilecode.yagson.YaGson;
+import com.gilecode.yagson.YaGsonBuilder;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Account implements Comparable<Account> {
@@ -74,8 +81,36 @@ public class Account implements Comparable<Account> {
         this.killedZombies = killedZombies;
     }
 
+    public static void toJson() {
+        FileWriter fileWriter1;
+        try {
+            fileWriter1 = new FileWriter("json/account.json");
+            YaGson gson = new YaGson();
+            String z = gson.toJson(Account.getAllAccount());
+            fileWriter1.write(z);
+            fileWriter1.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void getJson() {
+        YaGson yaGson = new YaGson();
+        try {
+            Account[] accounts = yaGson.fromJson(new FileReader("json/account.json"), Account[].class);
+            for (int i = 0; i < accounts.length; i += 2) {
+                Account.getAllAccount().add(accounts[i]);
+            }
+            System.out.println(Account.getAllAccount().size());
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public int compareTo(Account o) {
         return Integer.compare(o.killedZombies ,this.killedZombies);
     }
+
 }

@@ -1,6 +1,7 @@
 package warriorJSON;
 
 import com.gilecode.yagson.YaGson;
+import model.Account;
 import model.Plant;
 import model.Zombie;
 import model.Plant;
@@ -23,12 +24,12 @@ public class GetAndSetWarriorJSON {
             e.printStackTrace();
         }
     }
+
     public void setJson() {
         MakePlantAndZombie.getInstance().make();
         try {
             FileWriter fileWriter1 = new FileWriter("json/zombie.json");
             YaGson gson = new YaGson();
-
             String z = gson.toJson(Zombie.getZombies());
             fileWriter1.write(z);
             fileWriter1.flush();
@@ -41,7 +42,6 @@ public class GetAndSetWarriorJSON {
             e.printStackTrace();
         }
     }
-
 
     public static GetAndSetWarriorJSON getInstance() {
         return instance;
