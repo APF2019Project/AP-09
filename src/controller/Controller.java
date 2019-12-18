@@ -1,6 +1,7 @@
 package controller;
 
 import command.LoginCommand;
+import command.MainMenuCommand;
 import command.Menu;
 import model.Account;
 import view.Input;
@@ -30,19 +31,25 @@ public class Controller {
         Account.toJson();
     }
 
-
-
-    private void login(String command){
-
-
-    }
-
     private void getCommandEnumFromInput(){
         switch (getCurrentMenu()){
             case MAJORLOGIN:
                 loginMenu(Input.getInstance().getLastLoginCommand());
                 break;
+            case MAIN:
+                mainMenu(Input.getInstance().getLastMainMenuCommand());
         }
+    }
+
+    private void mainMenu(MainMenuCommand lastMainMenuCommand) {
+        switch (lastMainMenuCommand){
+            case PROFILE:
+                profile();
+        }
+    }
+
+    private void profile() {
+
     }
 
     private void loginMenu(LoginCommand loginCommand){

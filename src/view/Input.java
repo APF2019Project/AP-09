@@ -1,6 +1,7 @@
 package view;
 
 import command.LoginCommand;
+import command.MainMenuCommand;
 import controller.Controller;
 
 import java.util.Scanner;
@@ -10,6 +11,7 @@ public class Input {
     private static Input instance = new Input();
     private Scanner scanner = new Scanner(System.in);
     private LoginCommand lastLoginCommand;
+    private MainMenuCommand lastMainMenuCommand ;
     private Input(){
 
     }
@@ -27,7 +29,14 @@ public class Input {
             case MAJORLOGIN:
                 login(command);
                 break;
+            case MAIN:
+                main(command) ;
+        }
+    }
 
+    private void main(String command) {
+        if (command.toLowerCase().equals("profile")){
+            lastMainMenuCommand = MainMenuCommand.PROFILE ;
         }
     }
 
@@ -66,5 +75,13 @@ public class Input {
 
     public void setLastLoginCommand(LoginCommand lastLoginCommand) {
         this.lastLoginCommand = lastLoginCommand;
+    }
+
+    public MainMenuCommand getLastMainMenuCommand() {
+        return lastMainMenuCommand;
+    }
+
+    public void setLastMainMenuCommand(MainMenuCommand lastMainMenuCommand) {
+        this.lastMainMenuCommand = lastMainMenuCommand;
     }
 }
