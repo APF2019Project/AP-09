@@ -64,17 +64,22 @@ public class Controller {
                 signUp(loginCommand);
                 break;
             case LEADERBOARD:
-                leaderBoard();
+                leaderBoardMenu(loginCommand);
+
         }
     }
     public void exit(){
         endGame = true ;
     }
 
-    private void leaderBoard() {
-        Collections.sort(Account.getAllAccount());
-        for (Account account:Account.getAllAccount()) {
-            System.out.println(account.getUserName() + " " + account.getKilledZombies());
+    private void leaderBoardMenu(LoginCommand loginCommand) {
+        switch (loginCommand) {
+            case LEADERBOARD:
+            Collections.sort(Account.getAllAccount());
+            for (Account account : Account.getAllAccount()) {
+                System.out.println(account.getUserName() + " " + account.getKilledZombies());
+            }
+
         }
     }
 
