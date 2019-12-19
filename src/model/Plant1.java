@@ -1,11 +1,9 @@
 package model;
 
-import model.Plant;
-
 import java.util.ArrayList;
 
-public class Plant extends Card {
-    private static ArrayList<Plant> plants = new ArrayList<>();
+public class Plant1 extends Card {
+    private static ArrayList<Plant1> plant1s = new ArrayList<>();
     private String plantName;
     private String plantId = null;
     private int plantedTurn;
@@ -43,15 +41,15 @@ public class Plant extends Card {
     }
 
 
-    public Plant() {
-        plants.add(this);
+    public Plant1() {
+        plant1s.add(this);
     }
 
-    public Plant(String plantName, int plantedTurn, int healthPoint, int attackPower, int coolDown, int sunUsage, PlantType plantType,
-                 BulletType bulletType, BombType bombType, NutType nutType, SunflowerType sunflowerType,
-                 boolean hasBullet, boolean isBomb, boolean isNut, boolean isSunflower, boolean isSnowy, boolean doesFreeze,
-                 boolean isCactus, boolean isScared, boolean isLilyPad, boolean isTangleKelp, boolean isCattail,
-                 boolean hasMagnet, boolean isKernelpult) {
+    public Plant1(String plantName, int plantedTurn, int healthPoint, int attackPower, int coolDown, int sunUsage, PlantType plantType,
+                  BulletType bulletType, BombType bombType, NutType nutType, SunflowerType sunflowerType,
+                  boolean hasBullet, boolean isBomb, boolean isNut, boolean isSunflower, boolean isSnowy, boolean doesFreeze,
+                  boolean isCactus, boolean isScared, boolean isLilyPad, boolean isTangleKelp, boolean isCattail,
+                  boolean hasMagnet, boolean isKernelpult) {
         this.plantName = plantName;
         this.plantedTurn = plantedTurn;
         this.healthPoint = healthPoint;
@@ -76,7 +74,7 @@ public class Plant extends Card {
         this.isCattail = isCattail;
         this.hasMagnet = hasMagnet;
         this.isKernelpult = isKernelpult;
-        plants.add(this);
+        plant1s.add(this);
     }
 
     public int getBulletSpeed() {
@@ -267,8 +265,8 @@ public class Plant extends Card {
         this.plantType = plantType;
     }
 
-    public static ArrayList<Plant> getPlants() {
-        return plants;
+    public static ArrayList<Plant1> getPlant1s() {
+        return plant1s;
     }
 
     public String getPlantName() {

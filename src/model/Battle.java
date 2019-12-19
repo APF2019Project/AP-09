@@ -1,7 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-
 public class Battle {
     private Player firstPlayer;
     private Player secondPlayer;
@@ -51,7 +49,7 @@ public class Battle {
     public void plantAttacks() {
         for (Cell c : map.getCells()) {
             if (c.hasPlant()) {
-                c.getPlant().attack(closestZombie(c), c);
+                c.getPlant1().attack(closestZombie(c), c);
             }
         }
     }

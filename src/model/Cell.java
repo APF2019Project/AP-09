@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Cell {
     private int row;
     private int column;
-    private Plant plant;
+    private Plant1 plant1;
     private ArrayList<Zombie> zombies = new ArrayList<Zombie>();
     private boolean hasPlant;
     private boolean hasZombie;
@@ -52,12 +52,12 @@ public class Cell {
         this.zombies = zombies;
     }
 
-    public Plant getPlant() {
-        return plant;
+    public Plant1 getPlant1() {
+        return plant1;
     }
 
-    public void setPlant(Plant plant) {
-        this.plant = plant;
+    public void setPlant1(Plant1 plant1) {
+        this.plant1 = plant1;
     }
 
     public int getColumn() {
