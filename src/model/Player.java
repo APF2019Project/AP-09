@@ -8,8 +8,8 @@ public class Player {
     private int numberPlayerInGame;
     private int sun;
 
-    public ArrayList<Plant> getPlants() {
-        return this.deck.getPlants();
+    public ArrayList<Plant1> getPlants() {
+        return this.deck.getPlant1s();
     }
 
     public ArrayList<Zombie> getZombies() {
