@@ -42,22 +42,29 @@ public class ZombieInGame {
 
     private void pogoZombieAction() {
         //TODO
+        //jump from plants
+        //HOW MANY TIME??????
     }
 
     private void truckZombieAction() {
         //TODO
+        //plant should die instantly
+        //if it has strong truck it turns into normal zombie
     }
 
     private void bungeeZombieAction() {
         //TODO
+       //goes to a cell randomly and steals plant
     }
 
     private void balloonZombieAction() {
         //TODO
+        //doesn't get hurt by peas
     }
 
     private void gigagargantuarAction() {
         //TODO
+        //plant should die instantly
     }
 
     public Cell getCurrentCell() {

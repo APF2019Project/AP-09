@@ -1,5 +1,8 @@
 package model;
 
+import model.New_Zombies.Zombie;
+import model.New_Plants.Plant;
+
 public class Battle {
     private Player firstPlayer;
     private Player secondPlayer;
@@ -49,12 +52,12 @@ public class Battle {
     public void plantAttacks() {
         for (Cell c : map.getCells()) {
             if (c.hasPlant()) {
-                c.getPlant1().attack(closestZombie(c), c);
+                c.getPlant().attack(closestZombie(c), c);
             }
         }
     }
 
-    public boolean checkSelectedCellIsValidForInsert(Plant1 plant, Cell selectedCell) {
+    public boolean checkSelectedCellIsValidForInsert(Plant plant, Cell selectedCell) {
         if (checkSelectedCellForSpace(selectedCell)) {
             if (selectedCell.isLand() && plant.getPlantType() == PlantType.LAND)
                 return true;
@@ -69,10 +72,10 @@ public class Battle {
         return false;
     }
 
-    private void setPlantInCell(Plant1 plant, Cell selectedCell) {
+    private void setPlantInCell(Plant plant, Cell selectedCell) {
         if (checkSelectedCellIsValidForInsert(plant, selectedCell))
             if (!plant.isLilyPad())
-                selectedCell.setPlant1(plant);
+                selectedCell.setPlant(plant);
             else
                 selectedCell.setLeaf(true);
     }

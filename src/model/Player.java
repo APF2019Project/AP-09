@@ -1,5 +1,8 @@
 package model;
 
+import model.New_Zombies.Zombie;
+import model.New_Plants.Plant;
+
 import java.util.ArrayList;
 
 public class Player {
@@ -8,12 +11,12 @@ public class Player {
     private int numberPlayerInGame;
     private int sun;
 
-    public ArrayList<Plant1> getPlants() {
-        return this.deck.getPlant1s();
+    public ArrayList<Plant> getPlants() {
+        return this.deck.getPlants();
     }
 
-    public ArrayList<Zombie1> getZombies() {
-        return this.deck.getZombie1s();
+    public ArrayList<Zombie> getZombies() {
+        return this.deck.getZombies();
     }
 
     public void decreaseSun(int number) {
