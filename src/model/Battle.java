@@ -17,32 +17,35 @@ public class Battle {
     private Cell selectedCell;
     private Map map;
 
-    public boolean checkSelectedCellForSpace() {
-        //TODO
-        return false;
+    public boolean checkSelectedCellForSpace(Cell selectedCell) {
+        if (selectedCell.hasPlant())
+            return false;
+        return true;
     }
-    public void zombieAttack(){
-        for(Cell c : map.getCells()){
-            if(c.hasPlant() && c.hasZombie()){
+
+    public void zombieAttack() {
+        for (Cell c : map.getCells()) {
+            if (c.hasPlant() && c.hasZombie()) {
                 //TODO
             }
         }
     }
+
     public Cell closestZombie(Cell cell) {
         for (Cell c : map.getCells()) {
             if (c.getRow() != cell.getRow())
                 continue;
-            if(findZombie(c)) {
+            if (findZombie(c)) {
                 return c;
             }
         }
         return null;
     }
 
-    public boolean findZombie(Cell cell){
-       if(cell.hasZombie())
-           return true;
-       return false;
+    public boolean findZombie(Cell cell) {
+        if (cell.hasZombie())
+            return true;
+        return false;
     }
 
     public void plantAttacks() {
@@ -53,9 +56,27 @@ public class Battle {
         }
     }
 
-    public boolean checkSelectedCellIsValidForInsert() {
-        //TODO
+    public boolean checkSelectedCellIsValidForInsert(Plant plant, Cell selectedCell) {
+        if (checkSelectedCellForSpace(selectedCell)) {
+            if (selectedCell.isLand() && plant.getPlantType() == PlantType.LAND)
+                return true;
+            else if (selectedCell.isLeaf() && plant.getPlantType() == PlantType.LAND) {
+                return true;
+            } else if (!selectedCell.isLand() && plant.getPlantType() == PlantType.WATER) {
+                return true;
+            } else if (!selectedCell.isLand() && plant.isLilyPad() && !selectedCell.isLeaf()) {
+                return true;
+            }
+        }
         return false;
+    }
+
+    private void setPlantInCell(Plant plant, Cell selectedCell) {
+        if (checkSelectedCellIsValidForInsert(plant, selectedCell))
+            if (!plant.isLilyPad())
+                selectedCell.setPlant(plant);
+            else
+                selectedCell.setLeaf(true);
     }
 
     public Map getMap() {
