@@ -6,7 +6,7 @@ public class Cell {
     private int row;
     private int column;
     private Plant1 plant1;
-    private ArrayList<Zombie> zombies = new ArrayList<Zombie>();
+    private ArrayList<Zombie1> zombies = new ArrayList<Zombie1>();
     private boolean hasPlant;
     private boolean hasZombie;
     private boolean isLand;
@@ -44,11 +44,11 @@ public class Cell {
         isLand = land;
     }
 
-    public ArrayList<Zombie> getZombies() {
+    public ArrayList<Zombie1> getZombies() {
         return zombies;
     }
 
-    public void setZombies(ArrayList<Zombie> zombies) {
+    public void setZombies(ArrayList<Zombie1> zombies) {
         this.zombies = zombies;
     }
 

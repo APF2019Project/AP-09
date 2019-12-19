@@ -1,0 +1,5 @@
+package model.New_Zombies;
+
+public enum ZombieKind {
+    GIGAGARGANTUAR, BUNGEEZOMBIE, BALLOONZOMBIE, POGOZOMBIE, OTHER, TRUCKZOMBIE
+}

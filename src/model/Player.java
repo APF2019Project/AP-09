@@ -12,8 +12,8 @@ public class Player {
         return this.deck.getPlant1s();
     }
 
-    public ArrayList<Zombie> getZombies() {
-        return this.deck.getZombies();
+    public ArrayList<Zombie1> getZombies() {
+        return this.deck.getZombie1s();
     }
 
     public void decreaseSun(int number) {

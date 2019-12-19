@@ -2,8 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
-public class Zombie extends Card {
-    private static ArrayList<Zombie> zombies = new ArrayList<>();
+public class Zombie1 extends Card {
+    private static ArrayList<Zombie1> zombies = new ArrayList<>();
     private String zombieName ;
     private String zombieId = null;
     private int speed;
@@ -23,11 +23,11 @@ public class Zombie extends Card {
     private boolean hasArmor;
     private boolean hasShield;
 
-    public Zombie() {
+    public Zombie1() {
         zombies.add(this);
     }
 
-    public Zombie(String zombieName, int speed, int healthPoint, int attackPower, int shieldHP, ZombieType zombieType, HelmetType helmetType,
+    public Zombie1(String zombieName, int speed, int healthPoint, int attackPower, int shieldHP, ZombieType zombieType, HelmetType helmetType,
                   TruckType truckType, boolean hasHelmet, boolean hasTruck, boolean isBungeeZombie, boolean isBalloonZombie,
                   boolean isGigaGargantuar, boolean isPogoZombie, boolean hasDuck, boolean hasArmor, boolean hasShield) {
         this.zombieName = zombieName ;
@@ -179,7 +179,7 @@ public class Zombie extends Card {
         this.truckType = truckType;
     }
 
-    public static ArrayList<Zombie> getZombies() {
+    public static ArrayList<Zombie1> getZombies() {
         return zombies;
     }
 

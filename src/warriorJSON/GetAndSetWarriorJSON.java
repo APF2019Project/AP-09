@@ -2,7 +2,7 @@ package warriorJSON;
 
 import com.gilecode.yagson.YaGson;
 import model.Plant1;
-import model.Zombie;
+import model.Zombie1;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -17,8 +17,8 @@ public class GetAndSetWarriorJSON {
             YaGson yaGson = new YaGson();
             yaGson.fromJson(new FileReader("json/plant.json"), Plant1[].class);
             System.out.println(Plant1.getPlant1s().size());
-            yaGson.fromJson(new FileReader("json/zombie.json"), Zombie[].class);
-            System.out.println(Zombie.getZombies().size());
+            yaGson.fromJson(new FileReader("json/zombie.json"), Zombie1[].class);
+            System.out.println(Zombie1.getZombies().size());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -29,7 +29,7 @@ public class GetAndSetWarriorJSON {
         try {
             FileWriter fileWriter1 = new FileWriter("json/zombie.json");
             YaGson gson = new YaGson();
-            String z = gson.toJson(Zombie.getZombies());
+            String z = gson.toJson(Zombie1.getZombies());
             fileWriter1.write(z);
             fileWriter1.flush();
 
