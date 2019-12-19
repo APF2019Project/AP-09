@@ -1,4 +1,4 @@
-package model.New_Plants;
+package model.New_Plants.warrior;
 
 public class FireRate {
 

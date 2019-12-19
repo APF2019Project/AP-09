@@ -1,11 +1,18 @@
 package model;
 
+import constants.Constants;
+
 import java.util.ArrayList;
 
 public class Map {
-    private ArrayList<Cell> cells = new ArrayList<Cell>();
+    private Cell[][] cells = new Cell[Constants.MAP_ROWS_COUNT][Constants.MAP_COLUMNS_COUNT];
     private int[] lawnMower;
     private KindOfMap kindOfMap;
+
+
+    public Cell getCell(int row, int col) {
+        return cells[row][col];
+    }
 
     public KindOfMap getKindOfMap() {
         return kindOfMap;
@@ -23,11 +30,7 @@ public class Map {
         this.lawnMower = lawnMower;
     }
 
-    public ArrayList<Cell> getCells() {
+    public Cell[][] getCells() {
         return cells;
-    }
-
-    public void setCells(ArrayList<Cell> cells) {
-        this.cells = cells;
     }
 }

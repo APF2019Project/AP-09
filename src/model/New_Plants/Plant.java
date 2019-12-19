@@ -1,7 +1,5 @@
 package model.New_Plants;
 
-import model.PlantType;
-
 import java.util.ArrayList;
 
 abstract public class Plant {

@@ -1,4 +1,8 @@
-package model.New_Plants;
+package model.New_Plants.bomb;
+
+import model.New_Plants.Plant;
+import model.New_Plants.PlantKind;
+import model.New_Plants.fruits.Explosive;
 
 import java.util.ArrayList;
 
@@ -13,7 +17,10 @@ public class Bomb extends Plant {
 
     @Override
     public <T> ArrayList<T> operate(Class<T> type) {
-        return null;
+        ArrayList<T> explosives = new ArrayList<>();
+        Explosive explosive = new Explosive(this.bombBox);
+        explosives.add(type.cast(explosive));
+        return explosives;
     }
 
     public BombBox getBombBox() {

@@ -1,32 +1,16 @@
 package model;
 
+import model.New_Plants.Plant;
+
 import java.util.ArrayList;
 
 public class Cell {
     private int row;
     private int column;
-    private Plant1 plant1;
-    private ArrayList<Zombie1> zombies = new ArrayList<Zombie1>();
-    private boolean hasPlant;
-    private boolean hasZombie;
+    private Plant plant;
+    private ArrayList<Zombie> zombies = new ArrayList<Zombie>();
     private boolean isLand;
     private boolean leaf;
-
-    public boolean hasZombie() {
-        return hasZombie;
-    }
-
-    public void setHasZombie(boolean hasZombie) {
-        this.hasZombie = hasZombie;
-    }
-
-    public boolean hasPlant() {
-        return hasPlant;
-    }
-
-    public void setHasPlant(boolean hasPlant) {
-        this.hasPlant = hasPlant;
-    }
 
     public boolean isLeaf() {
         return leaf;
@@ -44,20 +28,20 @@ public class Cell {
         isLand = land;
     }
 
-    public ArrayList<Zombie1> getZombies() {
+    public ArrayList<Zombie> getZombies() {
         return zombies;
     }
 
-    public void setZombies(ArrayList<Zombie1> zombies) {
+    public void setZombies(ArrayList<Zombie> zombies) {
         this.zombies = zombies;
     }
 
-    public Plant1 getPlant1() {
-        return plant1;
+    public Plant getPlant() {
+        return plant;
     }
 
-    public void setPlant1(Plant1 plant1) {
-        this.plant1 = plant1;
+    public void setPlant(Plant plant) {
+        this.plant = plant;
     }
 
     public int getColumn() {
