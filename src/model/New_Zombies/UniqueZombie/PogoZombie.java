@@ -1,4 +1,7 @@
-package model.New_Zombies;
+package model.New_Zombies.UniqueZombie;
+
+import model.New_Zombies.Zombie;
+import model.New_Zombies.ZombieKind;
 
 import java.util.ArrayList;
 
