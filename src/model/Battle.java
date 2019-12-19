@@ -54,7 +54,7 @@ public class Battle {
         }
     }
 
-    public boolean checkSelectedCellIsValidForInsert(Plant plant, Cell selectedCell) {
+    public boolean checkSelectedCellIsValidForInsert(Plant1 plant, Cell selectedCell) {
         if (checkSelectedCellForSpace(selectedCell)) {
             if (selectedCell.isLand() && plant.getPlantType() == PlantType.LAND)
                 return true;
@@ -69,10 +69,10 @@ public class Battle {
         return false;
     }
 
-    private void setPlantInCell(Plant plant, Cell selectedCell) {
+    private void setPlantInCell(Plant1 plant, Cell selectedCell) {
         if (checkSelectedCellIsValidForInsert(plant, selectedCell))
             if (!plant.isLilyPad())
-                selectedCell.setPlant(plant);
+                selectedCell.setPlant1(plant);
             else
                 selectedCell.setLeaf(true);
     }
