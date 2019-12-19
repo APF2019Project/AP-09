@@ -28,6 +28,8 @@ abstract public class Zombie {
         setZombieKind(zombieKind);
     }
 
+    abstract public <T> ArrayList<T> operate(Class<T> type);
+
     public boolean hasArmor() {
         return hasArmor;
     }

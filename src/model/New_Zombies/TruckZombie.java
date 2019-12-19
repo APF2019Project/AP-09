@@ -1,5 +1,7 @@
 package model.New_Zombies;
 
+import java.util.ArrayList;
+
 public class TruckZombie extends Zombie {
     private boolean hasStrongTruck;
 
@@ -12,7 +14,13 @@ public class TruckZombie extends Zombie {
         return hasStrongTruck;
     }
 
+
     public void setHasStrongTruck(boolean hasStrongTruck) {
         this.hasStrongTruck = hasStrongTruck;
+    }
+
+    @Override
+    public <T> ArrayList<T> operate(Class<T> type) {
+        return null;
     }
 }
