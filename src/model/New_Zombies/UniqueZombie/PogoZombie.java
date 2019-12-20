@@ -1,5 +1,8 @@
 package model.New_Zombies.UniqueZombie;
 
+import model.Battle;
+import model.Cell;
+import model.Map;
 import model.New_Zombies.Zombie;
 import model.New_Zombies.ZombieKind;
 
@@ -11,7 +14,21 @@ public class PogoZombie extends Zombie {
     }
 
     @Override
-    public <T> ArrayList<T> operate(Class<T> type) {
-        return null;
+    public <T> void action() {
+        Cell cell = this.getCurrentCell();
+        Map gameMap = Battle.getRunningBattle().getMap();
+        if (cell.getPlant() != null) {
+            for (Cell[] cells : gameMap.getCells()) {
+                for (Cell c : cells) {
+                    if (c.getColumn() == cell.getColumn() && c.getRow() == cell.getRow()) {
+                        c.getZombies().remove(this);
+                    } else if (c.getColumn() == cell.getColumn() + 1 && c.getRow() == cell.getRow()) {
+                        c.getZombies().add(this);
+                        setCurrentCell(c);
+                        return;
+                    }
+                }
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 package model.New_Zombies.UniqueZombie;
 
+import model.Cell;
 import model.New_Zombies.Zombie;
 import model.New_Zombies.ZombieKind;
 
@@ -11,7 +12,10 @@ public class BalloonZombie extends Zombie {
     }
 
     @Override
-    public <T> ArrayList<T> operate(Class<T> type) {
-        return null;
+    public <T> void action() {
+        Cell cell = this.getCurrentCell();
+        if (cell.getPlant() != null) {
+            // attack
+        }
     }
 }
