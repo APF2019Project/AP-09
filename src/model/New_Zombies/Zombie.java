@@ -44,10 +44,22 @@ abstract public class Zombie {
                     } else if (c.getColumn() == cell.getColumn() + 1 && c.getRow() == cell.getRow()) {
                         c.getZombies().add(this);
                         setCurrentCell(c);
+                        reachLawnMower(c, gameMap);
                         return;
                     }
                 }
             }
+        }
+    }
+
+    public void reachLawnMower(Cell cell, Map gameMap) {
+        boolean[] lawnMower = gameMap.getLawnMower();
+        if(lawnMower[cell.getRow()] == true){
+            lawnMower[cell.getRow()] = false;
+            Battle.lawnMowerActivated(cell, gameMap);
+        }
+        else{
+            Battle.zombieWins();
         }
     }
 

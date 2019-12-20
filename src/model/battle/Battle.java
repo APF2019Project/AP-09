@@ -1,6 +1,9 @@
 package model.battle;
 
 import model.*;
+import model.New_Zombies.Zombie;
+
+import java.util.ArrayList;
 
 public class Battle {
     private Player plants;
@@ -25,6 +28,25 @@ public class Battle {
         this.gameMode = gameMode;
         Battle.runningBattle = this;
         this.battleComponents = new BattleComponents();
+    }
+
+    public static void zombieWins() {
+        Battle battle = Battle.getRunningBattle();
+        battle.setWinnerPlayer(battle.zombies);
+        battle.setEndGame(true);
+    }
+
+    public static void lawnMowerActivated(Cell cell, Map gameMap) {
+        for(Cell[] cells : gameMap.getCells()){
+            for(Cell c : cells){
+                if(c.getRow() == cell.getRow()){
+                    for(Zombie zombie : c.getZombies()){
+                        //Zombie dies
+                        //passing to graveYard
+                    }
+                }
+            }
+        }
     }
 
     public boolean checkSelectedCellIsValidForInsert(Cell cell) {

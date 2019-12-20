@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Map {
     private Cell[][] cells = new Cell[Constants.MAP_ROWS_COUNT][Constants.MAP_COLUMNS_COUNT];
-    private int[] lawnMower;
+    private boolean[] lawnMower = {true , true, true, true, true, true};
     private KindOfMap kindOfMap;
 
 
@@ -22,11 +22,11 @@ public class Map {
         this.kindOfMap = kindOfMap;
     }
 
-    public int[] getLawnMower() {
+    public boolean[] getLawnMower() {
         return lawnMower;
     }
 
-    public void setLawnMower(int[] lawnMower) {
+    public void setLawnMower(boolean[] lawnMower) {
         this.lawnMower = lawnMower;
     }
 
