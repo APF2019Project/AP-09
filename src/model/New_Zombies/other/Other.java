@@ -1,4 +1,4 @@
-package model.New_Zombies.Other;
+package model.New_Zombies.other;
 
 import model.New_Zombies.Zombie;
 import model.New_Zombies.ZombieKind;

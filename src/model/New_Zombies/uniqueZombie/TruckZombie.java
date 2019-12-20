@@ -1,4 +1,4 @@
-package model.New_Zombies.UniqueZombie;
+package model.New_Zombies.uniqueZombie;
 
 import model.New_Zombies.Zombie;
 import model.New_Zombies.ZombieKind;

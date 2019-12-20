@@ -1,4 +1,4 @@
-package model.New_Zombies.Other;
+package model.New_Zombies.other;
 
 public enum HelmetType {
     CONEHEAD, BUCKETHEAD, NONE
