@@ -1,5 +1,5 @@
 package command;
 
 public enum Menu {
-    MAJORLOGIN, MAIN ;
+    MAJOR_LOGIN, MAIN , LEADER_BOARD, PROFILE , SIGN_UP , LOGIN,PLAY ,SHOP ;
 }

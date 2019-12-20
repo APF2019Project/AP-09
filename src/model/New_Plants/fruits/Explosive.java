@@ -5,6 +5,7 @@ import model.Cell;
 import model.Map;
 import model.New_Plants.bomb.BombBox;
 import model.battle.Battle;
+import model.battle.GraveYard;
 
 import java.util.ArrayList;
 
@@ -26,7 +27,11 @@ public class Explosive extends Fruit {
         for (int i = getPosition().getRow() - width / 2; i < getPosition().getRow() + width / 2; i++) {
             for (int j = getPosition().getColumn() - length / 2; j < getPosition().getColumn() + length / 2; j++) {
                 Cell cell = gameMap.getCell(i, j);
-                // TODO Should get all zombies in these cells and kill them
+                for (int k = 0; k < cell.getZombies().size() ; k++) {
+                    GraveYard.getDeadZombies().add(cell.getZombies().get(k));
+                    cell.getZombies().remove(k) ;
+                    k -- ;
+                }
             }
         }
 
