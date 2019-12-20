@@ -32,4 +32,16 @@ public class TruckZombie extends Zombie {
             //Kill Plant
         }
     }
+    /*
+    public void truckDeath(){
+        if(hasStrongTruck){
+            this.setHealthPoint(2);
+            this.setAttackPower(1);
+            this.setSpeed(2);
+        }
+        else{
+           TRUCK ZOMBIE DIES
+        }
+    }
+    */
 }
