@@ -5,6 +5,9 @@ import model.New_Zombies.Zombie;
 
 import java.util.ArrayList;
 
+import static constants.Constants.MAP_COLUMNS_COUNT;
+import static constants.Constants.MAP_ROWS_COUNT;
+
 public class Battle {
     private Player plants;
     private Player zombies;
@@ -37,12 +40,13 @@ public class Battle {
     }
 
     public static void lawnMowerActivated(Cell cell, Map gameMap) {
-        for(Cell[] cells : gameMap.getCells()){
-            for(Cell c : cells){
-                if(c.getRow() == cell.getRow()){
-                    for(Zombie zombie : c.getZombies()){
+        for(int i = 0; i < MAP_ROWS_COUNT; ++i){
+            for(int j = 0; j < MAP_COLUMNS_COUNT; ++j){
+                if(i == cell.getRow()){
+                    for(int z = 0; z < gameMap.getCell(i, j).getZombies().size(); ++z){
                         //Zombie dies
                         //passing to graveYard
+                        --z;
                     }
                 }
             }

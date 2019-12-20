@@ -3,8 +3,12 @@ package model.New_Zombies;
 import model.Cell;
 import model.Map;
 import model.battle.Battle;
+import constants.Constants;
 
 import java.util.ArrayList;
+
+import static constants.Constants.MAP_COLUMNS_COUNT;
+import static constants.Constants.MAP_ROWS_COUNT;
 
 abstract public class Zombie {
     private static ArrayList<Zombie> zombies = new ArrayList<>();
@@ -37,14 +41,15 @@ abstract public class Zombie {
         Cell cell = this.getCurrentCell();
         Map gameMap = Battle.getRunningBattle().getMap();
         if (cell.getPlant() == null) {
-            for (Cell[] cells : gameMap.getCells()) {
-                for (Cell c : cells) {
-                    if (c.getColumn() == cell.getColumn() && c.getRow() == cell.getRow()) {
-                        c.getZombies().remove(this);
-                    } else if (c.getColumn() == cell.getColumn() + 1 && c.getRow() == cell.getRow()) {
-                        c.getZombies().add(this);
-                        setCurrentCell(c);
-                        reachLawnMower(c, gameMap);
+            for (int i = 0; i < MAP_ROWS_COUNT; ++i) {
+                for (int j = 0; j < MAP_COLUMNS_COUNT; ++j) {
+                    if (j == cell.getColumn() && i == cell.getRow()) {
+                        gameMap.getCell(i, j).getZombies().remove(this);
+                        --j;
+                    } else if (j == cell.getColumn() + 1 && i == cell.getRow()) {
+                        gameMap.getCell(i, j).getZombies().add(this);
+                        setCurrentCell(gameMap.getCell(i, j));
+                        reachLawnMower(gameMap.getCell(i, j), gameMap);
                         return;
                     }
                 }
