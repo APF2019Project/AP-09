@@ -2,6 +2,7 @@ package model.New_Zombies;
 
 import model.Cell;
 import model.Map;
+import model.battle.Battle;
 
 import java.util.ArrayList;
 
@@ -32,7 +33,23 @@ abstract public class Zombie {
         setZombieKind(zombieKind);
     }
 
-    abstract public void move();
+    public void move() {
+        Cell cell = this.getCurrentCell();
+        Map gameMap = Battle.getRunningBattle().getMap();
+        if (cell.getPlant() == null) {
+            for (Cell[] cells : gameMap.getCells()) {
+                for (Cell c : cells) {
+                    if (c.getColumn() == cell.getColumn() && c.getRow() == cell.getRow()) {
+                        c.getZombies().remove(this);
+                    } else if (c.getColumn() == cell.getColumn() + 1 && c.getRow() == cell.getRow()) {
+                        c.getZombies().add(this);
+                        setCurrentCell(c);
+                        return;
+                    }
+                }
+            }
+        }
+    }
 
     public Cell getCurrentCell() {
         return currentCell;
