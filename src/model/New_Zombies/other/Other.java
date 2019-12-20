@@ -1,5 +1,6 @@
 package model.New_Zombies.other;
 
+import model.Cell;
 import model.New_Zombies.Zombie;
 import model.New_Zombies.ZombieKind;
 
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 
 public class Other extends Zombie {
     private HelmetType helmetType;
+
     public Other(String zombieName, int healthPoint, int attackPower, int speed, int shieldHP, boolean isLandZombie, boolean hasDuck, boolean hasHelmet, boolean hasArmor, HelmetType helmetType) {
         super(zombieName, healthPoint, attackPower, speed, shieldHP, isLandZombie, hasDuck, hasHelmet, hasArmor, ZombieKind.OTHER);
         setHelmetType(helmetType);
@@ -21,7 +23,10 @@ public class Other extends Zombie {
     }
 
     @Override
-    public <T> ArrayList<T> operate(Class<T> type) {
-        return null;
+    public <T> void action() {
+        Cell cell = this.getCurrentCell();
+        if(cell.getPlant() != null){
+            //attack
+        }
     }
 }

@@ -1,5 +1,7 @@
 package model.New_Zombies;
 
+import model.Cell;
+
 import java.util.ArrayList;
 
 abstract public class Zombie {
@@ -14,6 +16,7 @@ abstract public class Zombie {
     private boolean hasHelmet;
     private boolean hasArmor;
     private ZombieKind zombieKind;
+    private Cell currentCell;
 
     public Zombie(String zombieName, int healthPoint, int attackPower, int speed, int shieldHP, boolean isLandZombie, boolean hasDuck, boolean hasHelmet, boolean hasArmor, ZombieKind zombieKind) {
         setZombieName(zombieName);
@@ -28,7 +31,15 @@ abstract public class Zombie {
         setZombieKind(zombieKind);
     }
 
-    abstract public <T> ArrayList<T> operate(Class<T> type);
+    public Cell getCurrentCell() {
+        return currentCell;
+    }
+
+    public void setCurrentCell(Cell currentCell) {
+        this.currentCell = currentCell;
+    }
+
+    abstract public <T> void action();
 
     public boolean hasArmor() {
         return hasArmor;
