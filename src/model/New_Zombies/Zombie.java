@@ -1,6 +1,7 @@
 package model.New_Zombies;
 
 import model.Cell;
+import model.Map;
 
 import java.util.ArrayList;
 
@@ -30,6 +31,8 @@ abstract public class Zombie {
         setHasArmor(hasArmor);
         setZombieKind(zombieKind);
     }
+
+    abstract public void move();
 
     public Cell getCurrentCell() {
         return currentCell;

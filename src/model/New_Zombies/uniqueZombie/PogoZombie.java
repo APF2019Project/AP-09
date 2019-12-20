@@ -18,15 +18,36 @@ public class PogoZombie extends Zombie {
         Cell cell = this.getCurrentCell();
         Map gameMap = Battle.getRunningBattle().getMap();
         if (cell.getPlant() != null) {
-            for (Cell[] cells : gameMap.getCells()) {
-                for (Cell c : cells) {
-                    if (c.getColumn() == cell.getColumn() && c.getRow() == cell.getRow()) {
-                        c.getZombies().remove(this);
-                    } else if (c.getColumn() == cell.getColumn() + 1 && c.getRow() == cell.getRow()) {
-                        c.getZombies().add(this);
-                        setCurrentCell(c);
-                        return;
-                    }
+            pogoMove(gameMap, cell);
+        }
+    }
+
+    public void pogoMove(Map gameMap, Cell cell) {
+        for (Cell[] cells : gameMap.getCells()) {
+            for (Cell c : cells) {
+                if (c.getColumn() == cell.getColumn() && c.getRow() == cell.getRow()) {
+                    c.getZombies().remove(this);
+                } else if (c.getColumn() == cell.getColumn() + 1 && c.getRow() == cell.getRow()) {
+                    c.getZombies().add(this);
+                    setCurrentCell(c);
+                    return;
+                }
+            }
+        }
+    }
+
+    @Override
+    public void move() {
+        Cell cell = this.getCurrentCell();
+        Map gameMap = model.battle.Battle.getRunningBattle().getMap();
+        for (Cell[] cells : gameMap.getCells()) {
+            for (Cell c : cells) {
+                if (c.getColumn() == cell.getColumn() && c.getRow() == cell.getRow()) {
+                    c.getZombies().remove(this);
+                } else if (c.getColumn() == cell.getColumn() + 1 && c.getRow() == cell.getRow()) {
+                    c.getZombies().add(this);
+                    setCurrentCell(c);
+                    return;
                 }
             }
         }
