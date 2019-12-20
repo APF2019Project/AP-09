@@ -54,11 +54,10 @@ abstract public class Zombie {
 
     public void reachLawnMower(Cell cell, Map gameMap) {
         boolean[] lawnMower = gameMap.getLawnMower();
-        if(lawnMower[cell.getRow()] == true){
+        if (lawnMower[cell.getRow()] == true) {
             lawnMower[cell.getRow()] = false;
             Battle.lawnMowerActivated(cell, gameMap);
-        }
-        else{
+        } else {
             Battle.zombieWins();
         }
     }

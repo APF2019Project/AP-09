@@ -30,6 +30,7 @@ public class PogoZombie extends Zombie {
                 } else if (c.getColumn() == cell.getColumn() + 1 && c.getRow() == cell.getRow()) {
                     c.getZombies().add(this);
                     setCurrentCell(c);
+                    reachLawnMower(c , gameMap);
                     return;
                 }
             }

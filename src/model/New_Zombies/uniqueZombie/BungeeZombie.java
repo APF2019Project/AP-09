@@ -5,6 +5,7 @@ import model.Cell;
 import model.Map;
 import model.New_Zombies.Zombie;
 import model.New_Zombies.ZombieKind;
+import model.battle.GraveYard;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -18,8 +19,10 @@ public class BungeeZombie extends Zombie {
 
     @Override
     public <T> void action() {
+        Cell cell = this.getCurrentCell();
         if (turnCounter == 3) {
-            //Steals Plant
+            GraveYard.getDeadPlants().add(cell.getPlant());
+            cell.setPlant(null);
             turnCounter = 0;
         } else
             ++turnCounter;

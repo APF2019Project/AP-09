@@ -5,6 +5,7 @@ import model.Map;
 import model.New_Zombies.Zombie;
 import model.New_Zombies.ZombieKind;
 import model.battle.Battle;
+import model.battle.GraveYard;
 
 import java.util.ArrayList;
 
@@ -29,7 +30,8 @@ public class TruckZombie extends Zombie {
     public <T> void action() {
         Cell cell = this.getCurrentCell();
         if (cell.getPlant() != null) {
-            //Kill Plant
+            GraveYard.getDeadPlants().add(cell.getPlant());
+            cell.setPlant(null);
         }
     }
 
