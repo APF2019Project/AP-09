@@ -37,6 +37,8 @@ abstract public class Zombie {
         setZombieKind(zombieKind);
     }
 
+    abstract public void attack(Cell currentCell);
+
     public void move() {
         Cell cell = this.getCurrentCell();
         Map gameMap = Battle.getRunningBattle().getMap();

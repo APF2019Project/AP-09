@@ -21,14 +21,17 @@ public class BungeeZombie extends Zombie {
     public <T> void action() {
         Cell cell = this.getCurrentCell();
         if (turnCounter == 3) {
-            GraveYard.getDeadPlants().add(cell.getPlant());
-            cell.setPlant(null);
+            attack(cell);
             turnCounter = 0;
         } else
             ++turnCounter;
     }
 
-
+    @Override
+    public void attack(Cell cell) {
+        GraveYard.getDeadPlants().add(cell.getPlant());
+        cell.setPlant(null);
+    }
 
     public void randomCell() {
         Random rand = new Random();

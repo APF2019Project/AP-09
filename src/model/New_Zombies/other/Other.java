@@ -5,6 +5,7 @@ import model.Map;
 import model.New_Zombies.Zombie;
 import model.New_Zombies.ZombieKind;
 import model.battle.Battle;
+import model.battle.GraveYard;
 
 import java.util.ArrayList;
 
@@ -28,8 +29,18 @@ public class Other extends Zombie {
     @Override
     public <T> void action() {
         Cell cell = this.getCurrentCell();
+        attack(cell);
+    }
+
+    @Override
+    public void attack(Cell cell) {
         if (cell.getPlant() != null) {
-            //attack
+            int attackPower = this.getAttackPower();
+            cell.getPlant().setHealthPoint(cell.getPlant().getHealthPoint() - attackPower);
+            if (cell.getPlant().getHealthPoint() == 0) {
+                GraveYard.getDeadPlants().add(cell.getPlant());
+                cell.setPlant(null);
+            }
         }
     }
 }

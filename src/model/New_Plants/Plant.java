@@ -27,6 +27,10 @@ abstract public class Plant {
         return plantName;
     }
 
+    public void setHealthPoint(int healthPoint) {
+        this.healthPoint = healthPoint;
+    }
+
     public int getHealthPoint() {
         return healthPoint;
     }

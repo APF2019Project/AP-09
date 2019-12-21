@@ -29,12 +29,16 @@ public class TruckZombie extends Zombie {
     @Override
     public <T> void action() {
         Cell cell = this.getCurrentCell();
+        attack(cell);
+    }
+
+    @Override
+    public void attack(Cell cell) {
         if (cell.getPlant() != null) {
             GraveYard.getDeadPlants().add(cell.getPlant());
             cell.setPlant(null);
         }
     }
-
     /*
     public void truckDeath(){
         if(hasStrongTruck){
