@@ -40,15 +40,12 @@ public class Battle {
     }
 
     public static void lawnMowerActivated(Cell cell, Map gameMap) {
-        for(int i = 0; i < MAP_ROWS_COUNT; ++i){
-            for(int j = 0; j < MAP_COLUMNS_COUNT; ++j){
-                if(i == cell.getRow()){
-                    for(int z = 0; z < gameMap.getCell(i, j).getZombies().size(); ++z){
-                        //Zombie dies
-                        //passing to graveYard
-                        --z;
-                    }
-                }
+        for (int j = 0; j < MAP_COLUMNS_COUNT; ++j) {
+            Cell c = gameMap.getCell(cell.getRow(), j);
+            for (int z = 0; z < c.getZombies().size(); ++z) {
+                GraveYard.getDeadZombies().add(c.getZombies().get(z));
+                c.getZombies().remove(z);
+                --z;
             }
         }
     }

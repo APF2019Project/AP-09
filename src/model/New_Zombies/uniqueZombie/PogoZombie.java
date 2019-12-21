@@ -26,22 +26,22 @@ public class PogoZombie extends Zombie {
     }
 
     public void pogoMove(Map gameMap, Cell cell) {
-        for (int i = 0; i < MAP_ROWS_COUNT; ++i) {
-            for (int j = 0; j < MAP_COLUMNS_COUNT; ++j) {
-                if (j == cell.getColumn() && i == cell.getRow()) {
-                    gameMap.getCell(i, j).getZombies().remove(this);
-                } else if (j == cell.getColumn() + 1 && i == cell.getRow()) {
-                    gameMap.getCell(i, j).getZombies().add(this);
-                    setCurrentCell(gameMap.getCell(i, j));
-                    reachLawnMower(gameMap.getCell(i, j), gameMap);
-                    return;
-                }
+        int row = cell.getRow();
+        for (int j = 0; j < MAP_COLUMNS_COUNT; ++j) {
+            if (j == cell.getColumn()) {
+                gameMap.getCell(row, j).getZombies().remove(this);
+            } else if (j == cell.getColumn() + 1) {
+                gameMap.getCell(row, j).getZombies().add(this);
+                setCurrentCell(gameMap.getCell(row, j));
+                if (this.getCurrentCell().getColumn() == MAP_COLUMNS_COUNT - 1)
+                    reachLawnMower(gameMap.getCell(row, j), gameMap);
+                return;
             }
         }
     }
 
     @Override
     public void attack(Cell cell) {
-
+        //nothing happens
     }
 }

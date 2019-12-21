@@ -38,12 +38,7 @@ public class BungeeZombie extends Zombie {
         int row = rand.nextInt(6);
         int column = rand.nextInt(19);
         Map gameMap = Battle.getRunningBattle().getMap();
-        for (Cell[] cells : gameMap.getCells()) {
-            for (Cell cell : cells) {
-                if (cell.getRow() == row && cell.getColumn() == column) {
-                    this.setCurrentCell(cell);
-                }
-            }
-        }
+        Cell bungeeCell = gameMap.getCell(row , column);
+        setCurrentCell(bungeeCell);
     }
 }

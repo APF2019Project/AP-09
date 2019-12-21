@@ -42,21 +42,21 @@ abstract public class Zombie {
     public void move() {
         Cell cell = this.getCurrentCell();
         Map gameMap = Battle.getRunningBattle().getMap();
+        int row = cell.getRow();
         if (cell.getPlant() == null) {
-            for (int i = 0; i < MAP_ROWS_COUNT; ++i) {
-                for (int j = 0; j < MAP_COLUMNS_COUNT; ++j) {
-                    if (j == cell.getColumn() && i == cell.getRow()) {
-                        gameMap.getCell(i, j).getZombies().remove(this);
-                        --j;
-                    } else if (j == cell.getColumn() + 1 && i == cell.getRow()) {
-                        gameMap.getCell(i, j).getZombies().add(this);
-                        setCurrentCell(gameMap.getCell(i, j));
-                        reachLawnMower(gameMap.getCell(i, j), gameMap);
-                        return;
-                    }
+            for (int j = 0; j < MAP_COLUMNS_COUNT; ++j) {
+                if (j == cell.getColumn()) {
+                    gameMap.getCell(row, j).getZombies().remove(this);
+                } else if (j == cell.getColumn() + 1) {
+                    gameMap.getCell(row, j).getZombies().add(this);
+                    setCurrentCell(gameMap.getCell(row, j));
+                    if (this.currentCell.getColumn() == MAP_COLUMNS_COUNT - 1)
+                        reachLawnMower(gameMap.getCell(row, j), gameMap);
+                    return;
                 }
             }
-        }
+        } else
+            this.action();
     }
 
     public void reachLawnMower(Cell cell, Map gameMap) {
