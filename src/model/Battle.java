@@ -2,6 +2,9 @@ package model;
 
 import model.New_Zombies.Zombie;
 import model.New_Plants.Plant;
+import model.card.Card;
+
+import static constants.Constants.MAP_COLUMNS_COUNT;
 
 public class Battle {
     private Player firstPlayer;
@@ -19,40 +22,47 @@ public class Battle {
     private Map map;
 
     public boolean checkSelectedCellForSpace(Cell selectedCell) {
-        if (selectedCell.hasPlant())
+        if (selectedCell.getPlant() != null)
             return false;
         return true;
     }
 
-    public void zombieAttack() {
-        for (Cell c : map.getCells()) {
-            if (c.hasPlant() && c.hasZombie()) {
-                //TODO
+    public void zombieMoveAndAction() {
+        for (Cell[] cells : map.getCells()) {
+            for (Cell c : cells) {
+                for (Zombie z : c.getZombies()){
+                    z.move();//moves, then does it's action
+                }
             }
         }
     }
 
     public Cell closestZombie(Cell cell) {
-        for (Cell c : map.getCells()) {
-            if (c.getRow() != cell.getRow())
+        int row = cell.getRow();
+        Map gameMap = Battle.getRunningBattle().getMap();
+        for (int i = MAP_COLUMNS_COUNT - 1; i >= 0; --i) {
+            Cell checkCell = gameMap.getCell(row, i);
+            if (cell.getColumn() < i)
                 continue;
-            if (findZombie(c)) {
-                return c;
+            else if (findZombie(checkCell)) {
+                return checkCell;
             }
         }
         return null;
     }
 
     public boolean findZombie(Cell cell) {
-        if (cell.hasZombie())
+        if (cell.getZombies() != null)
             return true;
         return false;
     }
 
     public void plantAttacks() {
-        for (Cell c : map.getCells()) {
-            if (c.hasPlant()) {
-                c.getPlant().attack(closestZombie(c), c);
+        for (Cell[] cells : map.getCells()) {
+            for (Cell c : cells) {
+                if (c.getPlant() != null) {
+                    //TODO plant in cell c attack it's closest zombie(using method closest Zombie)
+                }
             }
         }
     }

@@ -2,6 +2,7 @@ package model;
 
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
+import model.card.Card;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
