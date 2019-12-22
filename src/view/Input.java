@@ -1,8 +1,5 @@
 package view;
 
-import command.LeaderBoardCommand;
-import command.LoginCommand;
-import command.MainMenuCommand;
 import controller.Controller;
 
 import java.util.Scanner;
@@ -12,7 +9,7 @@ public class Input {
     private static Input instance = new Input();
     private Scanner scanner = new Scanner(System.in);
     private boolean invalidCommand = false;
-    private LoginCommand lastMajorLoginCommand;
+    private MajorLoginCommand lastMajorLoginCommand;
     private MainMenuCommand lastMainMenuCommand;
     private LeaderBoardCommand lastLeaderBoardCommand;
     private boolean exit = false;
@@ -74,7 +71,7 @@ public class Input {
             String UserAndPass = scanner.nextLine();
             if (UserAndPass.matches("\\w+ \\w+")) {
                 String[] words = UserAndPass.split(" ");
-                LoginCommand MajorLoginCommand = LoginCommand.LOGIN;
+                MajorLoginCommand MajorLoginCommand = view.MajorLoginCommand.LOGIN;
                 MajorLoginCommand.setName(words[0]);
                 MajorLoginCommand.setPassword(words[1]);
                 lastMajorLoginCommand = MajorLoginCommand;
@@ -86,29 +83,29 @@ public class Input {
             String UserAndPass = scanner.nextLine();
             if (UserAndPass.matches("\\w+ \\w+")) {
                 String[] words = UserAndPass.split(" ");
-                LoginCommand loginCommand = LoginCommand.SIGN_UP;
+                MajorLoginCommand loginCommand = MajorLoginCommand.SIGN_UP;
                 loginCommand.setName(words[0]);
                 loginCommand.setPassword(words[1]);
                 lastMajorLoginCommand = loginCommand;
             } else invalidCommand();
         } else if (command.toLowerCase().equals("leader board")) {
-            lastMajorLoginCommand = LoginCommand.LEADER_BOARD;
+            lastMajorLoginCommand = MajorLoginCommand.LEADER_BOARD;
         } else if (command.toLowerCase().equals("endGame")) {
-            lastMajorLoginCommand = LoginCommand.EXIT;
+            lastMajorLoginCommand = MajorLoginCommand.EXIT;
         } else
             invalidCommand();
     }
 
     public void invalidCommand() {
-        System.out.println("invalid command");
+        System.out.println("invalid view.command");
         invalidCommand = true;
     }
 
-    public LoginCommand getLastMajorLoginCommand() {
+    public MajorLoginCommand getLastMajorLoginCommand() {
         return lastMajorLoginCommand;
     }
 
-    public void setLastMajorLoginCommand(LoginCommand lastMajorLoginCommand) {
+    public void setLastMajorLoginCommand(MajorLoginCommand lastMajorLoginCommand) {
         this.lastMajorLoginCommand = lastMajorLoginCommand;
     }
 

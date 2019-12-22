@@ -2,6 +2,7 @@ package model.battle;
 
 import model.*;
 import model.New_Zombies.Zombie;
+import model.card.Card;
 
 import java.util.ArrayList;
 

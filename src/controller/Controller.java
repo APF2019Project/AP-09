@@ -1,22 +1,21 @@
 package controller;
 
-import command.LeaderBoardCommand;
-import command.LoginCommand;
-import command.MainMenuCommand;
-import command.Menu;
+import view.*;
 import model.Account;
-import view.Input;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import static view.Menu.MAJOR_LOGIN;
 
 public class Controller {
     private final static Controller instance = new Controller();
     private boolean endGame = false;
     private ArrayList<Menu> menus = new ArrayList<>();
+    private static Show show = Show.getInstance();
 
     private Controller() {
-        menus.add(Menu.MAJOR_LOGIN);
+        menus.add(MAJOR_LOGIN);
     }
 
     public static Controller getInstance() {
@@ -24,23 +23,49 @@ public class Controller {
     }
 
     public void main() {
+        Request request = Request.getInstance() ;
         while (!endGame) {
-            System.out.println(getCurrentMenu());
-            Input.getInstance().getCommandFromUserInConsole();
 
             if (firstCheck())
                 continue;
-            System.out.println("after check");
-            getCommandEnumFromInput();
+            show.showMenu(request.getCurrentMenu());
+            request.getRequest();
+            commandManagement(request, request.getCurrentMenu());
 
-
-            //TODO call Output
+            //TODO call Output(ali it's not for you :) )
         }
         Account.toJson();
     }
 
+    private void commandManagement(Request request, Menu currentMenu) {
+        switch (currentMenu){
+            case MAJOR_LOGIN:
+                majorLoginMenu(request.getLastMajorLoginCommand());
+                break;
+            case LOGIN:
+                loginMenu(request.getLastLoginCommand());
+                break;
+            //todo do the rest exept play
+        }
+    }
+    private void majorLoginMenu(MajorLoginCommand majorLoginCommand) {
+        switch (majorLoginCommand) {
+            case LOGIN:
+                Request.getInstance().nextMenu(Menu.LOGIN);
+                break;
+            case EXIT:
+                endGame();
+                break;
+            case SIGN_UP:
+                //todo
+                break;
+            case LEADER_BOARD:
+                //todo
+        }
+    }
+
+
     private boolean firstCheck() {
-        System.out.println("check");
         if (Input.getInstance().isInvalidCommand()) {
             Input.getInstance().setInvalidCommand(false);
             return true;
@@ -59,41 +84,12 @@ public class Controller {
     }
 
     private void help() {
-        switch (getCurrentMenu()) {
-            case SHOP:
-            case PLAY:
-            case LEADER_BOARD:
-            case LOGIN:
-            case MAIN:
-            case MAJOR_LOGIN:
-            case PROFILE:
-            case SIGN_UP:
-        }
+        Output.getInstance().printHelp(Request.getInstance().getCurrentMenu());
     }
 
-    private void getCommandEnumFromInput() {
-        switch (getCurrentMenu()) {
-            case MAJOR_LOGIN:
-                loginMenu(Input.getInstance().getLastMajorLoginCommand());
-                break;
-            case MAIN:
-                mainMenu(Input.getInstance().getLastMainMenuCommand());
-                break;
-            case LEADER_BOARD:
-                leaderBoard(Input.getInstance().getLastLeaderBoardCommand());
-                break;
-        }
-    }
 
-    private void leaderBoard(LeaderBoardCommand leaderBoardCommand) {
-        switch (leaderBoardCommand) {
-            case EXIT:
-                exit();
-                break;
-        }
-    }
 
-    private void mainMenu(MainMenuCommand lastMainMenuCommand) {
+    private void mainMenu(MainMenuCommand lastMainMenuCommand) { //todo it's just example ,  fit it into structure
         switch (lastMainMenuCommand) {
             case PROFILE:
                 profile();
@@ -107,40 +103,25 @@ public class Controller {
         }
     }
 
-    private void profile() {
-        nextMenu(Menu.PROFILE);
+    private void profile() { //todo it's just example ,  fit it into structure
+        Request.getInstance().nextMenu(Menu.PROFILE);
     }
 
-    private void play() {
-        nextMenu(Menu.PLAY);
+    private void play() { //todo don't touch this for now because battle is not ready yet!
+        Request.getInstance().nextMenu(Menu.PLAY);
     }
 
-    private void shop() {
-        nextMenu(Menu.SHOP);
+    private void shop() { //todo don't touch this it's mine
+        Request.getInstance().nextMenu(Menu.SHOP);
     }
 
-    private void loginMenu(LoginCommand loginCommand) {
-        switch (loginCommand) {
-            case LOGIN:
-                login(loginCommand);
-                break;
-            case EXIT:
-                endGame();
-                break;
-            case SIGN_UP:
-                signUp(loginCommand);
-                break;
-            case LEADER_BOARD:
-                leaderBoard();
-        }
-    }
 
     public void endGame() {
         endGame = true;
     }
 
     private void exit() {
-        if (getCurrentMenu().equals(Menu.MAJOR_LOGIN)) {
+        if (Request.getInstance().getCurrentMenu().equals(MAJOR_LOGIN)) {
             endGame();
             return;
         }
@@ -150,12 +131,12 @@ public class Controller {
     private void leaderBoard() {
         Collections.sort(Account.getAllAccount());
         for (Account account : Account.getAllAccount()) {
-            System.out.println(account.getUserName() + " " + account.getKilledZombies());
+            System.out.println(account.getUserName() + " " + account.getKilledZombies()); //todo make a function in the Output instead of printing directly in controller
         }
-        nextMenu(Menu.LEADER_BOARD);
+        Request.getInstance().nextMenu(Menu.LEADER_BOARD);
     }
 
-    private void signUp(LoginCommand loginCommand) {
+    private void signUp(MajorLoginCommand loginCommand) { //todo it's just example ,  fit it into structure
         String name = loginCommand.getName();
         String password = loginCommand.getPassword();
         int flagOfExistence = 0;
@@ -172,7 +153,7 @@ public class Controller {
 
     }
 
-    private void login(LoginCommand loginCommand) {
+    private void loginMenu(LoginCommand loginCommand) {
         String name = loginCommand.getName();
         String password = loginCommand.getPassword();
         int flagOfExistence = 0;
@@ -183,18 +164,13 @@ public class Controller {
             }
         }
         if (flagOfExistence == 1) {
-            nextMenu(Menu.MAIN);
+            Request.getInstance().nextMenu(MAJOR_LOGIN);
+            Request.getInstance().nextMenu(Menu.MAIN);
         } else
-            System.out.println("invalid account");
+            Output.getInstance().invalidAccount();
     }
 
-    private void nextMenu(Menu menu) {
-        menus.add(menu);
-    }
 
-    public Menu getCurrentMenu() {
-        return menus.get(menus.size() - 1);
-    }
 
     public void setEndGame(boolean endGame) {
         this.endGame = endGame;

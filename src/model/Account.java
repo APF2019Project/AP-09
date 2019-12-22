@@ -16,7 +16,6 @@ public class Account implements Comparable<Account> {
     private String userName;
     private String passWord;
     private ArrayList<Card> allCard;
-    private ArrayList<Card> Collection;
     private int killedZombies;
     private int money;
 
@@ -62,9 +61,6 @@ public class Account implements Comparable<Account> {
         return allCard;
     }
 
-    public ArrayList<Card> getCollection() {
-        return Collection;
-    }
 
     public int getKilledZombies() {
         return killedZombies;

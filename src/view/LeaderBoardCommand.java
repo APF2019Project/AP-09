@@ -1,5 +1,5 @@
-package command;
+package view;
 
 public enum LeaderBoardCommand {
-     EXIT ;
+    EXIT ;
 }
