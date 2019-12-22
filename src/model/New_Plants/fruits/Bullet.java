@@ -11,10 +11,13 @@ public class Bullet extends Fruit {
     private int bulletSpeed = Constants.BULLET_SPEED;
     private BulletKind bulletKind;
     private FireRate fireRate;
+    private int damagingPower ;
+    private boolean isFrontGoing ;
 
-    public Bullet(BulletKind bulletKind, FireRate fireRate) {
+    public Bullet(BulletKind bulletKind, FireRate fireRate, int damagingPower, boolean isFrontGoing) {
         this.bulletKind = bulletKind;
         this.fireRate = fireRate;
+
     }
 
 
@@ -37,5 +40,21 @@ public class Bullet extends Fruit {
 
     public void setFireRate(FireRate fireRate) {
         this.fireRate = fireRate;
+    }
+
+    public int getDamagingPower() {
+        return damagingPower;
+    }
+
+    public void setDamagingPower(int damagingPower) {
+        this.damagingPower = damagingPower;
+    }
+
+    public boolean isFrontGoing() {
+        return isFrontGoing;
+    }
+
+    public void setFrontGoing(boolean frontGoing) {
+        isFrontGoing = frontGoing;
     }
 }
