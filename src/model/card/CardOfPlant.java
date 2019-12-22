@@ -6,7 +6,9 @@ public class CardOfPlant extends Card {
     private Plant plant ;
 
     public CardOfPlant(Plant plant){
+        super(CardType.PLANT);
         this.plant = plant ;
+        this.setCardName(plant.getPlantName());
         calculatePrice();
     }
 

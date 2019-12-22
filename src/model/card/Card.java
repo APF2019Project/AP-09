@@ -6,6 +6,12 @@ abstract  public class Card {
        private static ArrayList<Card> cards = new ArrayList<>() ;
     private int price;
     private boolean isBought = false ;
+    private CardType cardType ;
+    private String cardName;
+
+    public Card(CardType cardType){
+        this.cardType = cardType ;
+    }
 
     public int getPrice() {
         return price;
@@ -28,5 +34,21 @@ abstract  public class Card {
 
     public void setBought(boolean bought) {
         isBought = bought;
+    }
+
+    public CardType getCardType() {
+        return cardType;
+    }
+
+    public void setCardType(CardType cardType) {
+        this.cardType = cardType;
+    }
+
+    public String getCardName() {
+        return cardName;
+    }
+
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
     }
 }
