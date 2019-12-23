@@ -1,5 +1,6 @@
 package view;
 
+import model.Account;
 import model.card.Card;
 
 public class Output {
@@ -20,12 +21,6 @@ public class Output {
             case LOGIN:
                 break;
             case SHOP:
-                System.out.println("available cards:");
-                for (Card card: Card.getCards()) {
-                    if (!card.isBought()){
-                        System.out.println(card.getCardName() + "     price : " + card.getPrice());
-                    }
-                }
                 break;
             case PLAY:
                 break;
@@ -41,5 +36,40 @@ public class Output {
     }
     public void invalidAccount(){
         System.out.println("invalid account");
+    }
+    public void invalidCard(){
+        System.out.println("invalid card");
+    }
+    public void soldCard(){
+        System.out.println("already sold!");
+    }
+    public void boughtSuccessfully(){
+        System.out.println("the card bought successfully!");
+    }
+    public void notEnoughMoney(){
+        System.out.println("not enough money!");
+    }
+    public void showMenu(Menu menu) {
+        System.out.println(" *** " + menu.name() + " Menu *** ");
+    }
+    public void showShop(){
+        System.out.println("available cards:");
+        for (Card card: Card.getCards()) {
+            if (!card.isBought()){
+                System.out.println(card.getCardType()+ " " + card.getCardName() + "     price : " + card.getPrice());
+            }
+        }
+    }
+    public void showBoughtCards(){
+        System.out.println("you have:");
+        for (Card card : Card.getCards()){
+            if (card.isBought()){
+                System.out.println(card.getCardType() + " " + card.getCardName());
+            }
+        }
+    }
+
+    public void showAccountMoney(){
+        System.out.println("you have  "+ Account.getLoggedAccount().getMoney() + "  $");
     }
 }

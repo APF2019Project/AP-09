@@ -1,5 +1,7 @@
 package view;
 
+import model.card.Card;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -10,6 +12,7 @@ public class Request {
     private Scanner scanner = new Scanner(System.in);
     private MajorLoginCommand lastMajorLoginCommand;
     private LoginCommand lastLoginCommand;
+    private ShopCommand lastShopCommand ;
 
     private Request() {
         menus.add(Menu.MAJOR_LOGIN);
@@ -31,22 +34,40 @@ public class Request {
                 break;
             case LOGIN:
                 login(command.toLowerCase());
-
         }
     }
 
+    public void shop(String command) {
+        for (int i = 0; i < Patterns.shopPatterns.length; i++) {
+            Matcher matcher = Patterns.shopPatterns[i].matcher(command);
+            if (matcher.matches()) {
+                setCommandOfShop(matcher, i);
+                return;
+            }
+        }
+        //Todo handle Errors
+    }
+
+    public void setCommandOfShop(Matcher matcher, int i){
+        if (i==3){
+            lastShopCommand = ShopCommand.values()[i];
+            lastShopCommand.setName(matcher.group(1));
+        }else
+            lastShopCommand = ShopCommand.values()[i];
+    }
+
     public void login(String command) {
-        Matcher matcher = Patterns.loginPattern.matcher(command);
+        Matcher matcher = Patterns.loginPattern[0].matcher(command);
         if (matcher.matches()) {
             LoginCommand loginCommand = LoginCommand.USERNAME_PASSWORD;
-            loginCommand.setName(matcher.group(0));
-            loginCommand.setPassword(matcher.group(1));
+            loginCommand.setName(matcher.group(1));
+            loginCommand.setPassword(matcher.group(2));
         }
         //TODO error
     }
 
 
-    private void majorLogin(String command) {
+    public void majorLogin(String command) {
         for (int i = 0; i < Patterns.majorLoginPatterns.length; i++) {
             Matcher matcher = Patterns.majorLoginPatterns[i].matcher(command);
             if (matcher.matches()) {
@@ -57,7 +78,7 @@ public class Request {
         //Todo handle Errors
     }
 
-    private void setCommandOfMajorLogin(int i) {
+    public void setCommandOfMajorLogin(int i) {
         lastMajorLoginCommand = MajorLoginCommand.values()[i];
     }
 
@@ -75,5 +96,13 @@ public class Request {
 
     public LoginCommand getLastLoginCommand() {
         return lastLoginCommand;
+    }
+
+    public ShopCommand getLastShopCommand() {
+        return lastShopCommand;
+    }
+
+    public void setLastShopCommand(ShopCommand lastShopCommand) {
+        this.lastShopCommand = lastShopCommand;
     }
 }

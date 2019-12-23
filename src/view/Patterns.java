@@ -9,8 +9,14 @@ public class Patterns {
             Pattern.compile("^(?i)create account\\s*$"),
             Pattern.compile("^(?i)login\\s*$"),
     };
-    static Pattern loginPattern = new Pattern{
-            Pattern.compile("^(?i)(\\S+) (\\S+)\\s*$")
+    static Pattern[] loginPattern = new Pattern[]{
+            Pattern.compile("^(?i)(\\S+) (\\S+)\\s*$"),
+    };
+    static Pattern[] shopPatterns = new Pattern[]{
+            Pattern.compile("^(?i)money\\s*$"),
+            Pattern.compile("^(?i)show shop\\s*$"),
+            Pattern.compile("^(?i)show collection\\s*$"),
+            Pattern.compile("^(?i)buy (\\S+)\\s*$"),
     };
 
 }
