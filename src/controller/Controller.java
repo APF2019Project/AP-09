@@ -45,6 +45,9 @@ public class Controller {
             case LOGIN:
                 loginMenu(request.getLastLoginCommand());
                 break;
+            case SIGN_UP:
+                //TODO
+                break;
             //todo do the rest exept play
         }
     }
@@ -57,10 +60,14 @@ public class Controller {
                 endGame();
                 break;
             case SIGN_UP:
-                //todo
+                Request.getInstance().nextMenu(Menu.SIGN_UP);
                 break;
             case LEADER_BOARD:
-                //todo
+                Request.getInstance().nextMenu(Menu.LEADER_BOARD);
+                break;
+            case HELP:
+                help();
+                break;
         }
     }
 

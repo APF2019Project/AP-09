@@ -14,8 +14,8 @@ public class Show {
     public void printAMessage(String message) {
         System.out.println(message);
     }
+
     public void showMenu(Menu menu) {
         System.out.println(" *** " + menu.name() + " Menu *** ");
     }
-
 }

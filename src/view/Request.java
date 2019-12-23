@@ -10,6 +10,7 @@ public class Request {
     private Scanner scanner = new Scanner(System.in);
     private MajorLoginCommand lastMajorLoginCommand;
     private LoginCommand lastLoginCommand;
+    private SignUpCommand lastSignUpCommand;
 
     private Request() {
         menus.add(Menu.MAJOR_LOGIN);
@@ -55,6 +56,10 @@ public class Request {
             }
         }
         //Todo handle Errors
+    }
+
+    public SignUpCommand getLastSignUpCommand() {
+        return lastSignUpCommand;
     }
 
     private void setCommandOfMajorLogin(int i) {
