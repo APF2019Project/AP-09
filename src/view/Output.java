@@ -60,7 +60,7 @@ public class Output {
             }
         }
     }
-    public void boughtCards(){
+    public void showBoughtCards(){
         System.out.println("you have:");
         for (Card card : Card.getCards()){
             if (card.isBought()){
