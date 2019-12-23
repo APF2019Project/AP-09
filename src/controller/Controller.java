@@ -1,5 +1,8 @@
 package controller;
 
+import com.sun.org.apache.bcel.internal.generic.ACONST_NULL;
+import model.card.Card;
+import sun.font.DelegatingShape;
 import view.*;
 import model.Account;
 
@@ -24,12 +27,12 @@ public class Controller {
     }
 
     public void main() {
-        Request request = Request.getInstance();
+        Request request = Request.getInstance() ;
         while (!endGame) {
 
             if (firstCheck())
                 continue;
-            show.showMenu(request.getCurrentMenu());
+            Output.getInstance().showMenu(request.getCurrentMenu());
             request.getRequest();
             commandManagement(request, request.getCurrentMenu());
 
@@ -39,7 +42,7 @@ public class Controller {
     }
 
     private void commandManagement(Request request, Menu currentMenu) {
-        switch (currentMenu) {
+        switch (currentMenu){
             case MAJOR_LOGIN:
                 majorLoginMenu(request.getLastMajorLoginCommand());
                 break;
@@ -267,6 +270,41 @@ public class Controller {
         } else
             Output.getInstance().invalidAccount();
     }
+    public void  shopMenu(ShopCommand shopCommand){
+        switch (shopCommand){
+            case BUY:
+                String cardNameFromConsole = shopCommand.getName() ;
+                Boolean isContainCard = Card.getCards().stream().anyMatch(card -> card.getCardName().equals(cardNameFromConsole)) ;
+                if (!isContainCard)
+                    Output.getInstance().invalidCard();
+                else{
+                    Card targetCard = (Card) Card.getCards().stream().filter(card -> card.getCardName().equals(cardNameFromConsole)).toArray()[0] ;
+                    if (targetCard.isBought())
+                        Output.getInstance().soldCard();
+                    else{
+                        if (targetCard.getPrice()<= Account.getLoggedAccount().getMoney()) {
+                            Account.getLoggedAccount().decreaseMoney(targetCard.getPrice());
+                            Account.getLoggedAccount().getAllCard().add(targetCard);
+                            targetCard.setBought(true);
+                            Output.getInstance().boughtSuccessfully();
+                        } else
+                            Output.getInstance().notEnoughMoney();
+                    }
+                }
+                break;
+            case MONEY:
+                    Output.getInstance().showAccountMoney();
+                break;
+            case SHOW_SHOP:
+                    Output.getInstance().showShop();
+                break;
+            case SHOW_BOUGHT_CARDS:
+                Output.getInstance().showBoughtCards();
+                break;
+        }
+
+    }
+
 
 
     public void setEndGame(boolean endGame) {

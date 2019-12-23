@@ -16,6 +16,7 @@ public class Account implements Comparable<Account> {
     private String userName;
     private String passWord;
     private ArrayList<Card> allCard;
+    private ArrayList<Card> deck ;
     private int killedZombies;
     private int money;
 
@@ -105,9 +106,20 @@ public class Account implements Comparable<Account> {
             e.printStackTrace();
         }
     }
+
+    public void increaseMoney(int n){
+        this.money += n ;
+    }
+
+    public void decreaseMoney(int n){
+        this.money -= n ;
+    }
     @Override
     public int compareTo(Account o) {
         return Integer.compare(o.killedZombies ,this.killedZombies);
     }
 
+    public ArrayList<Card> getDeck() {
+        return deck;
+    }
 }

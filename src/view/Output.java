@@ -40,10 +40,20 @@ public class Output {
     public static Output getInstance() {
         return instance;
     }
-
-    public void invalidAccount() {
+    public void invalidAccount(){
         System.out.println("invalid account");
     }
+    public void invalidCard(){
+        System.out.println("invalid card");
+    }
+    public void soldCard(){
+        System.out.println("already sold!");
+    }
+    public void boughtSuccessfully(){
+        System.out.println("the card bought successfully!");
+    }
+    public void notEnoughMoney(){
+        System.out.println("not enough money!");
 
     public void majorLoginHelp() {
         System.out.println("The Menus:");
@@ -52,18 +62,24 @@ public class Output {
         System.out.println(" *** LeaderBoard Menu ***");
         System.out.println(" *** Exit ***");
     }
-
-    public void shopHelp() {
+    public void showMenu(Menu menu) {
+        System.out.println(" *** " + menu.name() + " Menu *** ");
+    }
+    public void showShop(){
         System.out.println("available cards:");
-        for (Card card : Card.getCards()) {
-            if (!card.isBought()) {
-                System.out.println(card.getCardName() + "     price : " + card.getPrice());
+        for (Card card: Card.getCards()) {
+            if (!card.isBought()){
+                System.out.println(card.getCardType()+ " " + card.getCardName() + "     price : " + card.getPrice());
             }
         }
     }
-
-    public void invalidSigning() {
-        System.out.println("already exists");
+    public void showBoughtCards(){
+        System.out.println("you have:");
+        for (Card card : Card.getCards()){
+            if (card.isBought()){
+                System.out.println(card.getCardType() + " " + card.getCardName());
+            }
+        }
     }
 
     public void printLeaderBoard(Account account) {

@@ -21,6 +21,10 @@ abstract public class Plant {
         this.plantKind = plantKind;
     }
 
+    public static ArrayList<Plant> getPlants() {
+        return plants;
+    }
+
     abstract public <T> ArrayList<T> operate(Class<T> type);
 
     public String getPlantName() {
