@@ -12,8 +12,10 @@ public class Input {
     private MajorLoginCommand lastMajorLoginCommand;
     private MainMenuCommand lastMainMenuCommand;
     private LeaderBoardCommand lastLeaderBoardCommand;
+    private ProfileMenuCommand lastProfileMenuCommand;
     private boolean exit = false;
     private boolean help = false;
+
     private Input() {
 
     }
@@ -28,9 +30,10 @@ public class Input {
 
     private void identifyCommand(String command) {
         if (command.toLowerCase().equals("exit")) {
-            exit =true;
+            exit = true;
             return;
-        }if (command.toLowerCase().equals("help")){
+        }
+        if (command.toLowerCase().equals("help")) {
             help = true;
             return;
         }
@@ -44,17 +47,72 @@ public class Input {
             case LEADER_BOARD:
                 leaderBoard(command);
                 break;
+            case PROFILE:
+                profile(command);
+                break;
 
         }
     }
 
-    private void leaderBoard(String command) {
+    public void profile(String command) {
+        if (command.toLowerCase().equals("change")) {
+            String userAndPass = scanner.nextLine();
+            if (userAndPass.matches("\\w+ \\w+")) {
+                String[] words = userAndPass.split(" ");
+                ProfileMenuCommand profileMenuCommand = ProfileMenuCommand.CHANGE;
+                ProfileMenuCommand.setName(words[0]);
+                ProfileMenuCommand.setPassword(words[1]);
+                lastProfileMenuCommand = profileMenuCommand;
+            }
+
+        }
+        else if(command.toLowerCase().equals("show")){
+            ProfileMenuCommand profileMenuCommand = ProfileMenuCommand.SHOW;
+            lastProfileMenuCommand = profileMenuCommand;
+        }
+        else if(command.toLowerCase().equals("create")){
+            String userAndPass = scanner.nextLine();
+            if (userAndPass.matches("\\w+ \\w+")) {
+                String[] words = userAndPass.split(" ");
+                ProfileMenuCommand profileMenuCommand = ProfileMenuCommand.CREATE;
+                ProfileMenuCommand.setName(words[0]);
+                ProfileMenuCommand.setPassword(words[1]);
+                lastProfileMenuCommand = profileMenuCommand;
+            }
+        }
+        else if(command.toLowerCase().equals("delete")){
+            String userAndPass = scanner.nextLine();
+            if (userAndPass.matches("\\w+ \\w+")) {
+                String[] words = userAndPass.split(" ");
+                ProfileMenuCommand profileMenuCommand = ProfileMenuCommand.DELETE;
+                ProfileMenuCommand.setName(words[0]);
+                ProfileMenuCommand.setPassword(words[1]);
+                lastProfileMenuCommand = profileMenuCommand;
+            }
+        }
+        else if(command.toLowerCase().equals("rename")){
+            String username = scanner.nextLine();
+            if (username.matches("\\w+")) {
+                ProfileMenuCommand profileMenuCommand = ProfileMenuCommand.RENAME;
+                ProfileMenuCommand.setName(username);
+                lastProfileMenuCommand = profileMenuCommand;
+            }
+        }
+        else if(command.toLowerCase().equals("help")){
+            ProfileMenuCommand profileMenuCommand = ProfileMenuCommand.HELP;
+            lastProfileMenuCommand = profileMenuCommand;
+        }
+        else
+            invalidCommand();
+    }
+
+    public void leaderBoard(String command) {
         if (command.toLowerCase().equals("exit")) {
             lastLeaderBoardCommand = LeaderBoardCommand.EXIT;
         } else invalidCommand();
     }
 
-    private void main(String command) {
+    public void main(String command) {
         if (command.toLowerCase().equals("profile")) {
             lastMainMenuCommand = MainMenuCommand.PROFILE;
         } else if (command.toLowerCase().equals("play")) {

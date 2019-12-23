@@ -12,6 +12,8 @@ public class Request {
     private LoginCommand lastLoginCommand;
     private SignUpCommand lastSignUpCommand;
     private LeaderBoardCommand lastLeaderBoardCommand;
+    private MainMenuCommand lastMainMenuCommand;
+    private ProfileMenuCommand lastProfileMenuCommand;
 
     private Request() {
         menus.add(Menu.MAJOR_LOGIN);
@@ -24,6 +26,14 @@ public class Request {
     public void getRequest() {
         String command = scanner.nextLine();
         transferCommandToRightPlace(command);
+    }
+
+    public ProfileMenuCommand getLastProfileMenuCommand() {
+        return lastProfileMenuCommand;
+    }
+
+    public MainMenuCommand getLastMainMenuCommand() {
+        return lastMainMenuCommand;
     }
 
     public LeaderBoardCommand getLastLeaderBoardCommand() {

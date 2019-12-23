@@ -24,10 +24,17 @@ public class Output {
             case PLAY:
                 break;
             case PROFILE:
-                break;
-            case LEADER_BOARD:
+                profileHelp();
                 break;
         }
+    }
+
+    private void profileHelp() {
+        System.out.println("change your account");
+        System.out.println("rename your username");
+        System.out.println("delete your profile");
+        System.out.println("show your username");
+        System.out.println("create new profile");
     }
 
     public static Output getInstance() {
@@ -39,7 +46,6 @@ public class Output {
     }
 
     public void majorLoginHelp() {
-        System.out.println(" *** Major Login Menu ***");
         System.out.println("The Menus:");
         System.out.println(" *** Login Menu ***");
         System.out.println(" *** Sign up Menu ***");
@@ -61,6 +67,6 @@ public class Output {
     }
 
     public void printLeaderBoard(Account account) {
-        account.getUserName() + " " + account.getKilledZombies()
+        System.out.println(account.getUserName() + " " + account.getKilledZombies());
     }
 }

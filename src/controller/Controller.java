@@ -52,8 +52,93 @@ public class Controller {
             case LEADER_BOARD:
                 leaderBoard();
                 break;
+            case MAIN:
+                mainMenu(request.getLastMainMenuCommand());
+                break;
+            case PROFILE:
+                profileMenu(request.getLastProfileMenuCommand());
+                break;
             //todo do the rest except play and shop
         }
+    }
+
+    private void profileMenu(ProfileMenuCommand profileMenuCommand) {
+        switch (profileMenuCommand) {
+            case CHANGE:
+                changeAccount(profileMenuCommand);
+                break;
+            case SHOW:
+                showCurrentAccount();
+                break;
+            case CREATE:
+                createNewProfile(profileMenuCommand);
+                break;
+            case DELETE:
+                deleteProfile(profileMenuCommand);
+                break;
+            case RENAME:
+                renameProfile(profileMenuCommand);
+                break;
+            case HELP:
+                help();
+                break;
+        }
+    }
+
+    private void renameProfile(ProfileMenuCommand profileMenuCommand) {
+        String name = profileMenuCommand.getName();
+        Account account = Account.getLoggedAccount();
+        account.setUserName(name);
+    }
+
+    private void deleteProfile(ProfileMenuCommand profileMenuCommand) {
+        String name = profileMenuCommand.getName();
+        String password = profileMenuCommand.getPassword();
+        int flagOfExistence = 0;
+        for (Account account : Account.getAllAccount()) {
+            if (account.getUserName().equals(name) && account.getPassWord().equals(password)) {
+                Account.getAllAccount().remove(account);
+            }
+        }
+        if (flagOfExistence != 1)
+            Output.getInstance().invalidAccount();
+
+    }
+
+    private void createNewProfile(ProfileMenuCommand profileMenuCommand) {
+        String name = profileMenuCommand.getName();
+        String password = profileMenuCommand.getPassword();
+        int flagOfExistence = 0;
+        for (Account account : Account.getAllAccount()) {
+            if (account.getUserName().equals(name)) {
+                flagOfExistence = 1;
+            }
+        }
+        if (flagOfExistence == 0) {
+            Account.getAllAccount().add(new Account(name, password));
+
+        } else
+            Output.getInstance().invalidSigning();
+    }
+
+    private void showCurrentAccount() {
+        Account account = Account.getLoggedAccount();
+        System.out.println(account.getUserName());
+    }
+
+    private void changeAccount(ProfileMenuCommand profileMenuCommand) {
+        String name = profileMenuCommand.getName();
+        String password = profileMenuCommand.getPassword();
+        int flagOfExistence = 0;
+        for (Account account : Account.getAllAccount()) {
+            if (account.getUserName().equals(name) && account.getPassWord().equals(password)) {
+                Account.setLoggedAccount(account);
+                flagOfExistence = 1;
+            }
+        }
+        if (flagOfExistence != 1)
+            Output.getInstance().invalidAccount();
+
     }
 
     private void majorLoginMenu(MajorLoginCommand majorLoginCommand) {
@@ -95,13 +180,13 @@ public class Controller {
         return false;
     }
 
-    private void help() {
+    public void help() {
         Output.getInstance().printHelp(Request.getInstance().getCurrentMenu());
     }
 
 
-    private void mainMenu(MainMenuCommand lastMainMenuCommand) { //todo it's just example ,  fit it into structure
-        switch (lastMainMenuCommand) {
+    public void mainMenu(MainMenuCommand mainMenuCommand) {
+        switch (mainMenuCommand) {
             case PROFILE:
                 profile();
                 break;
@@ -114,15 +199,15 @@ public class Controller {
         }
     }
 
-    private void profile() { //todo it's just example ,  fit it into structure
+    public void profile() { //todo it's just example ,  fit it into structure
         Request.getInstance().nextMenu(Menu.PROFILE);
     }
 
-    private void play() { //todo don't touch this for now because battle is not ready yet!
+    public void play() { //todo don't touch this for now because battle is not ready yet!
         Request.getInstance().nextMenu(Menu.PLAY);
     }
 
-    private void shop() { //todo don't touch this it's mine
+    public void shop() { //todo don't touch this it's mine
         Request.getInstance().nextMenu(Menu.SHOP);
     }
 
@@ -131,7 +216,7 @@ public class Controller {
         endGame = true;
     }
 
-    private void exit() {
+    public void exit() {
         if (Request.getInstance().getCurrentMenu().equals(MAJOR_LOGIN)) {
             endGame();
             return;
@@ -139,7 +224,7 @@ public class Controller {
         menus.remove(menus.size() - 1);
     }
 
-    private void leaderBoard() {
+    public void leaderBoard() {
         Collections.sort(Account.getAllAccount());
         for (Account account : Account.getAllAccount()) {
             Output.getInstance().printLeaderBoard(account);
@@ -147,7 +232,7 @@ public class Controller {
         Request.getInstance().nextMenu(Menu.LEADER_BOARD);
     }
 
-    private void signUp(SignUpCommand signUpCommand) {
+    public void signUp(SignUpCommand signUpCommand) {
         String name = signUpCommand.getName();
         String password = signUpCommand.getPassword();
         int flagOfExistence = 0;
@@ -166,12 +251,12 @@ public class Controller {
 
     }
 
-    private void loginMenu(LoginCommand loginCommand) {
+    public void loginMenu(LoginCommand loginCommand) {
         String name = loginCommand.getName();
         String password = loginCommand.getPassword();
         int flagOfExistence = 0;
         for (Account account : Account.getAllAccount()) {
-            if (account.getUserName().equals(name)) {
+            if (account.getUserName().equals(name) && account.getPassWord().equals(password)) {
                 Account.setLoggedAccount(account);
                 flagOfExistence = 1;
             }
