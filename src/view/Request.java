@@ -11,6 +11,7 @@ public class Request {
     private MajorLoginCommand lastMajorLoginCommand;
     private LoginCommand lastLoginCommand;
     private SignUpCommand lastSignUpCommand;
+    private LeaderBoardCommand lastLeaderBoardCommand;
 
     private Request() {
         menus.add(Menu.MAJOR_LOGIN);
@@ -25,6 +26,10 @@ public class Request {
         transferCommandToRightPlace(command);
     }
 
+    public LeaderBoardCommand getLastLeaderBoardCommand() {
+        return lastLeaderBoardCommand;
+    }
+
     public void transferCommandToRightPlace(String command) {
         switch (getCurrentMenu()) {
             case MAJOR_LOGIN:
@@ -32,8 +37,32 @@ public class Request {
                 break;
             case LOGIN:
                 login(command.toLowerCase());
+                break;
+            case SIGN_UP:
+                signUp(command.toLowerCase());
+                break;
+            case LEADER_BOARD:
+                leaderBoard(command.toLowerCase());
+                break;
 
         }
+    }
+
+    public void leaderBoard(String command) {
+        Matcher matcher = Patterns.loginPattern.matcher(command);
+        if(matcher.matches()){
+
+        }
+    }
+
+    public void signUp(String command) {
+        Matcher matcher = Patterns.loginPattern.matcher(command);
+        if (matcher.matches()) {
+            SignUpCommand signUpCommand = SignUpCommand.USERNAME_PASSWORD;
+            signUpCommand.setName(matcher.group(1));
+            signUpCommand.setPassword(matcher.group(2));
+        }
+        // TODO error
     }
 
     public void login(String command) {
@@ -47,7 +76,7 @@ public class Request {
     }
 
 
-    private void majorLogin(String command) {
+    public void majorLogin(String command) {
         for (int i = 0; i < Patterns.majorLoginPatterns.length; i++) {
             Matcher matcher = Patterns.majorLoginPatterns[i].matcher(command);
             if (matcher.matches()) {
@@ -62,7 +91,7 @@ public class Request {
         return lastSignUpCommand;
     }
 
-    private void setCommandOfMajorLogin(int i) {
+    public void setCommandOfMajorLogin(int i) {
         lastMajorLoginCommand = MajorLoginCommand.values()[i];
     }
 

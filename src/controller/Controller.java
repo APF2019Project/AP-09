@@ -6,6 +6,7 @@ import model.Account;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import static view.Menu.MAIN;
 import static view.Menu.MAJOR_LOGIN;
 
 public class Controller {
@@ -23,7 +24,7 @@ public class Controller {
     }
 
     public void main() {
-        Request request = Request.getInstance() ;
+        Request request = Request.getInstance();
         while (!endGame) {
 
             if (firstCheck())
@@ -38,7 +39,7 @@ public class Controller {
     }
 
     private void commandManagement(Request request, Menu currentMenu) {
-        switch (currentMenu){
+        switch (currentMenu) {
             case MAJOR_LOGIN:
                 majorLoginMenu(request.getLastMajorLoginCommand());
                 break;
@@ -46,11 +47,15 @@ public class Controller {
                 loginMenu(request.getLastLoginCommand());
                 break;
             case SIGN_UP:
-                //TODO
+                signUp(request.getLastSignUpCommand());
                 break;
-            //todo do the rest exept play
+            case LEADER_BOARD:
+                leaderBoard();
+                break;
+            //todo do the rest except play and shop
         }
     }
+
     private void majorLoginMenu(MajorLoginCommand majorLoginCommand) {
         switch (majorLoginCommand) {
             case LOGIN:
@@ -95,7 +100,6 @@ public class Controller {
     }
 
 
-
     private void mainMenu(MainMenuCommand lastMainMenuCommand) { //todo it's just example ,  fit it into structure
         switch (lastMainMenuCommand) {
             case PROFILE:
@@ -138,14 +142,14 @@ public class Controller {
     private void leaderBoard() {
         Collections.sort(Account.getAllAccount());
         for (Account account : Account.getAllAccount()) {
-            System.out.println(account.getUserName() + " " + account.getKilledZombies()); //todo make a function in the Output instead of printing directly in controller
+            Output.getInstance().printLeaderBoard(account);
         }
         Request.getInstance().nextMenu(Menu.LEADER_BOARD);
     }
 
-    private void signUp(MajorLoginCommand loginCommand) { //todo it's just example ,  fit it into structure
-        String name = loginCommand.getName();
-        String password = loginCommand.getPassword();
+    private void signUp(SignUpCommand signUpCommand) {
+        String name = signUpCommand.getName();
+        String password = signUpCommand.getPassword();
         int flagOfExistence = 0;
         for (Account account : Account.getAllAccount()) {
             if (account.getUserName().equals(name)) {
@@ -154,9 +158,11 @@ public class Controller {
         }
         if (flagOfExistence == 0) {
             Account.getAllAccount().add(new Account(name, password));
+            Request.getInstance().nextMenu(MAJOR_LOGIN);
+            Request.getInstance().nextMenu(MAIN);
 
         } else
-            System.out.println("already exist");
+            Output.getInstance().invalidSigning();
 
     }
 
@@ -172,11 +178,10 @@ public class Controller {
         }
         if (flagOfExistence == 1) {
             Request.getInstance().nextMenu(MAJOR_LOGIN);
-            Request.getInstance().nextMenu(Menu.MAIN);
+            Request.getInstance().nextMenu(MAIN);
         } else
             Output.getInstance().invalidAccount();
     }
-
 
 
     public void setEndGame(boolean endGame) {

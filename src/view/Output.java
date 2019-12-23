@@ -1,5 +1,7 @@
 package view;
 
+import javafx.scene.control.Accordion;
+import model.Account;
 import model.card.Card;
 
 public class Output {
@@ -12,21 +14,12 @@ public class Output {
     public void printHelp(Menu menu) {
         switch (menu) {
             case MAJOR_LOGIN:
-                majorLoginHelp(menu);
+                majorLoginHelp();
                 break;
             case MAIN:
                 break;
-            case SIGN_UP:
-                break;
-            case LOGIN:
-                break;
             case SHOP:
-                System.out.println("available cards:");
-                for (Card card : Card.getCards()) {
-                    if (!card.isBought()) {
-                        System.out.println(card.getCardName() + "     price : " + card.getPrice());
-                    }
-                }
+                shopHelp();
                 break;
             case PLAY:
                 break;
@@ -45,12 +38,29 @@ public class Output {
         System.out.println("invalid account");
     }
 
-    public void majorLoginHelp(Menu menu) {
+    public void majorLoginHelp() {
         System.out.println(" *** Major Login Menu ***");
         System.out.println("The Menus:");
         System.out.println(" *** Login Menu ***");
         System.out.println(" *** Sign up Menu ***");
         System.out.println(" *** LeaderBoard Menu ***");
         System.out.println(" *** Exit ***");
+    }
+
+    public void shopHelp() {
+        System.out.println("available cards:");
+        for (Card card : Card.getCards()) {
+            if (!card.isBought()) {
+                System.out.println(card.getCardName() + "     price : " + card.getPrice());
+            }
+        }
+    }
+
+    public void invalidSigning() {
+        System.out.println("already exists");
+    }
+
+    public void printLeaderBoard(Account account) {
+        account.getUserName() + " " + account.getKilledZombies()
     }
 }
