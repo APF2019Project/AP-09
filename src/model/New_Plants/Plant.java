@@ -10,6 +10,7 @@ abstract public class Plant {
     private int attackPower;
     private int coolDown;
     private int sunUsage;
+    private boolean isLilyPad;
     private PlantKind plantKind;
 
     public Plant(String plantName, int healthPoint, int attackPower, int coolDown, int sunUsage, PlantKind plantKind) {
@@ -19,6 +20,14 @@ abstract public class Plant {
         this.coolDown = coolDown;
         this.sunUsage = sunUsage;
         this.plantKind = plantKind;
+    }
+
+    public boolean isLilyPad() {
+        return isLilyPad;
+    }
+
+    public void setLilyPad(boolean lilyPad) {
+        isLilyPad = lilyPad;
     }
 
     public static ArrayList<Plant> getPlants() {

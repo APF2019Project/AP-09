@@ -1,6 +1,6 @@
 package model;
 
-import model.New_Plants.Plant;
+import model.New_Plants.*;
 import model.New_Zombies.Zombie;
 
 import java.util.ArrayList;
@@ -41,8 +41,8 @@ public class Cell {
         return plant;
     }
 
-    public void setPlant(Plant plant) {
-        this.plant = plant;
+    public void setPlant(Plant plants) {
+        plant = plants;
     }
 
     public int getColumn() {

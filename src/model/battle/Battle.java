@@ -1,13 +1,14 @@
-package model.battle;
-
-import model.*;
+import model.Cell;
+import model.GameMode;
+import model.Map;
+import model.New_Plants.*;
 import model.New_Zombies.Zombie;
+import model.Player;
+import model.battle.BattleComponents;
+import model.battle.GraveYard;
 import model.card.Card;
 
-import java.util.ArrayList;
-
 import static constants.Constants.MAP_COLUMNS_COUNT;
-import static constants.Constants.MAP_ROWS_COUNT;
 
 public class Battle {
     private Player plants;
@@ -38,6 +39,75 @@ public class Battle {
         Battle battle = Battle.getRunningBattle();
         battle.setWinnerPlayer(battle.zombies);
         battle.setEndGame(true);
+    }
+
+    public boolean checkSelectedCellForSpace(Cell selectedCell) {
+        if (selectedCell.getPlant() != null)
+            return false;
+        return true;
+    }
+
+    public void zombieMoveAndAction() {
+        for (Cell[] cells : map.getCells()) {
+            for (Cell c : cells) {
+                for (Zombie z : c.getZombies()) {
+                    z.move();//moves, then does it's action
+                }
+            }
+        }
+    }
+
+    public Cell closestZombie(Cell cell) {
+        int row = cell.getRow();
+        Map gameMap = Battle.getRunningBattle().getMap();
+        for (int i = MAP_COLUMNS_COUNT - 1; i >= 0; --i) {
+            Cell checkCell = gameMap.getCell(row, i);
+            if (cell.getColumn() < i)
+                continue;
+            else if (findZombie(checkCell)) {
+                return checkCell;
+            }
+        }
+        return null;
+    }
+
+    public boolean findZombie(Cell cell) {
+        if (cell.getZombies() != null)
+            return true;
+        return false;
+    }
+
+    public void plantAttacks() {
+        for (Cell[] cells : map.getCells()) {
+            for (Cell c : cells) {
+                if (c.getPlant() != null) {
+                    //TODO plant in cell c attack it's closest zombie(using method closest Zombie)
+                }
+            }
+        }
+    }
+
+    public boolean checkSelectedCellIsValidForInsert(Plant plant, Cell selectedCell) {
+        if (checkSelectedCellForSpace(selectedCell)) {
+            if (selectedCell.isLand() && plant.getPlantType() == PlantType.LAND)
+                return true;
+            else if (selectedCell.isLeaf() && plant.getPlantType() == PlantType.LAND) {
+                return true;
+            } else if (!selectedCell.isLand() && plant.getPlantType() == PlantType.WATER) {
+                return true;
+            } else if (!selectedCell.isLand() && plant.isLilyPad() && !selectedCell.isLeaf()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void setPlantInCell(Plant plant, Cell selectedCell) {
+        if (checkSelectedCellIsValidForInsert(plant, selectedCell))
+            if (!plant.isLilyPad())
+                selectedCell.setPlant(plant);
+            else
+                selectedCell.setLeaf(true);
     }
 
     public static void lawnMowerActivated(Cell cell, Map gameMap) {

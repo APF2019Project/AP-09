@@ -1,15 +1,11 @@
 package model.New_Zombies.uniqueZombie;
 
-import model.Battle;
 import model.Cell;
 import model.Map;
 import model.New_Zombies.Zombie;
 import model.New_Zombies.ZombieKind;
 
-import java.util.ArrayList;
-
 import static constants.Constants.MAP_COLUMNS_COUNT;
-import static constants.Constants.MAP_ROWS_COUNT;
 
 public class PogoZombie extends Zombie {
     public PogoZombie(String zombieName, int healthPoint, int attackPower, int speed, int shieldHP, boolean isLandZombie, boolean hasDuck, boolean hasHelmet, boolean hasArmor) {

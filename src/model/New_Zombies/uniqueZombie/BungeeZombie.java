@@ -1,13 +1,11 @@
 package model.New_Zombies.uniqueZombie;
 
-import model.Battle;
 import model.Cell;
 import model.Map;
 import model.New_Zombies.Zombie;
 import model.New_Zombies.ZombieKind;
 import model.battle.GraveYard;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class BungeeZombie extends Zombie {
