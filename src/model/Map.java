@@ -9,6 +9,10 @@ public class Map {
     private boolean[] lawnMower = {true , true, true, true, true, true};
     private KindOfMap kindOfMap;
 
+    public Map(KindOfMap kindOfMap){
+        this.kindOfMap = kindOfMap ;
+    }
+
 
     public Cell getCell(int row, int col) {
         return cells[row][col];
