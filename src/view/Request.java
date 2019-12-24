@@ -16,7 +16,7 @@ public class Request {
     private LeaderBoardCommand lastLeaderBoardCommand;
     private MainMenuCommand lastMainMenuCommand;
     private ProfileMenuCommand lastProfileMenuCommand;
-    private ShopCommand lastShopCommand ;
+    private ShopCommand lastShopCommand;
 
     private Request() {
         menus.add(Menu.MAJOR_LOGIN);
@@ -72,16 +72,33 @@ public class Request {
         //Todo handle Errors
     }
 
-    public void setCommandOfShop(Matcher matcher, int i){
-        if (i==3){
+    public void setCommandOfShop(Matcher matcher, int i) {
+        if (i == 3) {
             lastShopCommand = ShopCommand.values()[i];
             lastShopCommand.setName(matcher.group(1));
-        }else
+        } else
             lastShopCommand = ShopCommand.values()[i];
     }
 
-    public void login(String command) {
+    public void leaderBoard(String command) {
         Matcher matcher = Patterns.loginPattern.matcher(command);
+        if (matcher.matches()) {
+
+        }
+    }
+
+    public void signUp(String command) {
+        Matcher matcher = Patterns.loginPattern.matcher(command);
+        if (matcher.matches()) {
+            SignUpCommand signUpCommand = SignUpCommand.USERNAME_PASSWORD;
+            signUpCommand.setName(matcher.group(1));
+            signUpCommand.setPassword(matcher.group(2));
+        }
+        // TODO error
+    }
+
+    public void login(String command) {
+        Matcher matcher = Patterns.loginPattern[0].matcher(command);
         if (matcher.matches()) {
             LoginCommand loginCommand = LoginCommand.USERNAME_PASSWORD;
             loginCommand.setName(matcher.group(0));

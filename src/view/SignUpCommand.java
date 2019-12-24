@@ -1,7 +1,7 @@
 package view;
 
-public enum ProfileMenuCommand {
-    CHANGE, DELETE, CREATE, RENAME, SHOW, HELP;
+public enum SignUpCommand {
+    USERNAME_PASSWORD ;
 
     private String name;
     private String password;
@@ -21,4 +21,4 @@ public enum ProfileMenuCommand {
     public void setPassword(String password) {
         this.password = password;
     }
-    }
+}

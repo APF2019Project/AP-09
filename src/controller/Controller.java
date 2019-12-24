@@ -16,7 +16,6 @@ public class Controller {
     private final static Controller instance = new Controller();
     private boolean endGame = false;
     private ArrayList<Menu> menus = new ArrayList<>();
-    private static Show show = Show.getInstance();
 
     private Controller() {
         menus.add(MAJOR_LOGIN);
@@ -27,7 +26,7 @@ public class Controller {
     }
 
     public void main() {
-        Request request = Request.getInstance() ;
+        Request request = Request.getInstance();
         while (!endGame) {
 
             if (firstCheck())
@@ -42,7 +41,7 @@ public class Controller {
     }
 
     private void commandManagement(Request request, Menu currentMenu) {
-        switch (currentMenu){
+        switch (currentMenu) {
             case MAJOR_LOGIN:
                 majorLoginMenu(request.getLastMajorLoginCommand());
                 break;
@@ -270,19 +269,20 @@ public class Controller {
         } else
             Output.getInstance().invalidAccount();
     }
-    public void  shopMenu(ShopCommand shopCommand){
-        switch (shopCommand){
+
+    public void shopMenu(ShopCommand shopCommand) {
+        switch (shopCommand) {
             case BUY:
-                String cardNameFromConsole = shopCommand.getName() ;
-                Boolean isContainCard = Card.getCards().stream().anyMatch(card -> card.getCardName().equals(cardNameFromConsole)) ;
+                String cardNameFromConsole = shopCommand.getName();
+                Boolean isContainCard = Card.getCards().stream().anyMatch(card -> card.getCardName().equals(cardNameFromConsole));
                 if (!isContainCard)
                     Output.getInstance().invalidCard();
-                else{
-                    Card targetCard = (Card) Card.getCards().stream().filter(card -> card.getCardName().equals(cardNameFromConsole)).toArray()[0] ;
+                else {
+                    Card targetCard = (Card) Card.getCards().stream().filter(card -> card.getCardName().equals(cardNameFromConsole)).toArray()[0];
                     if (targetCard.isBought())
                         Output.getInstance().soldCard();
-                    else{
-                        if (targetCard.getPrice()<= Account.getLoggedAccount().getMoney()) {
+                    else {
+                        if (targetCard.getPrice() <= Account.getLoggedAccount().getMoney()) {
                             Account.getLoggedAccount().decreaseMoney(targetCard.getPrice());
                             Account.getLoggedAccount().getAllCard().add(targetCard);
                             targetCard.setBought(true);
@@ -293,10 +293,10 @@ public class Controller {
                 }
                 break;
             case MONEY:
-                    Output.getInstance().showAccountMoney();
+                Output.getInstance().showAccountMoney();
                 break;
             case SHOW_SHOP:
-                    Output.getInstance().showShop();
+                Output.getInstance().showShop();
                 break;
             case SHOW_BOUGHT_CARDS:
                 Output.getInstance().showBoughtCards();
@@ -304,8 +304,6 @@ public class Controller {
         }
 
     }
-
-
 
     public void setEndGame(boolean endGame) {
         this.endGame = endGame;

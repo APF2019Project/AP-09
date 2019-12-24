@@ -66,11 +66,11 @@ public class Input {
             }
 
         }
-        else if(command.toLowerCase().equals("show")){
+        if(command.toLowerCase().equals("show")){
             ProfileMenuCommand profileMenuCommand = ProfileMenuCommand.SHOW;
             lastProfileMenuCommand = profileMenuCommand;
         }
-        else if(command.toLowerCase().equals("create")){
+        if(command.toLowerCase().equals("create")){
             String userAndPass = scanner.nextLine();
             if (userAndPass.matches("\\w+ \\w+")) {
                 String[] words = userAndPass.split(" ");
@@ -80,7 +80,7 @@ public class Input {
                 lastProfileMenuCommand = profileMenuCommand;
             }
         }
-        else if(command.toLowerCase().equals("delete")){
+        if(command.toLowerCase().equals("delete")){
             String userAndPass = scanner.nextLine();
             if (userAndPass.matches("\\w+ \\w+")) {
                 String[] words = userAndPass.split(" ");
@@ -90,20 +90,9 @@ public class Input {
                 lastProfileMenuCommand = profileMenuCommand;
             }
         }
-        else if(command.toLowerCase().equals("rename")){
-            String username = scanner.nextLine();
-            if (username.matches("\\w+")) {
-                ProfileMenuCommand profileMenuCommand = ProfileMenuCommand.RENAME;
-                ProfileMenuCommand.setName(username);
-                lastProfileMenuCommand = profileMenuCommand;
-            }
+        if(command.toLowerCase().equals("rename")){
+            
         }
-        else if(command.toLowerCase().equals("help")){
-            ProfileMenuCommand profileMenuCommand = ProfileMenuCommand.HELP;
-            lastProfileMenuCommand = profileMenuCommand;
-        }
-        else
-            invalidCommand();
     }
 
     public void leaderBoard(String command) {

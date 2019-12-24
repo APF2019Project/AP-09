@@ -16,7 +16,7 @@ public class GetAndSetWarriorJSON {
             yaGson.fromJson(new FileReader("json/plant.json"), Plant1[].class);
             System.out.println(Plant1.getPlant1s().size());
             yaGson.fromJson(new FileReader("json/zombie.json"), Zombie1[].class);
-            System.out.println(Zombie1.get[Zombies().size());
+            System.out.println(Zombie1.getZombies().size());
         } catch (Exception e) {
             e.printStackTrace();
         }

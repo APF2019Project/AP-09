@@ -18,5 +18,4 @@ public class Patterns {
             Pattern.compile("^(?i)show collection\\s*$"),
             Pattern.compile("^(?i)buy (\\S+)\\s*$"),
     };
-
 }
