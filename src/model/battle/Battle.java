@@ -3,9 +3,9 @@ package model.battle;
 import model.Cell;
 import model.GameMode;
 import model.Map;
+
 import model.New_Plants.*;
 import model.New_Zombies.Zombie;
-import model.Player;
 import model.battle.BattleComponents;
 import model.battle.GraveYard;
 import model.card.Card;
@@ -40,7 +40,17 @@ public class Battle {
     public static void zombieWins() {
         Battle battle = Battle.getRunningBattle();
         battle.setWinnerPlayer(battle.zombies);
+        if(battle.getCurrentPlayer().equals(battle.zombies)){
+            Account account = Account.getLoggedAccount();
+            increaseZombieMoney(account);
+        }
         battle.setEndGame(true);
+    }
+
+    public static void increaseZombieMoney(Account account) {
+        int numOfDeadPlants = GraveYard.getDeadPlants().size();
+        int prize = 10 * numOfDeadPlants;
+        account.setMoney(account.getMoney() + prize);
     }
 
     public boolean checkSelectedCellForSpace(Cell selectedCell) {
@@ -250,4 +260,5 @@ public class Battle {
     public BattleComponents getBattleComponents() {
         return battleComponents;
     }
+
 }
