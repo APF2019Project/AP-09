@@ -50,9 +50,37 @@ public class Request {
                 break;
             case SIGN_UP:
                 signUp(command.toLowerCase());
+            case PROFILE:
+                profile(command.toLowerCase());
                 break;
             case COLLECTION:
                 collection(command.toLowerCase());
+        }
+    }
+
+    private void profile(String command) {
+        for(int i = 0; i < Patterns.profilePatterns.length; ++i){
+            Matcher matcher = Patterns.profilePatterns[i].matcher(command);
+            if(matcher.matches()){
+                setCommandOfProfile(matcher, i);
+                return;
+            }
+        }
+        //TODO handle errors
+    }
+
+    private void setCommandOfProfile(Matcher matcher, int i) {
+        if(i == 3){
+            lastProfileMenuCommand = ProfileMenuCommand.values()[i];
+            lastProfileMenuCommand.setName(matcher.group(1));
+        }
+        else if(i == 4){
+            lastProfileMenuCommand = ProfileMenuCommand.values()[i];
+        }
+        else{
+            lastProfileMenuCommand = ProfileMenuCommand.values()[i];
+            lastProfileMenuCommand.setName(matcher.group(1));
+            lastProfileMenuCommand.setPassword(matcher.group(2));
         }
     }
 

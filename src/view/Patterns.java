@@ -28,4 +28,11 @@ public class Patterns {
             Pattern.compile("^(?i)remove (\\S+)\\s*$"),
             Pattern.compile("^(?i)play\\s*$"),
     };
+    static Pattern[] profilePatterns = new Pattern[]{
+            Pattern.compile("^(?i)change (\\S+) (\\S+)\\s*$"),
+            Pattern.compile("^(?i)delete (\\S+) (\\S+)\\s*$"),
+            Pattern.compile("^(?i)create (\\S+) (\\S+)\\s*$"),
+            Pattern.compile("^(?i)rename (\\S+)\\s*$"),
+            Pattern.compile("^(?i)show\\s*$"),
+    };
 }
