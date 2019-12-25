@@ -1,3 +1,5 @@
+package model.battle;
+
 import model.Cell;
 import model.GameMode;
 import model.Map;
