@@ -37,9 +37,15 @@ public class Battle {
         battle.setWinnerPlayer(battle.zombies);
         if(battle.getCurrentPlayer().equals(battle.zombies)){
             Account account = Account.getLoggedAccount();
-
+            increaseZombieMoney(account);
         }
         battle.setEndGame(true);
+    }
+
+    public static void increaseZombieMoney(Account account) {
+        int numOfDeadPlants = GraveYard.getDeadPlants().size();
+        int prize = 10 * numOfDeadPlants;
+        account.setMoney(account.getMoney() + prize);
     }
 
     public boolean checkSelectedCellForSpace(Cell selectedCell) {
@@ -249,95 +255,5 @@ public class Battle {
     public BattleComponents getBattleComponents() {
         return battleComponents;
     }
-    public boolean isSelectedSpace() {
-        return isSelectedSpace;
-    }
 
-    public void setSelectedSpace(boolean selectedSpace) {
-        isSelectedSpace = selectedSpace;
-    }
-
-    public static Battle getRunningBattle() {
-        return runningBattle;
-    }
-
-    public static void setRunningBattle(Battle runningBattle) {
-        Battle.runningBattle = runningBattle;
-    }
-
-    public GameMode getGameMode() {
-        return gameMode;
-    }
-
-    public void setGameMode(GameMode gameMode) {
-        this.gameMode = gameMode;
-    }
-
-    public Card getSelectedCard() {
-        return selectedCard;
-    }
-
-    public void setSelectedCard(Card selectedCard) {
-        this.selectedCard = selectedCard;
-    }
-
-    public boolean isEndGame() {
-        return isEndGame;
-    }
-
-    public void setEndGame(boolean endGame) {
-        isEndGame = endGame;
-    }
-
-    public Player getWinnerPlayer() {
-        return winnerPlayer;
-    }
-
-    public boolean isDraw() {
-        return isDraw;
-    }
-
-    public void setDraw(boolean draw) {
-        isDraw = draw;
-    }
-
-    public void setWinnerPlayer(Player winnerPlayer) {
-        this.winnerPlayer = winnerPlayer;
-    }
-
-    public Player getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-    public void setCurrentPlayer(Player currentPlayer) {
-        this.currentPlayer = currentPlayer;
-    }
-
-    public int getTurn() {
-        return turn;
-    }
-
-    public void nextTurn() {
-        this.turn += 1;
-    }
-
-    public Player getZombies() {
-        return zombies;
-    }
-
-    public void setZombies(Player zombies) {
-        this.zombies = zombies;
-    }
-
-    public Player getPlants() {
-        return plants;
-    }
-
-    public void setPlants(Player plants) {
-        this.plants = plants;
-    }
-
-    public BattleComponents getBattleComponents() {
-        return battleComponents;
-    }
 }
