@@ -37,34 +37,34 @@ public class ZombieInGame {
     }
 
     private void otherAction() {
-        //TODO
+        this.zombie.move();
+        //zombie moves first then if the cell has plant it attacks or does it's particular action
+        //attacks
     }
 
     private void pogoZombieAction() {
-        //TODO
-        //jump from plants
-        //HOW MANY TIME??????
+        this.zombie.move();
+        //jumps from plants
     }
 
     private void truckZombieAction() {
-        //TODO
-        //plant should die instantly
-        //if it has strong truck it turns into normal zombie
+        this.zombie.move();
+        //drives over plants
     }
 
     private void bungeeZombieAction() {
-        //TODO
-       //goes to a cell randomly and steals plant
+        this.zombie.move();
+        //steals a plant
     }
 
     private void balloonZombieAction() {
-        //TODO
-        //doesn't get hurt by peas
+        this.zombie.move();
+        //doesn't get hurt by catapult
     }
 
     private void gigagargantuarAction() {
-        //TODO
-        //plant should die instantly
+        this.zombie.move();
+        //destroys plant
     }
 
     public Cell getCurrentCell() {
