@@ -11,7 +11,7 @@ public class Player {
     private int numberPlayerInGame;
     private int sun;
     private ArrayList<Card> deck = new ArrayList<>();
-    
+
 
     public void decreaseSun(int number) {
         this.sun -= number;
@@ -43,6 +43,14 @@ public class Player {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public boolean equals(Player player) {
+        if (this.getAccount().getUserName().equals(player.getAccount().getUserName()))
+            if (this.getAccount().getPassWord().equals(player.getAccount().getPassWord()))
+                return true;
+
+        return false;
     }
 
 }

@@ -60,8 +60,8 @@ public class Input {
             if (userAndPass.matches("\\w+ \\w+")) {
                 String[] words = userAndPass.split(" ");
                 ProfileMenuCommand profileMenuCommand = ProfileMenuCommand.CHANGE;
-                ProfileMenuCommand.setName(words[0]);
-                ProfileMenuCommand.setPassword(words[1]);
+                profileMenuCommand.setName(words[0]);
+                profileMenuCommand.setPassword(words[1]);
                 lastProfileMenuCommand = profileMenuCommand;
             }
 
@@ -75,8 +75,8 @@ public class Input {
             if (userAndPass.matches("\\w+ \\w+")) {
                 String[] words = userAndPass.split(" ");
                 ProfileMenuCommand profileMenuCommand = ProfileMenuCommand.CREATE;
-                ProfileMenuCommand.setName(words[0]);
-                ProfileMenuCommand.setPassword(words[1]);
+                profileMenuCommand.setName(words[0]);
+                profileMenuCommand.setPassword(words[1]);
                 lastProfileMenuCommand = profileMenuCommand;
             }
         }
@@ -85,8 +85,8 @@ public class Input {
             if (userAndPass.matches("\\w+ \\w+")) {
                 String[] words = userAndPass.split(" ");
                 ProfileMenuCommand profileMenuCommand = ProfileMenuCommand.DELETE;
-                ProfileMenuCommand.setName(words[0]);
-                ProfileMenuCommand.setPassword(words[1]);
+                profileMenuCommand.setName(words[0]);
+                profileMenuCommand.setPassword(words[1]);
                 lastProfileMenuCommand = profileMenuCommand;
             }
         }

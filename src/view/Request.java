@@ -81,14 +81,14 @@ public class Request {
     }
 
     public void leaderBoard(String command) {
-        Matcher matcher = Patterns.loginPattern.matcher(command);
+        Matcher matcher = Patterns.majorLoginPatterns[0].matcher(command);
         if (matcher.matches()) {
 
         }
     }
 
     public void signUp(String command) {
-        Matcher matcher = Patterns.loginPattern.matcher(command);
+        Matcher matcher = Patterns.majorLoginPatterns[1].matcher(command);
         if (matcher.matches()) {
             SignUpCommand signUpCommand = SignUpCommand.USERNAME_PASSWORD;
             signUpCommand.setName(matcher.group(1));
