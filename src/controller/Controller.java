@@ -60,8 +60,55 @@ public class Controller {
             case PROFILE:
                 profileMenu(request.getLastProfileMenuCommand());
                 break;
+            case COLLECTION:
+                collectionMenu(request.getLastCollectionCommand());
+                break;
             //todo do the rest except play and shop
         }
+    }
+
+    private void collectionMenu(CollectionCommand collectionCommand) {
+        switch (collectionCommand){
+            case SHOW_HAND:
+                Output.getInstance().showHand();
+                break;
+            case PLAY:
+                //TODO
+                break;
+            case REMOVE:
+                removeCard(collectionCommand);
+                break;
+            case SELECT:
+                selectCard(collectionCommand);
+                break;
+            case SHOW_COLLECTION:
+                Output.getInstance().showCollection();
+                break;
+        }
+    }
+
+    public void removeCard(CollectionCommand collectionCommand) {
+        Account account = Account.getLoggedAccount();
+        for(Card card : account.getDeck()){
+            if(card.getCardName().equals(collectionCommand.getName())){
+                account.getDeck().remove(card);
+                System.out.println("you have removed a card");
+                return;
+            }
+        }
+        Output.getInstance().invalidCard();
+    }
+
+    public void selectCard(CollectionCommand collectionCommand) {
+        Account account = Account.getLoggedAccount();
+        for(Card card : account.getAllCard()){
+            if(card.getCardName().equals(collectionCommand.getName())){
+                account.getDeck().add(card);
+                System.out.println("you have selected a card");
+                return;
+            }
+        }
+        Output.getInstance().invalidCard();
     }
 
     private void profileMenu(ProfileMenuCommand profileMenuCommand) {

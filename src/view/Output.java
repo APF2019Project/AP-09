@@ -111,4 +111,18 @@ public class Output {
     public void printLeaderBoard(Account account) {
         System.out.println(account.getUserName() + " " + account.getKilledZombies());
     }
+
+    public void showHand() {
+        System.out.println("your hand is :");
+        for(Card card : Account.getLoggedAccount().getDeck()){
+            System.out.println(card.getCardName());
+        }
+    }
+
+    public void showCollection() {
+        System.out.println("your collection is :");
+        for(Card card : Account.getLoggedAccount().getAllCard()){
+            System.out.println(card.getCardName());
+        }
+    }
 }

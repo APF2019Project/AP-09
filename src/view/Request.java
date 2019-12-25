@@ -13,10 +13,10 @@ public class Request {
     private MajorLoginCommand lastMajorLoginCommand;
     private LoginCommand lastLoginCommand;
     private SignUpCommand lastSignUpCommand;
-    private LeaderBoardCommand lastLeaderBoardCommand;
     private MainMenuCommand lastMainMenuCommand;
     private ProfileMenuCommand lastProfileMenuCommand;
     private ShopCommand lastShopCommand;
+    private CollectionCommand lastCollectionCommand;
 
     private Request() {
         menus.add(Menu.MAJOR_LOGIN);
@@ -39,9 +39,6 @@ public class Request {
         return lastMainMenuCommand;
     }
 
-    public LeaderBoardCommand getLastLeaderBoardCommand() {
-        return lastLeaderBoardCommand;
-    }
 
     public void transferCommandToRightPlace(String command) {
         switch (getCurrentMenu()) {
@@ -54,11 +51,31 @@ public class Request {
             case SIGN_UP:
                 signUp(command.toLowerCase());
                 break;
-            case LEADER_BOARD:
-                leaderBoard(command.toLowerCase());
-                break;
-
+            case COLLECTION:
+                collection(command.toLowerCase());
         }
+    }
+
+    public void collection(String command) {
+        for (int i = 0; i < Patterns.collectionPatterns.length; ++i) {
+            Matcher matcher = Patterns.collectionPatterns[i].matcher(command);
+            if (matcher.matches()) {
+                setCommandOfCollection(matcher, i);
+                return;
+            }
+        }
+        //TODO handle errors
+    }
+
+    private void setCommandOfCollection(Matcher matcher, int i) {
+        if (i == 2) {
+            lastCollectionCommand = CollectionCommand.values()[i];
+            lastCollectionCommand.setName(matcher.group(1));
+        } else if (i == 3) {
+            lastCollectionCommand = CollectionCommand.values()[i];
+            lastCollectionCommand.setName(matcher.group(1));
+        } else
+            lastShopCommand = ShopCommand.values()[i];
     }
 
     public void shop(String command) {
@@ -80,19 +97,13 @@ public class Request {
             lastShopCommand = ShopCommand.values()[i];
     }
 
-    public void leaderBoard(String command) {
-        Matcher matcher = Patterns.majorLoginPatterns[0].matcher(command);
-        if (matcher.matches()) {
-
-        }
-    }
 
     public void signUp(String command) {
-        Matcher matcher = Patterns.majorLoginPatterns[1].matcher(command);
+        Matcher matcher = Patterns.signUpPatterns[0].matcher(command);
         if (matcher.matches()) {
-            SignUpCommand signUpCommand = SignUpCommand.USERNAME_PASSWORD;
-            signUpCommand.setName(matcher.group(1));
-            signUpCommand.setPassword(matcher.group(2));
+            lastSignUpCommand = SignUpCommand.USERNAME_PASSWORD;
+            lastSignUpCommand.setName(matcher.group(0));
+            lastSignUpCommand.setPassword(matcher.group(1));
         }
         // TODO error
     }
@@ -100,9 +111,9 @@ public class Request {
     public void login(String command) {
         Matcher matcher = Patterns.loginPattern[0].matcher(command);
         if (matcher.matches()) {
-            LoginCommand loginCommand = LoginCommand.USERNAME_PASSWORD;
-            loginCommand.setName(matcher.group(0));
-            loginCommand.setPassword(matcher.group(1));
+            lastLoginCommand = LoginCommand.USERNAME_PASSWORD;
+            lastLoginCommand.setName(matcher.group(0));
+            lastLoginCommand.setPassword(matcher.group(1));
         }
         //TODO error
     }
@@ -149,5 +160,33 @@ public class Request {
 
     public void setLastShopCommand(ShopCommand lastShopCommand) {
         this.lastShopCommand = lastShopCommand;
+    }
+
+    public CollectionCommand getLastCollectionCommand() {
+        return lastCollectionCommand;
+    }
+
+    public void setLastCollectionCommand(CollectionCommand lastCollectionCommand) {
+        this.lastCollectionCommand = lastCollectionCommand;
+    }
+
+    public void setLastProfileMenuCommand(ProfileMenuCommand lastProfileMenuCommand) {
+        this.lastProfileMenuCommand = lastProfileMenuCommand;
+    }
+
+    public void setLastMainMenuCommand(MainMenuCommand lastMainMenuCommand) {
+        this.lastMainMenuCommand = lastMainMenuCommand;
+    }
+
+    public void setLastLoginCommand(LoginCommand lastLoginCommand) {
+        this.lastLoginCommand = lastLoginCommand;
+    }
+
+    public void setLastMajorLoginCommand(MajorLoginCommand lastMajorLoginCommand) {
+        this.lastMajorLoginCommand = lastMajorLoginCommand;
+    }
+
+    public void setLastSignUpCommand(SignUpCommand lastSignUpCommand) {
+        this.lastSignUpCommand = lastSignUpCommand;
     }
 }
