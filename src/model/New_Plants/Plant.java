@@ -1,6 +1,7 @@
 package model.New_Plants;
 
 import java.util.ArrayList;
+import model.New_Plants.Plant;
 
 abstract public class Plant {
 
@@ -11,6 +12,7 @@ abstract public class Plant {
     private int coolDown;
     private int sunUsage;
     private boolean isLilyPad;
+    private boolean isDead = false;
     private PlantKind plantKind;
 
     public Plant(String plantName, int healthPoint, int attackPower, int coolDown, int sunUsage, PlantKind plantKind) {
@@ -38,6 +40,14 @@ abstract public class Plant {
 
     public String getPlantName() {
         return plantName;
+    }
+
+    public boolean isDead() {
+        return isDead;
+    }
+
+    public void setDead(boolean dead) {
+        isDead = dead;
     }
 
     public void setHealthPoint(int healthPoint) {
