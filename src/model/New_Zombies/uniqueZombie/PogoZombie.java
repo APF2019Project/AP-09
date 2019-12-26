@@ -7,8 +7,6 @@ import model.New_Zombies.ZombieKind;
 import model.battle.Battle;
 import model.battle.ZombieInGame;
 
-import static constants.Constants.MAP_COLUMNS_COUNT;
-
 public class PogoZombie extends Zombie {
     public PogoZombie(String zombieName, int healthPoint, int attackPower, int speed, int shieldHP, boolean isLandZombie, boolean hasDuck, boolean hasHelmet, boolean hasArmor) {
         super(zombieName, healthPoint, attackPower, speed, shieldHP, isLandZombie, hasDuck, hasHelmet, hasArmor, ZombieKind.POGOZOMBIE);
@@ -18,7 +16,7 @@ public class PogoZombie extends Zombie {
     public <T> void action() {
         Cell cell = this.getCurrentCell();
         Map gameMap = Battle.getRunningBattle().getMap();
-        if (cell.getPlant() != null) {
+        if (cell.getPlantInGame() != null) {
             pogoMove(gameMap, cell);
         }
     }

@@ -1,13 +1,14 @@
 package model.battle;
 
+import com.rits.cloning.Cloner;
 import constants.Constants;
 import model.*;
 
-import model.New_Plants.*;
 import model.New_Zombies.Zombie;
-import model.battle.BattleComponents;
-import model.battle.GraveYard;
 import model.card.Card;
+import model.card.CardOfZombie;
+
+import java.util.Random;
 
 import static constants.Constants.MAP_COLUMNS_COUNT;
 
@@ -38,10 +39,11 @@ public class Battle {
         Battle.runningBattle = this;
         this.battleComponents = new BattleComponents();
     }
+
     public static void zombieWins() {
         Battle battle = Battle.getRunningBattle();
         battle.setWinnerPlayer(battle.zombies);
-        if(battle.getCurrentPlayer().equals(battle.zombies)){
+        if (battle.getCurrentPlayer().equals(battle.zombies)) {
             Account account = Account.getLoggedAccount();
             battle.increaseZombieMoney(account);
         }
@@ -54,13 +56,35 @@ public class Battle {
             this.checkForZombiesWin();
             this.checkForPlantsWin();
             this.nextTurn();
+            this.nextWaveCheck();
         } else {
 
         }
     }
 
-    public void insertNextRandomZombie() {
-        //TODO
+    public void nextWaveCheck() {
+        if (this.getBattleComponents().getAllZombiesInGame().size() == 0) {
+            this.wavesCount -= 1;
+            insertNextWaveZombies();
+        }
+    }
+
+    public void insertNextWaveZombies() {
+        Random random = new Random();
+        int zombiesCount = random.nextInt(7) + 4;
+        for (int i = 0; i < zombiesCount; i++) {
+            generateRandomZombie();
+        }
+    }
+
+    private void generateRandomZombie() {
+        Random random = new Random();
+        int randomRow = random.nextInt(6);
+        int randomCard = random.nextInt(this.zombies.getAccount().getDeck().size());
+        Zombie zombie = ((CardOfZombie) this.zombies.getAccount().getDeck().get(randomCard)).getZombie();
+        Cloner cloner = new Cloner();
+        Zombie newRandomZombie = cloner.deepClone(zombie);
+        new ZombieInGame(newRandomZombie, this.map.getCell(randomRow, 18));
     }
 
 
@@ -71,7 +95,7 @@ public class Battle {
     }
 
     public boolean checkSelectedCellForSpace(Cell selectedCell) {
-        if (selectedCell.getPlant() != null)
+        if (selectedCell.getPlantInGame() != null)
             return false;
         return true;
     }
@@ -109,7 +133,7 @@ public class Battle {
     public void plantAttacks() {
         for (Cell[] cells : map.getCells()) {
             for (Cell c : cells) {
-                if (c.getPlant() != null) {
+                if (c.getPlantInGame() != null) {
                     //TODO plant in cell c attack it's closest zombie(using method closest Zombie)
                 }
             }
@@ -134,7 +158,7 @@ public class Battle {
 //    private void setPlantInCell(Plant plant, Cell selectedCell) {
 //        if (checkSelectedCellIsValidForInsert(plant, selectedCell))
 //            if (!plant.isLilyPad())
-//                selectedCell.setPlant(plant);
+//                selectedCell.setPlantInGame(plant);
 //            else
 //                selectedCell.setLeaf(true);
 //    }
@@ -171,7 +195,7 @@ public class Battle {
     }
 
     public boolean checkSelectedCellIsValidForInsert(Cell cell) {
-        return cell.getPlant() == null && cell.getColumn() % 2 == 0;
+        return cell.getPlantInGame() == null && cell.getColumn() % 2 == 0;
     }
 
     public Map getMap() {

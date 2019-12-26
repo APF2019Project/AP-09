@@ -91,8 +91,6 @@ public class BattleComponents {
     }
 
 
-
-
     private void checkForLawnMowerActivation() {
 
         for (int i = 0; i < Constants.MAP_ROWS_COUNT; i++) {

@@ -28,9 +28,9 @@ public class BungeeZombie extends Zombie {
 
     @Override
     public void attack(Cell cell) {
-        cell.getPlant().setDead(true);
-        GraveYard.getDeadPlants().add(cell.getPlant());
-        cell.setPlant(null);
+        cell.getPlantInGame().setDead(true);
+        GraveYard.getDeadPlants().add(cell.getPlantInGame());
+        cell.setPlantInGame(null);
     }
 
     public void randomCell() {

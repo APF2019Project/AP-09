@@ -12,6 +12,8 @@ public class ZombieInGame {
 
     public ZombieInGame(Zombie zombie, Cell currentCell) {
         setCurrentCell(currentCell);
+        currentCell.getZombies().add(this);
+        Battle.getRunningBattle().getBattleComponents().addZombieInGame(this);
         setZombie(zombie);
     }
 

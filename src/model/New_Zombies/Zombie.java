@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import static constants.Constants.MAP_COLUMNS_COUNT;
 
-abstract public class Zombie {
+abstract public class Zombie implements Cloneable {
     private static ArrayList<Zombie> zombies = new ArrayList<>();
     private String zombieName;
     private int healthPoint;
@@ -52,10 +52,10 @@ abstract public class Zombie {
             speed /= speedLimited;
             setSpeedLimited(0);
         }
-        if (cell.getPlant() == null) {
+        if (cell.getPlantInGame() == null) {
             gameMap.getCell(row, column).getZombies().remove(zombieInGame);
             for (int j = column + 1; j <= column + speed; ++j) {
-                if (gameMap.getCell(row, j).getPlant() != null) {
+                if (gameMap.getCell(row, j).getPlantInGame() != null) {
                     gameMap.getCell(row, j).getZombies().add(zombieInGame);
                     zombieInGame.setCurrentCell(gameMap.getCell(row, j));
                     setCurrentCell(gameMap.getCell(row, j));
