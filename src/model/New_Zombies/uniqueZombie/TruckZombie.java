@@ -37,6 +37,7 @@ public class TruckZombie extends Zombie {
     public void attack(Cell cell) {
         if (cell.getPlant() != null) {
             if(cell.getPlant().getPlantKind() != PlantKind.BOMB) {
+                cell.getPlant().setDead(true);
                 GraveYard.getDeadPlants().add(cell.getPlant());
                 cell.setPlant(null);
             }

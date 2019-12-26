@@ -44,6 +44,7 @@ public class Bullet extends Fruit {
                     }
                 }
                 if (this.getPosition().getZombies().get(0).getZombie().getHealthPoint() <= 0) {
+                    this.getPosition().getZombies().get(0).getZombie().setDead(true);
                     GraveYard.getDeadZombies().add(this.getPosition().getZombies().get(0).getZombie());
                     ZombieInGame.removeZombieFromGame(this.getPosition().getZombies().get(0));
                     this.getPosition().getZombies().remove(0);

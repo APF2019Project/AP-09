@@ -22,6 +22,7 @@ abstract public class Zombie {
     private boolean hasDuck;
     private boolean hasHelmet;
     private boolean hasArmor;
+    private boolean isDead = false;
     private ZombieKind zombieKind;
     private Cell currentCell;
 
@@ -96,6 +97,14 @@ abstract public class Zombie {
 //            Battle.zombieWins();
 //        }
 //    }
+
+    public boolean isDead() {
+        return isDead;
+    }
+
+    public void setDead(boolean dead) {
+        isDead = dead;
+    }
 
     public void decreaseZombieHealthStraight(int attack) {
         if (shieldHP != 0) {
