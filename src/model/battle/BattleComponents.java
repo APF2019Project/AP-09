@@ -67,7 +67,7 @@ public class BattleComponents {
     private void checkForDeadZombies() {
         ArrayList<ZombieInGame> deadZombies = new ArrayList<>();
         for (ZombieInGame zombieInGame : this.allZombiesInGame) {
-            if (zombieInGame.getPlant().isDead()) {
+            if (zombieInGame.getZombie().isDead()) {
                 deadZombies.add(zombieInGame);
             }
         }
