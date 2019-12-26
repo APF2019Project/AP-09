@@ -73,7 +73,6 @@ public class BattleComponents {
         }
         this.allZombiesInGame.removeAll(deadZombies);
         Battle.getRunningBattle().getGraveYard().getDeadZombies().addAll(deadZombies);
-
     }
 
     private void checkForDeadFruits() {
