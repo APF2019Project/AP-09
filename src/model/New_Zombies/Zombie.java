@@ -72,7 +72,7 @@ abstract public class Zombie implements Cloneable {
                 zombieInGame.setCurrentCell(gameMap.getCell(row, j));
                 setCurrentCell(gameMap.getCell(row, j));
                 checkHasFruit(gameMap.getCell(row, j));
-                if(j == column + speed)
+                if (j == column + speed)
                     return;
             }
         }
@@ -81,22 +81,12 @@ abstract public class Zombie implements Cloneable {
     }
 
     public void checkHasFruit(Cell cell) {
-        if(cell.getFruits() != null){
-            for(Fruit f : cell.getFruits()){
+        if (cell.getFruits() != null) {
+            for (Fruit f : cell.getFruits()) {
                 f.action(cell.getZombies());
             }
         }
     }
-
-//    public void reachLawnMower(Cell cell, Map gameMap) {
-//        boolean[] lawnMower = gameMap.getLawnMower();
-//        if (lawnMower[cell.getRow()]) {
-//            lawnMower[cell.getRow()] = false;
-//            Battle.getRunningBattle().lawnMowerActivated(cell, gameMap);
-//        } else {
-//            Battle.zombieWins();
-//        }
-//    }
 
     public boolean isDead() {
         return isDead;

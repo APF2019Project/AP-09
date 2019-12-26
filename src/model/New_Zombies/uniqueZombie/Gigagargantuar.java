@@ -20,10 +20,8 @@ public class Gigagargantuar extends Zombie {
     @Override
     public void attack(Cell cell) {
         if (cell.getPlantInGame() != null) {
-            if (cell.getPlantInGame().getPlantKind() != PlantKind.BOMB) {
-                cell.getPlantInGame().setDead(true);
-                GraveYard.getDeadPlants().add(cell.getPlantInGame());
-                cell.setPlantInGame(null);
+            if (cell.getPlantInGame().getPlant().getPlantKind() != PlantKind.BOMB) {
+                cell.getPlantInGame().getPlant().setDead(true);
             }
         }
     }

@@ -21,13 +21,11 @@ public class BalloonZombie extends Zombie {
     @Override
     public void attack(Cell cell) {
         if (cell.getPlantInGame() != null) {
-            if (cell.getPlantInGame().getPlantKind() != PlantKind.BOMB) {
+            if (cell.getPlantInGame().getPlant().getPlantKind() != PlantKind.BOMB) {
                 int attackPower = this.getAttackPower();
-                cell.getPlantInGame().setHealthPoint(cell.getPlantInGame().getHealthPoint() - attackPower);
-                if (cell.getPlantInGame().getHealthPoint() <= 0) {
-                    cell.getPlantInGame().setDead(true);
-                    GraveYard.getDeadPlants().add(cell.getPlantInGame());
-                    cell.setPlantInGame(null);
+                cell.getPlantInGame().getPlant().setHealthPoint(cell.getPlantInGame().getPlant().getHealthPoint() - attackPower);
+                if (cell.getPlantInGame().getPlant().getHealthPoint() <= 0) {
+                    cell.getPlantInGame().getPlant().setDead(true);
                 }
             }
         }
