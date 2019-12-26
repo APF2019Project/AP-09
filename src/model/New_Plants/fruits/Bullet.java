@@ -19,12 +19,11 @@ public class Bullet extends Fruit {
     private int speedLimiter;
     private int radius;
 
-    public Bullet(BulletKind bulletKind, FireRate fireRate, int damagingPower, int speedLimiter, int radius) {
+    public Bullet(BulletKind bulletKind, FireRate fireRate, int damagingPower, int speedLimiter) {
         this.bulletKind = bulletKind;
         this.fireRate = fireRate;
         this.damagingPower = damagingPower;
         this.speedLimiter = speedLimiter;
-        this.radius = radius;
     }
 
 
@@ -49,12 +48,10 @@ public class Bullet extends Fruit {
                     ZombieInGame.removeZombieFromGame(this.getPosition().getZombies().get(0));
                     this.getPosition().getZombies().remove(0);
                 }
-                Battle.getRunningBattle().getBattleComponents().getFruits().remove(this);
-                this.getPosition().getFruits().remove(this);
+                this.setDead(true);
             } else {
                 if (this.getPosition().getColumn() == Constants.MAP_COLUMNS_COUNT - 1) {
-                    Battle.getRunningBattle().getBattleComponents().getFruits().remove(this);
-                    this.getPosition().getFruits().remove(this);
+                    this.setDead(true);
                 }else
                     this.getPosition().getFruits().remove(this);
                 this.setPosition(Map.getCurrentMap().getCell(this.getPosition().getRow(), this.getPosition().getColumn() + 1));
