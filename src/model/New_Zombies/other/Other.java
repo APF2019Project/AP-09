@@ -37,7 +37,7 @@ public class Other extends Zombie {
         if (cell.getPlant() != null) {
             int attackPower = this.getAttackPower();
             cell.getPlant().setHealthPoint(cell.getPlant().getHealthPoint() - attackPower);
-            if (cell.getPlant().getHealthPoint() == 0) {
+            if (cell.getPlant().getHealthPoint() <= 0) {
                 GraveYard.getDeadPlants().add(cell.getPlant());
                 cell.setPlant(null);
             }

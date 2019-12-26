@@ -3,15 +3,21 @@ package model.battle;
 import model.Cell;
 import model.New_Zombies.Zombie;
 
+import java.util.ArrayList;
+
 public class ZombieInGame {
     private Zombie zombie;
     private Cell currentCell;
+    private static ArrayList<ZombieInGame> allZombiesInGame;
 
     public ZombieInGame(Zombie zombie, Cell currentCell) {
         setCurrentCell(currentCell);
         setZombie(zombie);
     }
 
+    public static void removeZombieFromGame(ZombieInGame zombieInGame) {
+        allZombiesInGame.remove(zombieInGame);
+    }
 
     public void action() {
         switch (this.getZombie().getZombieKind()) {

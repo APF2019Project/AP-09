@@ -15,7 +15,7 @@ abstract public class Zombie {
     private int attackPower;
     private int speed;
     private int shieldHP;
-    private boolean isSpeedLimited = false;
+    private int speedLimited = 0;
     private boolean isLandZombie;
     private boolean hasDuck;
     private boolean hasHelmet;
@@ -44,9 +44,9 @@ abstract public class Zombie {
         int row = cell.getRow();
         int column = cell.getColumn();
         int speed = this.speed;
-        if (isSpeedLimited()) {
-            speed /= 2;
-            setSpeedLimited(false);
+        if (speedLimited > 0) {
+            speed /= speedLimited;
+            setSpeedLimited(0);
         }
         if (cell.getPlant() == null) {
             gameMap.getCell(row, column).getZombies().remove(this);
@@ -77,6 +77,24 @@ abstract public class Zombie {
         }
     }
 
+    public void decreaseZombieHealthStraight(int attack) {
+        if (shieldHP != 0) {
+            if (attack >= shieldHP) {
+                attack -= shieldHP;
+                shieldHP = 0;
+                healthPoint -= attack;
+            } else {
+                shieldHP -= attack;
+            }
+        } else {
+            healthPoint -= attack;
+        }
+    }
+
+    public void decreaseZombieHealthCurve(int attack) {
+        healthPoint -= attack;
+    }
+
     public Cell getCurrentCell() {
         return currentCell;
     }
@@ -91,12 +109,12 @@ abstract public class Zombie {
         return hasArmor;
     }
 
-    public boolean isSpeedLimited() {
-        return isSpeedLimited;
+    public int getSpeedLimited() {
+        return speedLimited;
     }
 
-    public void setSpeedLimited(boolean speedLimited) {
-        isSpeedLimited = speedLimited;
+    public void setSpeedLimited(int speedLimited) {
+        this.speedLimited = speedLimited;
     }
 
     public void setHasArmor(boolean hasArmor) {
