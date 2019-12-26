@@ -42,7 +42,7 @@ public class Battle {
             this.checkForZombiesWin();
             this.checkForPlantsWin();
             this.nextTurn();
-        }else{
+        } else {
 
         }
     }
@@ -58,7 +58,7 @@ public class Battle {
 
 
     public void increaseZombieMoney(Account account) {
-        int numOfDeadPlants = GraveYard.getDeadPlants().size();
+        int numOfDeadPlants = graveYard.getDeadPlants().size();
         int prize = 10 * numOfDeadPlants;
         account.setMoney(account.getMoney() + prize);
     }
@@ -155,7 +155,7 @@ public class Battle {
         for (int j = 0; j < MAP_COLUMNS_COUNT; ++j) {
             Cell c = this.map.getCell(cell.getRow(), j);
             for (int z = 0; z < c.getZombies().size(); ++z) {
-                GraveYard.getDeadZombies().add(c.getZombies().get(z).getZombie());
+                this.graveYard.getDeadZombies().add(c.getZombies().get(z));
                 Battle.getRunningBattle().getBattleComponents().removeZombieFromGame(c.getZombies().get(z));
                 c.getZombies().remove(z);
                 --z;
