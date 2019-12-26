@@ -25,17 +25,8 @@ public class Musketeer extends Plant {
     public <T> ArrayList<T> operate(Class<T> type) {
         ArrayList<T> bullets = new ArrayList<>();
         for (int i = 0; i < this.fireRate.getBulletCount(); i++) {
-            if (this.rangeOfAttack !=0 ) {
-                for (int j = -this.rangeOfAttack; j < this.rangeOfAttack + 1; j++) {
-                    Bullet bullet = new Bullet(BulletKind.STRAIGHT_BULLET, this.fireRate, 1, this.speedLimiter, j);
-                    bullets.add(type.cast(bullet));
-                }
-            }
-            else {
-                Bullet bullet = new Bullet(BulletKind.STRAIGHT_BULLET, this.fireRate, 1, this.speedLimiter, 0);
+                Bullet bullet = new Bullet(BulletKind.STRAIGHT_BULLET, this.fireRate, 1, this.speedLimiter);
                 bullets.add(type.cast(bullet));
-            }
-
         }
         return bullets;
     }

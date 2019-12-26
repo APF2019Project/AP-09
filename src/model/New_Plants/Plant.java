@@ -14,6 +14,7 @@ abstract public class Plant {
     private boolean isLilyPad;
     private boolean isDead = false;
     private PlantKind plantKind;
+    private boolean isDead ;
 
     public Plant(String plantName, int healthPoint, int attackPower, int coolDown, int sunUsage, PlantKind plantKind) {
         this.plantName = plantName;
@@ -72,5 +73,13 @@ abstract public class Plant {
 
     public PlantKind getPlantKind() {
         return plantKind;
+    }
+
+    public boolean isDead() {
+        return isDead;
+    }
+
+    public void setDead(boolean dead) {
+        isDead = dead;
     }
 }

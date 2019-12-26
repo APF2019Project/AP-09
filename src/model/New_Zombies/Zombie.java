@@ -42,7 +42,7 @@ abstract public class Zombie {
     abstract public void attack(Cell currentCell);
 
     public void move() {
-        ZombieInGame zombieInGame = ZombieInGame.findZombieInGame(this);
+        ZombieInGame zombieInGame = Battle.getRunningBattle().getBattleComponents().findZombieInGame(this);
         Cell cell = this.getCurrentCell();
         Map gameMap = Battle.getRunningBattle().getMap();
         int row = cell.getRow();
@@ -65,7 +65,7 @@ abstract public class Zombie {
                     gameMap.getCell(row, j).getZombies().add(zombieInGame);
                     zombieInGame.setCurrentCell(gameMap.getCell(row, j));
                     setCurrentCell(gameMap.getCell(row, j));
-                    reachLawnMower(currentCell, gameMap);
+//                    reachLawnMower(currentCell, gameMap
                     return;
                 }
                 gameMap.getCell(row, j).getZombies().add(zombieInGame);
@@ -88,15 +88,15 @@ abstract public class Zombie {
         }
     }
 
-    public void reachLawnMower(Cell cell, Map gameMap) {
-        boolean[] lawnMower = gameMap.getLawnMower();
-        if (lawnMower[cell.getRow()] == true) {
-            lawnMower[cell.getRow()] = false;
-            Battle.lawnMowerActivated(cell, gameMap);
-        } else {
-            Battle.zombieWins();
-        }
-    }
+//    public void reachLawnMower(Cell cell, Map gameMap) {
+//        boolean[] lawnMower = gameMap.getLawnMower();
+//        if (lawnMower[cell.getRow()]) {
+//            lawnMower[cell.getRow()] = false;
+//            Battle.getRunningBattle().lawnMowerActivated(cell, gameMap);
+//        } else {
+//            Battle.zombieWins();
+//        }
+//    }
 
     public boolean isDead() {
         return isDead;

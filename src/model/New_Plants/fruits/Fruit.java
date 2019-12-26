@@ -7,6 +7,7 @@ import java.util.ArrayList;
 abstract public class Fruit {
 
     private Cell position;
+    private boolean isDead ;
 
     public Fruit() {
     }
@@ -20,5 +21,13 @@ abstract public class Fruit {
 
     public void setPosition(Cell position) {
         this.position = position;
+    }
+
+    public boolean isDead() {
+        return isDead;
+    }
+
+    public void setDead(boolean dead) {
+        isDead = dead;
     }
 }

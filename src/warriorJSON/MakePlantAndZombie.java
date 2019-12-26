@@ -65,6 +65,5 @@ public class MakePlantAndZombie {
 
     public static MakePlantAndZombie getInstance() {
         return instance;
-         */
     }
 }

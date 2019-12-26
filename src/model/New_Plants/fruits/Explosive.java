@@ -4,6 +4,7 @@ import constants.Constants;
 import model.Cell;
 import model.Map;
 import model.New_Plants.bomb.BombBox;
+import model.New_Zombies.Zombie;
 import model.battle.Battle;
 import model.battle.GraveYard;
 import model.battle.ZombieInGame;
@@ -30,10 +31,7 @@ public class Explosive extends Fruit {
                 for (int j = getPosition().getColumn() - length / 2; j < getPosition().getColumn() + length / 2; j++) {
                     Cell cell = gameMap.getCell(i, j);
                     for (int k = 0; k < cell.getZombies().size(); k++) {
-                        GraveYard.getDeadZombies().add(cell.getZombies().get(k).getZombie());
-                        ZombieInGame.getZombiesInGame().remove(cell.getZombies().get(k));
-                        cell.getZombies().remove(k);
-                        k--;
+                        cell.getZombies().get(k).getZombie().setDead(true) ;
                     }
                 }
             }

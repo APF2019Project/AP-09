@@ -35,4 +35,32 @@ public class Patterns {
             Pattern.compile("^(?i)rename (\\S+)\\s*$"),
             Pattern.compile("^(?i)show\\s*$"),
     };
+
+    static Pattern[] dayAndPoolPlayPatterns = new Pattern[]{
+            Pattern.compile("^(?i)show hand\\s*$"),
+            Pattern.compile("^(?i)select (\\S+)\\s*$"),
+            Pattern.compile("^(?i)plant (\\d+),(\\d+)\\s*$"),
+            Pattern.compile("^(?i)remove (\\d+),(\\d+)\\s*$"),
+            Pattern.compile("^(?i)end turn\\s*$"),
+            Pattern.compile("^(?i)show lawn\\s*$"),
+    };
+
+    static Pattern[] railPlayPatterns = new Pattern[]{
+            Pattern.compile("^(?i)list\\s*$"),
+            Pattern.compile("^(?i)select (\\d+)\\s*$"),
+            Pattern.compile("^(?i)record\\s*$"),
+            Pattern.compile("^(?i)plant (\\d+),(\\d+)\\s*$"),
+            Pattern.compile("^(?i)remove (\\d+),(\\d+)\\s*$"),
+            Pattern.compile("^(?i)end turn\\s*$"),
+            Pattern.compile("^(?i)show lawn\\s*$"),
+    };
+
+    static Pattern[] zombiePlayPatterns = new Pattern[]{
+            Pattern.compile("^(?i)show hand\\s*$"),
+            Pattern.compile("^(?i)show lanes\\s*$"),
+            Pattern.compile("^(?i)put (\\s+),(\\d+)\\s*$"),
+            Pattern.compile("^(?i)start\\s*$"),
+            Pattern.compile("^(?i)end turn\\s*$"),
+            Pattern.compile("^(?i)show lawn\\s*$"),
+    };
 }
