@@ -3,6 +3,10 @@ package model.battle;
 import constants.Constants;
 import model.*;
 
+import model.New_Plants.*;
+import model.New_Zombies.Zombie;
+import model.battle.BattleComponents;
+import model.battle.GraveYard;
 import model.card.Card;
 
 import static constants.Constants.MAP_COLUMNS_COUNT;
@@ -34,7 +38,15 @@ public class Battle {
         Battle.runningBattle = this;
         this.battleComponents = new BattleComponents();
     }
-
+    public static void zombieWins() {
+        Battle battle = Battle.getRunningBattle();
+        battle.setWinnerPlayer(battle.zombies);
+        if(battle.getCurrentPlayer().equals(battle.zombies)){
+            Account account = Account.getLoggedAccount();
+            battle.increaseZombieMoney(account);
+        }
+        battle.setEndGame(true);
+    }
 
     public void initTurn() {
         if (!this.isEndGame()) {

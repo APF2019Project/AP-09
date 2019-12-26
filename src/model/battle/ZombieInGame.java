@@ -8,13 +8,28 @@ import java.util.ArrayList;
 public class ZombieInGame {
     private Zombie zombie;
     private Cell currentCell;
+    private static ArrayList<ZombieInGame> allZombiesInGame;
 
     public ZombieInGame(Zombie zombie, Cell currentCell) {
         setCurrentCell(currentCell);
         setZombie(zombie);
     }
 
+    public static void removeZombieFromGame(ZombieInGame zombieInGame) {
+        allZombiesInGame.remove(zombieInGame);
+    }
+    public static ArrayList<ZombieInGame> getZombiesInGame() {
+        return allZombiesInGame;
+    }
 
+    public static ZombieInGame findZombieInGame(Zombie zombie){
+        for(ZombieInGame z : allZombiesInGame){
+            if(z.getZombie().equals(zombie)){
+                return z;
+            }
+        }
+        return null;
+    }
     public void action() {
         switch (this.getZombie().getZombieKind()) {
             //TODO might need to check something
