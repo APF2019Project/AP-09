@@ -100,69 +100,6 @@ public class Battle {
         return true;
     }
 
-    public void zombieMoveAndAction() {
-        for (Cell[] cells : map.getCells()) {
-            for (Cell c : cells) {
-                for (ZombieInGame z : c.getZombies()) {
-                    z.action();//moves, then does it's action
-                }
-            }
-        }
-    }
-
-    public Cell closestZombie(Cell cell) {
-        int row = cell.getRow();
-        Map gameMap = Battle.getRunningBattle().getMap();
-        for (int i = MAP_COLUMNS_COUNT - 1; i >= 0; --i) {
-            Cell checkCell = gameMap.getCell(row, i);
-            if (cell.getColumn() < i)
-                continue;
-            else if (findZombie(checkCell)) {
-                return checkCell;
-            }
-        }
-        return null;
-    }
-
-    public boolean findZombie(Cell cell) {
-        if (cell.getZombies() != null)
-            return true;
-        return false;
-    }
-
-    public void plantAttacks() {
-        for (Cell[] cells : map.getCells()) {
-            for (Cell c : cells) {
-                if (c.getPlantInGame() != null) {
-                    //TODO plant in cell c attack it's closest zombie(using method closest Zombie)
-                }
-            }
-        }
-    }
-
-//    public boolean checkSelectedCellIsValidForInsert(Plant plant, Cell selectedCell) {
-//        if (checkSelectedCellForSpace(selectedCell)) {
-//            if (selectedCell.isLand() && plant.getPlantKind() == PlantType.LAND)
-//                return true;
-//            else if (selectedCell.isLeaf() && plant.getPlantType() == PlantType.LAND) {
-//                return true;
-//            } else if (!selectedCell.isLand() && plant.getPlantType() == PlantType.WATER) {
-//                return true;
-//            } else if (!selectedCell.isLand() && plant.isLilyPad() && !selectedCell.isLeaf()) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
-//    private void setPlantInCell(Plant plant, Cell selectedCell) {
-//        if (checkSelectedCellIsValidForInsert(plant, selectedCell))
-//            if (!plant.isLilyPad())
-//                selectedCell.setPlantInGame(plant);
-//            else
-//                selectedCell.setLeaf(true);
-//    }
-
     public void checkForZombiesWin() {
 
         for (int i = 0; i < Constants.MAP_ROWS_COUNT; i++) {
