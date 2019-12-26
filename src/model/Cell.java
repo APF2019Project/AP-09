@@ -11,7 +11,7 @@ public class Cell {
     private int row;
     private int column;
     private Plant plant;
-    private ArrayList<ZombieInGame> zombies = new ArrayList<ZombieInGame>();
+    private ArrayList<ZombieInGame> zombies = new ArrayList<>();
     private ArrayList<Fruit> fruits = new ArrayList<>();
     private boolean isLand;
     private boolean leaf;

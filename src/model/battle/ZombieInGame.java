@@ -18,6 +18,10 @@ public class ZombieInGame {
     public static void removeZombieFromGame(ZombieInGame zombieInGame) {
         allZombiesInGame.remove(zombieInGame);
     }
+    public static ArrayList<ZombieInGame> getZombiesInGame() {
+        return allZombiesInGame;
+    }
+
 
     public void action() {
         switch (this.getZombie().getZombieKind()) {
