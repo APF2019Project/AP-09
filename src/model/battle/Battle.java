@@ -5,6 +5,7 @@ import constants.Constants;
 import model.*;
 
 import model.New_Zombies.Zombie;
+import model.battle.managers.*;
 import model.card.Card;
 import model.card.CardOfZombie;
 
@@ -29,15 +30,32 @@ public class Battle {
     private Cell selectedCell;
     private Map map;
     private int wavesCount;
+    private BattleManager battleManager;
 
 
     public Battle(Player plants, Player zombies, GameMode gameMode, int wavesCount) {
         this.plants = plants;
         this.zombies = zombies;
         this.gameMode = gameMode;
+        setBattleManager(gameMode);
         this.wavesCount = wavesCount;
         Battle.runningBattle = this;
         this.battleComponents = new BattleComponents();
+    }
+
+    private void setBattleManager(GameMode gameMode) {
+        switch (gameMode) {
+            case DAY:
+                this.battleManager = new DayBattleManager();
+            case WATER:
+                this.battleManager = new WaterBattleManager();
+            case RAIL:
+                this.battleManager = new RailBattleManager();
+            case ZOMBIE:
+                this.battleManager = new ZombieBattleManager();
+            case MULTIPLAYER:
+                this.battleManager = new PvPBattleManager();
+        }
     }
 
     public static void zombieWins() {
@@ -52,11 +70,12 @@ public class Battle {
 
     public void initTurn() {
         if (!this.isEndGame()) {
-            this.getBattleComponents().manage();
-            this.checkForZombiesWin();
-            this.checkForPlantsWin();
-            this.nextTurn();
-            this.nextWaveCheck();
+              this.battleManager.manage();
+//            this.getBattleComponents().manage();
+//            this.checkForZombiesWin();
+//            this.checkForPlantsWin();
+//            this.nextTurn();
+//            this.nextWaveCheck();
         } else {
 
         }
