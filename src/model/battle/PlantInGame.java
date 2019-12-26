@@ -53,20 +53,26 @@ public class PlantInGame {
     }
 
     public void musketeerAction() {
-        Musketeer musketeer = (Musketeer) this.plant ;
-        if ((readyToFireCounter == 0 ) && (Map.getCurrentMap().isContainZombieInRow(this.getCurrentCell().getRow())))
-        {
-            ArrayList<Bullet> bullets = this.plant.operate(Bullet.class);
-            for (Fruit bullet: bullets) {
-                bullet.setPosition(this.currentCell);
-                this.getCurrentCell().getFruits().add(bullet) ;
+        Musketeer musketeer = (Musketeer) this.plant;
+        int flagOfShooting = 0;
+        if (readyToFireCounter == 0) {
+            for (int i = -musketeer.getRangeOfAttack(); i <= musketeer.getRangeOfAttack(); i++) {
+                if ((Map.getCurrentMap().isContainZombieInRow(this.getCurrentCell().getRow() + i))) {
+                    flagOfShooting = 1;
+                    ArrayList<Bullet> bullets = this.plant.operate(Bullet.class);
+                    for (Bullet bullet : bullets) {
+                        bullet.setPosition(this.currentCell);
+                        bullet.setRadius(i);
+                        this.getCurrentCell().getFruits().add(bullet);
+                    }
+                    Battle.getRunningBattle().getBattleComponents().addBullet(bullets);
+                }
             }
-            Battle.getRunningBattle().getBattleComponents().addBullet(bullets);
-            this.readyToFireCounter = musketeer.getFireRate().getTurnCount();
+            if (flagOfShooting == 1) {
+                this.readyToFireCounter = musketeer.getFireRate().getTurnCount();
+            }
         } else
-        if (readyToFireCounter != 0)
-            readyToFireCounter -- ;
-
+            this.readyToFireCounter--;
     }
 
     public void catapultAction() {
@@ -80,9 +86,12 @@ public class PlantInGame {
             for (Explosive explosive : explosives) {
                 explosive.setPosition(this.currentCell);
             }
+            Battle.getRunningBattle().getBattleComponents().addExplosive(explosives);
+            this.plant.setDead(true);
+        }else if (readyToFireCounter != 0){
+            readyToFireCounter -- ;
         }
         }
-
 
     public void wallAction() {
         //TODO
