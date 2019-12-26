@@ -9,7 +9,6 @@ abstract public class Fruit {
     private Cell position;
 
     public Fruit() {
-
     }
 
     abstract public <T> void action(ArrayList<T> inputs);

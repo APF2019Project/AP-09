@@ -12,6 +12,7 @@ public class ZombieInGame {
         setZombie(zombie);
     }
 
+
     public void action() {
         switch (this.getZombie().getZombieKind()) {
             //TODO might need to check something

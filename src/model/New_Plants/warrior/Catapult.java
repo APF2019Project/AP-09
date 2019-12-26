@@ -25,7 +25,7 @@ public class Catapult extends Plant {
         ArrayList<T> bullets = new ArrayList<>();
 
         for (int i = 0; i < fireRate.getBulletCount(); i++) {
-            Bullet bullet = new Bullet(BulletKind.CURVED_BULLET, this.fireRate);
+            Bullet bullet = new Bullet(BulletKind.CURVED_BULLET, this.fireRate, this.getAttackPower());
             bullets.add(type.cast(bullet));
         }
         return bullets;

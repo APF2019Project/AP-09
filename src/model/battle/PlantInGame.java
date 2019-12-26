@@ -1,27 +1,33 @@
 package model.battle;
 
 import model.Cell;
+import model.Map;
 import model.New_Plants.fruits.Explosive;
 import model.New_Plants.fruits.Bullet;
 import model.New_Plants.Plant;
+import model.New_Plants.warrior.Musketeer;
 
 import java.util.ArrayList;
 
 public class PlantInGame {
 
     private Plant plant;
-    private int turnCounter;
+    private  int readyToFireCounter= 0 ; //harmoqe shelik kard byd mosavi ba fireratesh besh badesh ba har turn yeki kam she ta be sefr berese
     private Cell currentCell;
     private ArrayList<Bullet> bullets = new ArrayList<>();
 
+    private static ArrayList<PlantInGame> allPlantsInGame ;
+
     public PlantInGame(Plant plant, int turnCounter, Cell currentCell) {
         this.plant = plant;
-        this.turnCounter = turnCounter;
         this.currentCell = currentCell;
     }
 
+    public static ArrayList<PlantInGame> getAllPlantsInGame() {
+        return allPlantsInGame;
+    }
+
     public void action() {
-        //TODO must check some specific conditions
         switch (this.plant.getPlantKind()) {
             case MUSKETEER:
                 musketeerAction();
@@ -44,8 +50,16 @@ public class PlantInGame {
     }
 
     public void musketeerAction() {
+        Musketeer musketeer = (Musketeer) this.plant ;
         //TODO
-        ArrayList<Bullet> bullets = this.plant.operate(Bullet.class);
+        if ((readyToFireCounter == 0 ) && (Map.getCurrentMap().isContainZombieInRow(this.getCurrentCell().getRow())))
+        {
+            ArrayList<Bullet> bullets = this.plant.operate(Bullet.class);
+            for (Bullet bullet: bullets) {
+                bullet.setPosition(this.currentCell);
+            }
+            this.readyToFireCounter = musketeer.getFireRate().getTurnCount();
+        }
 
     }
 
@@ -67,23 +81,21 @@ public class PlantInGame {
         //TODO
     }
 
-    public void turnIncrement() {
-        this.turnCounter++;
-    }
 
-    public void turnReset() {
-        this.turnCounter = 0;
-    }
 
     public Plant getPlant() {
         return plant;
     }
 
-    public int getTurnCounter() {
-        return turnCounter;
-    }
-
     public Cell getCurrentCell() {
         return currentCell;
+    }
+
+    public int getReadyToFireCounter() {
+        return readyToFireCounter;
+    }
+
+    public void setReadyToFireCounter(int readyToFireCounter) {
+        this.readyToFireCounter = readyToFireCounter;
     }
 }

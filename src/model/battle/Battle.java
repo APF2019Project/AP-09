@@ -1,6 +1,7 @@
 package model.battle;
 
 import model.*;
+
 import model.New_Plants.*;
 import model.New_Zombies.Zombie;
 import model.battle.BattleComponents;
@@ -96,28 +97,28 @@ public class Battle {
         }
     }
 
-    public boolean checkSelectedCellIsValidForInsert(Plant plant, Cell selectedCell) {
-        if (checkSelectedCellForSpace(selectedCell)) {
-            if (selectedCell.isLand() && plant.getPlantType() == PlantType.LAND)
-                return true;
-            else if (selectedCell.isLeaf() && plant.getPlantType() == PlantType.LAND) {
-                return true;
-            } else if (!selectedCell.isLand() && plant.getPlantType() == PlantType.WATER) {
-                return true;
-            } else if (!selectedCell.isLand() && plant.isLilyPad() && !selectedCell.isLeaf()) {
-                return true;
-            }
-        }
-        return false;
-    }
+//    public boolean checkSelectedCellIsValidForInsert(Plant plant, Cell selectedCell) {
+//        if (checkSelectedCellForSpace(selectedCell)) {
+//            if (selectedCell.isLand() && plant.getPlantKind() == PlantType.LAND)
+//                return true;
+//            else if (selectedCell.isLeaf() && plant.getPlantType() == PlantType.LAND) {
+//                return true;
+//            } else if (!selectedCell.isLand() && plant.getPlantType() == PlantType.WATER) {
+//                return true;
+//            } else if (!selectedCell.isLand() && plant.isLilyPad() && !selectedCell.isLeaf()) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
-    private void setPlantInCell(Plant plant, Cell selectedCell) {
-        if (checkSelectedCellIsValidForInsert(plant, selectedCell))
-            if (!plant.isLilyPad())
-                selectedCell.setPlant(plant);
-            else
-                selectedCell.setLeaf(true);
-    }
+//    private void setPlantInCell(Plant plant, Cell selectedCell) {
+//        if (checkSelectedCellIsValidForInsert(plant, selectedCell))
+//            if (!plant.isLilyPad())
+//                selectedCell.setPlant(plant);
+//            else
+//                selectedCell.setLeaf(true);
+//    }
 
     public static void lawnMowerActivated(Cell cell, Map gameMap) {
         for (int j = 0; j < MAP_COLUMNS_COUNT; ++j) {
