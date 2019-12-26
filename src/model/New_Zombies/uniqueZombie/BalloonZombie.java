@@ -30,7 +30,6 @@ public class BalloonZombie extends Zombie {
                 cell.getPlant().setHealthPoint(cell.getPlant().getHealthPoint() - attackPower);
                 if (cell.getPlant().getHealthPoint() <= 0) {
                     cell.getPlant().setDead(true);
-                    GraveYard.getDeadPlants().add(cell.getPlant());
                     cell.setPlant(null);
                 }
             }
