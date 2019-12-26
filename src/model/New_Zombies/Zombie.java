@@ -15,6 +15,7 @@ abstract public class Zombie {
     private int attackPower;
     private int speed;
     private int shieldHP;
+    private boolean isSpeedLimited = false;
     private boolean isLandZombie;
     private boolean hasDuck;
     private boolean hasHelmet;
@@ -42,6 +43,11 @@ abstract public class Zombie {
         Map gameMap = Battle.getRunningBattle().getMap();
         int row = cell.getRow();
         int column = cell.getColumn();
+        int speed = this.speed;
+        if (isSpeedLimited()) {
+            speed /= 2;
+            setSpeedLimited(false);
+        }
         if (cell.getPlant() == null) {
             gameMap.getCell(row, column).getZombies().remove(this);
             for (int j = column + 1; j <= column + speed; ++j) {
@@ -83,6 +89,14 @@ abstract public class Zombie {
 
     public boolean hasArmor() {
         return hasArmor;
+    }
+
+    public boolean isSpeedLimited() {
+        return isSpeedLimited;
+    }
+
+    public void setSpeedLimited(boolean speedLimited) {
+        isSpeedLimited = speedLimited;
     }
 
     public void setHasArmor(boolean hasArmor) {
