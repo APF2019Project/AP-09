@@ -61,6 +61,7 @@ public class BattleComponents {
             }
         }
         this.allPlantsInGame.removeAll(deadPlants);
+        Battle.getRunningBattle().getMap().deleteDeadPlants();
         Battle.getRunningBattle().getGraveYard().getDeadPlants().addAll(deadPlants);
     }
 
@@ -72,6 +73,7 @@ public class BattleComponents {
             }
         }
         this.allZombiesInGame.removeAll(deadZombies);
+        Battle.getRunningBattle().getMap().deleteDeadZombies();
         Battle.getRunningBattle().getGraveYard().getDeadZombies().addAll(deadZombies);
     }
 
@@ -85,7 +87,10 @@ public class BattleComponents {
         }
 
         this.fruits.removeAll(deadFruits);
+        Battle.getRunningBattle().getMap().deleteDeadFruits();
     }
+
+
 
 
     private void checkForLawnMowerActivation() {

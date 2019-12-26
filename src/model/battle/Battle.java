@@ -47,11 +47,6 @@ public class Battle {
         }
     }
 
-
-    public void doAllAttacksInTurn() {
-        //TODO
-    }
-
     public void insertNextRandomZombie() {
         //TODO
     }
