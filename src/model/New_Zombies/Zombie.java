@@ -2,7 +2,9 @@ package model.New_Zombies;
 
 import model.Cell;
 import model.Map;
+import model.New_Plants.fruits.Fruit;
 import model.battle.Battle;
+import model.battle.ZombieInGame;
 
 import java.util.ArrayList;
 
@@ -15,7 +17,7 @@ abstract public class Zombie {
     private int attackPower;
     private int speed;
     private int shieldHP;
-    private boolean isSpeedLimited = false;
+    private int speedLimited = 0;
     private boolean isLandZombie;
     private boolean hasDuck;
     private boolean hasHelmet;
@@ -39,32 +41,50 @@ abstract public class Zombie {
     abstract public void attack(Cell currentCell);
 
     public void move() {
+        ZombieInGame zombieInGame = ZombieInGame.findZombieInGame(this);
         Cell cell = this.getCurrentCell();
         Map gameMap = Battle.getRunningBattle().getMap();
         int row = cell.getRow();
         int column = cell.getColumn();
         int speed = this.speed;
-        if (isSpeedLimited()) {
-            speed /= 2;
-            setSpeedLimited(false);
+        if (speedLimited > 0) {
+            speed /= speedLimited;
+            setSpeedLimited(0);
         }
         if (cell.getPlant() == null) {
-            gameMap.getCell(row, column).getZombies().remove(this);
+            gameMap.getCell(row, column).getZombies().remove(zombieInGame);
             for (int j = column + 1; j <= column + speed; ++j) {
                 if (gameMap.getCell(row, j).getPlant() != null) {
-                    gameMap.getCell(row, j).getZombies().add(this);
+                    gameMap.getCell(row, j).getZombies().add(zombieInGame);
+                    zombieInGame.setCurrentCell(gameMap.getCell(row, j));
                     setCurrentCell(gameMap.getCell(row, j));
                     this.action();
                     return;
                 } else if (j == MAP_COLUMNS_COUNT - 1) {
-                    gameMap.getCell(row, j).getZombies().add(this);
+                    gameMap.getCell(row, j).getZombies().add(zombieInGame);
+                    zombieInGame.setCurrentCell(gameMap.getCell(row, j));
                     setCurrentCell(gameMap.getCell(row, j));
                     reachLawnMower(currentCell, gameMap);
                     return;
                 }
+                gameMap.getCell(row, j).getZombies().add(zombieInGame);
+                zombieInGame.setCurrentCell(gameMap.getCell(row, j));
+                setCurrentCell(gameMap.getCell(row, j));
+                checkHasFruit(gameMap.getCell(row, j));
+                if(j == column + speed)
+                    return;
             }
         }
+        checkHasFruit(currentCell);
         this.action();
+    }
+
+    public void checkHasFruit(Cell cell) {
+        if(cell.getFruits() != null){
+            for(Fruit f : cell.getFruits()){
+                f.action(cell.getZombies());
+            }
+        }
     }
 
     public void reachLawnMower(Cell cell, Map gameMap) {
@@ -75,6 +95,24 @@ abstract public class Zombie {
         } else {
             Battle.zombieWins();
         }
+    }
+
+    public void decreaseZombieHealthStraight(int attack) {
+        if (shieldHP != 0) {
+            if (attack >= shieldHP) {
+                attack -= shieldHP;
+                shieldHP = 0;
+                healthPoint -= attack;
+            } else {
+                shieldHP -= attack;
+            }
+        } else {
+            healthPoint -= attack;
+        }
+    }
+
+    public void decreaseZombieHealthCurve(int attack) {
+        healthPoint -= attack;
     }
 
     public Cell getCurrentCell() {
@@ -91,12 +129,12 @@ abstract public class Zombie {
         return hasArmor;
     }
 
-    public boolean isSpeedLimited() {
-        return isSpeedLimited;
+    public int getSpeedLimited() {
+        return speedLimited;
     }
 
-    public void setSpeedLimited(boolean speedLimited) {
-        isSpeedLimited = speedLimited;
+    public void setSpeedLimited(int speedLimited) {
+        this.speedLimited = speedLimited;
     }
 
     public void setHasArmor(boolean hasArmor) {

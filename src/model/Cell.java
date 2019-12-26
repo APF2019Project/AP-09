@@ -36,6 +36,9 @@ public class Cell {
         return zombies;
     }
 
+    public void setZombies(ArrayList<ZombieInGame> zombies) {
+        this.zombies = zombies;
+    }
 
     public Plant getPlant() {
         return plant;
