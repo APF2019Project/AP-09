@@ -18,16 +18,12 @@ public class Bomb extends Plant {
 
     @Override
     public <T> ArrayList<T> operate(Class<T> type) {
-        if (readyToFireCounter != 0) {
-            readyToFireCounter--;
-            return null ;
-        } else {
             ArrayList<T> explosives = new ArrayList<>();
             Explosive explosive = new Explosive(this.bombBox);
             explosives.add(type.cast(explosive));
             return explosives;
         }
-    }
+
 
 
     public BombBox getBombBox() {

@@ -22,21 +22,22 @@ public class Explosive extends Fruit {
 
     @Override
     public <T> void action(ArrayList<T> inputs) {
-        int length = bombBox.getLength();
-        int width = bombBox.getWidth();
-        Map gameMap = Battle.getRunningBattle().getMap();
-        for (int i = getPosition().getRow() - width / 2; i <= getPosition().getRow() + width / 2; i++) {
-            for (int j = getPosition().getColumn() - length / 2; j < getPosition().getColumn() + length / 2; j++) {
-                Cell cell = gameMap.getCell(i, j);
-                for (int k = 0; k < cell.getZombies().size() ; k++) {
-                    GraveYard.getDeadZombies().add(cell.getZombies().get(k).getZombie());
-                    ZombieInGame.getZombiesInGame().remove(cell.getZombies().get(k)) ;
-                    cell.getZombies().remove(k) ;
-                    k -- ;
+        if (this.getPosition().getZombies() != null) {
+            int length = bombBox.getLength();
+            int width = bombBox.getWidth();
+            Map gameMap = Battle.getRunningBattle().getMap();
+            for (int i = getPosition().getRow() - width / 2; i <= getPosition().getRow() + width / 2; i++) {
+                for (int j = getPosition().getColumn() - length / 2; j < getPosition().getColumn() + length / 2; j++) {
+                    Cell cell = gameMap.getCell(i, j);
+                    for (int k = 0; k < cell.getZombies().size(); k++) {
+                        GraveYard.getDeadZombies().add(cell.getZombies().get(k).getZombie());
+                        ZombieInGame.getZombiesInGame().remove(cell.getZombies().get(k));
+                        cell.getZombies().remove(k);
+                        k--;
+                    }
                 }
             }
         }
-
     }
 
     public BombBox getBombBox() {

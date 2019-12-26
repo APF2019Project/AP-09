@@ -18,8 +18,16 @@ public class BattleComponents {
     }
 
 
-    public void addFruit(ArrayList<Fruit> fruits) {
-        this.fruits.addAll(fruits);
+    public void addBullet(ArrayList<Bullet> bullets) {
+        this.fruits.addAll(bullets);
+    }
+
+    public void addExplosive(ArrayList<Explosive> explosives){
+        this.fruits.addAll(explosives);
+    }
+
+    public void addSun(ArrayList<Sun> suns){
+        this.fruits.addAll(suns);
     }
 
     public ArrayList<Fruit> getFruits() {

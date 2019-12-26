@@ -42,7 +42,9 @@ public class Bullet extends Fruit {
                     Battle.getRunningBattle().getBattleComponents().getFruits().remove(this) ;
                     this.getPosition().getFruits().remove(this);
                 }else
+                    this.getPosition().getFruits().remove(this);
                 this.setPosition(Map.getCurrentMap().getCell(this.getPosition().getRow(), this.getPosition().getColumn() + 1));
+                this.getPosition().getFruits().add(this);
             }
         }
 
