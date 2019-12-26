@@ -4,6 +4,7 @@ import model.Cell;
 import model.Map;
 import model.New_Zombies.Zombie;
 import model.New_Zombies.ZombieKind;
+import model.battle.Battle;
 
 import static constants.Constants.MAP_COLUMNS_COUNT;
 
@@ -23,16 +24,11 @@ public class PogoZombie extends Zombie {
 
     public void pogoMove(Map gameMap, Cell cell) {
         int row = cell.getRow();
-        for (int j = 0; j < MAP_COLUMNS_COUNT; ++j) {
-            if (j == cell.getColumn()) {
-                gameMap.getCell(row, j).getZombies().remove(this);
-            } else if (j == cell.getColumn() + 1) {
-                gameMap.getCell(row, j).getZombies().add(this);
-                setCurrentCell(gameMap.getCell(row, j));
-                if (this.getCurrentCell().getColumn() == MAP_COLUMNS_COUNT - 1)
-                    reachLawnMower(gameMap.getCell(row, j), gameMap);
-                return;
-            }
+        int column = cell.getColumn();
+        gameMap.getCell(row, column).getZombies().remove(this);
+        gameMap.getCell(row,column + 1).getZombies().add(this);
+        if(column + 1 == MAP_COLUMNS_COUNT - 1){
+            reachLawnMower(getCurrentCell(), gameMap);
         }
     }
 

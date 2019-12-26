@@ -4,6 +4,7 @@ import model.Cell;
 import model.Map;
 import model.New_Zombies.Zombie;
 import model.New_Zombies.ZombieKind;
+import model.battle.Battle;
 import model.battle.GraveYard;
 
 import java.util.Random;
