@@ -9,21 +9,36 @@ import java.util.ArrayList;
 public class Bomb extends Plant {
 
     private BombBox bombBox;
+    private int readyToFireCounter;
 
-    public Bomb(String plantName, int healthPoint, int attackPower, int coolDown, int sunUsage, BombBox bombBox) {
+    public Bomb(String plantName, int healthPoint, int attackPower, int coolDown, int sunUsage, BombBox bombBox, int readyToFireCounter) {
         super(plantName, healthPoint, attackPower, coolDown, sunUsage, PlantKind.BOMB);
         this.bombBox = bombBox;
     }
 
     @Override
     public <T> ArrayList<T> operate(Class<T> type) {
-        ArrayList<T> explosives = new ArrayList<>();
-        Explosive explosive = new Explosive(this.bombBox);
-        explosives.add(type.cast(explosive));
-        return explosives;
+        if (readyToFireCounter != 0) {
+            readyToFireCounter--;
+            return null ;
+        } else {
+            ArrayList<T> explosives = new ArrayList<>();
+            Explosive explosive = new Explosive(this.bombBox);
+            explosives.add(type.cast(explosive));
+            return explosives;
+        }
     }
+
 
     public BombBox getBombBox() {
         return bombBox;
+    }
+
+    public int getReadyToFireCounter() {
+        return readyToFireCounter;
+    }
+
+    public void setReadyToFireCounter(int readyToFireCounter) {
+        this.readyToFireCounter = readyToFireCounter;
     }
 }

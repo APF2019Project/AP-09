@@ -1,6 +1,7 @@
 package model;
 
 import model.New_Plants.*;
+import model.New_Plants.fruits.Fruit;
 import model.New_Zombies.Zombie;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ public class Cell {
     private int column;
     private Plant plant;
     private ArrayList<Zombie> zombies = new ArrayList<Zombie>();
+    private ArrayList<Fruit> fruits = new ArrayList<>();
     private boolean isLand;
     private boolean leaf;
 
@@ -59,5 +61,9 @@ public class Cell {
 
     public void setRow(int row) {
         this.row = row;
+    }
+
+    public ArrayList<Fruit> getFruits() {
+        return fruits;
     }
 }

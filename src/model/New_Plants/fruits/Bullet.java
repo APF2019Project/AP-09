@@ -2,6 +2,7 @@ package model.New_Plants.fruits;
 
 import constants.Constants;
 import model.Cell;
+import model.Map;
 import model.New_Plants.warrior.FireRate;
 import model.battle.Battle;
 
@@ -27,6 +28,23 @@ public class Bullet extends Fruit {
 
     @Override
     public <T> void action(ArrayList<T> inputs) {
+        this.setPosition(Map.getCurrentMap().getCell(this.getPosition().getRow() + this.radius , this.getPosition().getColumn()));
+        for (int i = 0; i < bulletSpeed + 1 ; i++) {
+            if (this.getPosition().getZombies() != null ){
+                /* todo inja age zombies.get(0) shield dasht va noe bullet az noe straight bood az shieldesh kam kon age nadasht az joonesh kam kon age az noe curved bood yekarast boro az joone zombi kam kon
+                    age zobie joonesh sefr shod az arrayliste cell va arrayliste zombiesingame removesh kon
+                    emal kardane speed limit rooye zombi baraye ye nobat
+                 */
+                Battle.getRunningBattle().getBattleComponents().getFruits().remove(this) ;
+                this.getPosition().getFruits().remove(this);
+            }else {
+                if (this.getPosition().getColumn() == Constants.MAP_COLUMNS_COUNT - 1 ){
+                    Battle.getRunningBattle().getBattleComponents().getFruits().remove(this) ;
+                    this.getPosition().getFruits().remove(this);
+                }else
+                this.setPosition(Map.getCurrentMap().getCell(this.getPosition().getRow(), this.getPosition().getColumn() + 1));
+            }
+        }
 
     }
 
