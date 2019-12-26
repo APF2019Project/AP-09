@@ -1,6 +1,5 @@
 package view;
 
-import javafx.scene.control.Accordion;
 import model.Account;
 import model.card.Card;
 

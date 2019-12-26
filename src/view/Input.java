@@ -4,6 +4,8 @@ import controller.Controller;
 
 import java.util.Scanner;
 
+import static view.Menu.MAJOR_LOGIN;
+
 
 public class Input {
     private static Input instance = new Input();
