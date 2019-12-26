@@ -3,13 +3,20 @@ package model.battle;
 import model.Cell;
 import model.New_Zombies.Zombie;
 
+import java.util.ArrayList;
+
 public class ZombieInGame {
     private Zombie zombie;
+    private static ArrayList<ZombieInGame> zombiesInGame = new ArrayList<>();
     private Cell currentCell;
 
     public ZombieInGame(Zombie zombie, Cell currentCell) {
         setCurrentCell(currentCell);
         setZombie(zombie);
+    }
+
+    public static ArrayList<ZombieInGame> getZombiesInGame() {
+        return zombiesInGame;
     }
 
 

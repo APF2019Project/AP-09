@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class PlantInGame {
 
     private Plant plant;
-    private  int readyToFireCounter= 0 ; //harmoqe shelik kard byd mosavi ba fireratesh besh badesh ba har turn yeki kam she ta be sefr berese
+    private  int readyToFireCounter= 0 ;
     private Cell currentCell;
     private ArrayList<Bullet> bullets = new ArrayList<>();
 
@@ -51,7 +51,6 @@ public class PlantInGame {
 
     public void musketeerAction() {
         Musketeer musketeer = (Musketeer) this.plant ;
-        //TODO
         if ((readyToFireCounter == 0 ) && (Map.getCurrentMap().isContainZombieInRow(this.getCurrentCell().getRow())))
         {
             ArrayList<Bullet> bullets = this.plant.operate(Bullet.class);
@@ -59,7 +58,9 @@ public class PlantInGame {
                 bullet.setPosition(this.currentCell);
             }
             this.readyToFireCounter = musketeer.getFireRate().getTurnCount();
-        }
+        } else
+        if (readyToFireCounter != 0)
+            readyToFireCounter -- ;
 
     }
 
