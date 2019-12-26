@@ -124,7 +124,8 @@ public class Battle {
         for (int j = 0; j < MAP_COLUMNS_COUNT; ++j) {
             Cell c = gameMap.getCell(cell.getRow(), j);
             for (int z = 0; z < c.getZombies().size(); ++z) {
-                GraveYard.getDeadZombies().add(c.getZombies().get(z));
+                GraveYard.getDeadZombies().add(c.getZombies().get(z).getZombie());
+                ZombieInGame.removeZombieFromGame(c.getZombies().get(z));
                 c.getZombies().remove(z);
                 --z;
             }

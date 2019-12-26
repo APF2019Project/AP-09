@@ -22,7 +22,14 @@ public class ZombieInGame {
         return allZombiesInGame;
     }
 
-
+    public static ZombieInGame findZombieInGame(Zombie zombie){
+        for(ZombieInGame z : allZombiesInGame){
+            if(z.getZombie().equals(zombie)){
+                return z;
+            }
+        }
+        return null;
+    }
     public void action() {
         switch (this.getZombie().getZombieKind()) {
             //TODO might need to check something

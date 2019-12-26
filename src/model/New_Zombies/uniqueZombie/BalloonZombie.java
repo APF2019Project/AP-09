@@ -2,6 +2,7 @@ package model.New_Zombies.uniqueZombie;
 
 import model.Cell;
 import model.Map;
+import model.New_Plants.PlantKind;
 import model.New_Zombies.Zombie;
 import model.New_Zombies.ZombieKind;
 import model.New_Plants.Plant;
@@ -24,11 +25,13 @@ public class BalloonZombie extends Zombie {
     @Override
     public void attack(Cell cell) {
         if (cell.getPlant() != null) {
-            int attackPower = this.getAttackPower();
-            cell.getPlant().setHealthPoint(cell.getPlant().getHealthPoint() - attackPower);
-            if (cell.getPlant().getHealthPoint() <= 0) {
-                GraveYard.getDeadPlants().add(cell.getPlant());
-                cell.setPlant(null);
+            if (cell.getPlant().getPlantKind() != PlantKind.BOMB) {
+                int attackPower = this.getAttackPower();
+                cell.getPlant().setHealthPoint(cell.getPlant().getHealthPoint() - attackPower);
+                if (cell.getPlant().getHealthPoint() <= 0) {
+                    GraveYard.getDeadPlants().add(cell.getPlant());
+                    cell.setPlant(null);
+                }
             }
         }
     }

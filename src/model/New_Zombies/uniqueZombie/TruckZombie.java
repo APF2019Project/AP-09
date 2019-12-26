@@ -2,6 +2,7 @@ package model.New_Zombies.uniqueZombie;
 
 import model.Cell;
 import model.Map;
+import model.New_Plants.PlantKind;
 import model.New_Zombies.Zombie;
 import model.New_Zombies.ZombieKind;
 import model.battle.Battle;
@@ -35,8 +36,10 @@ public class TruckZombie extends Zombie {
     @Override
     public void attack(Cell cell) {
         if (cell.getPlant() != null) {
-            GraveYard.getDeadPlants().add(cell.getPlant());
-            cell.setPlant(null);
+            if(cell.getPlant().getPlantKind() != PlantKind.BOMB) {
+                GraveYard.getDeadPlants().add(cell.getPlant());
+                cell.setPlant(null);
+            }
         }
     }
     /*
