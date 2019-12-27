@@ -41,54 +41,6 @@ abstract public class Zombie implements Cloneable {
 
     abstract public void attack(Cell currentCell);
 
-    public void move() {
-        ZombieInGame zombieInGame = Battle.getRunningBattle().getBattleComponents().findZombieInGame(this);
-        Cell cell = zombieInGame.getCurrentCell();
-        Map gameMap = Battle.getRunningBattle().getMap();
-        int row = cell.getRow();
-        int column = cell.getColumn();
-        int speed = this.speed;
-        if (speedLimited > 0) {
-            speed /= speedLimited;
-            setSpeedLimited(0);
-        }
-        if(stopTime > 0){
-            --stopTime;
-            return;
-        }
-        if (cell.getPlantInGame() == null) {
-            gameMap.getCell(row, column).getZombies().remove(zombieInGame);
-            for (int j = column + 1; j <= column + speed; ++j) {
-                if (gameMap.getCell(row, j).getPlantInGame() != null) {
-                    gameMap.getCell(row, j).getZombies().add(zombieInGame);
-                    zombieInGame.setCurrentCell(gameMap.getCell(row, j));
-                    this.action();
-                    return;
-                } else if (j == MAP_COLUMNS_COUNT - 1) {
-                    gameMap.getCell(row, j).getZombies().add(zombieInGame);
-                    zombieInGame.setCurrentCell(gameMap.getCell(row, j));
-//                    reachLawnMower(currentCell, gameMap
-                    return;
-                }
-                gameMap.getCell(row, j).getZombies().add(zombieInGame);
-                zombieInGame.setCurrentCell(gameMap.getCell(row, j));
-                checkHasFruit(gameMap.getCell(row, j));
-                if (j == column + speed)
-                    return;
-            }
-        }
-        checkHasFruit(zombieInGame.getCurrentCell());
-        this.action();
-    }
-
-    public void checkHasFruit(Cell cell) {
-        if (cell.getFruits() != null) {
-            for (Fruit f : cell.getFruits()) {
-                f.action(cell.getZombies());
-            }
-        }
-    }
-
     public boolean isDead() {
         return isDead;
     }
