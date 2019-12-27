@@ -12,6 +12,8 @@ import static constants.Constants.MAP_COLUMNS_COUNT;
 public class ZombieInGame {
     private Zombie zombie;
     private Cell currentCell;
+    private boolean isEffected = false;
+    private BulletEffect bulletEffect = new BulletEffect();
     private static ArrayList<ZombieInGame> allZombiesInGame;
 
     public ZombieInGame(Zombie zombie, Cell currentCell) {
@@ -24,18 +26,20 @@ public class ZombieInGame {
     public static void removeZombieFromGame(ZombieInGame zombieInGame) {
         allZombiesInGame.remove(zombieInGame);
     }
+
     public static ArrayList<ZombieInGame> getZombiesInGame() {
         return allZombiesInGame;
     }
 
-    public static ZombieInGame findZombieInGame(Zombie zombie){
-        for(ZombieInGame z : allZombiesInGame){
-            if(z.getZombie().equals(zombie)){
+    public static ZombieInGame findZombieInGame(Zombie zombie) {
+        for (ZombieInGame z : allZombiesInGame) {
+            if (z.getZombie().equals(zombie)) {
                 return z;
             }
         }
         return null;
     }
+
     public void action() {
         switch (this.getZombie().getZombieKind()) {
             //TODO might need to check something
@@ -59,7 +63,7 @@ public class ZombieInGame {
                 break;
         }
     }
-    
+
     public void move() {
         Cell cell = this.getCurrentCell();
         Zombie zombie = this.getZombie();
@@ -67,33 +71,21 @@ public class ZombieInGame {
         int row = cell.getRow();
         int column = cell.getColumn();
         int speed = zombie.getSpeed();
-        if(zombie.getStopTime() > 0){
-            zombie.setStopTime(zombie.getStopTime() - 1);
-            zombie.setSpeedLimited(0);
-            return;
-        }
-        if (zombie.getSpeedLimited() > 0) {
-            speed /= zombie.getSpeedLimited();
-            zombie.setSpeedLimited(0);
-        }
+        speed = doExistingEffect(speed);
         if (cell.getPlantInGame() == null) {
             gameMap.getCell(row, column).getZombies().remove(this);
             for (int j = column + 1; j <= column + speed; ++j) {
                 if (gameMap.getCell(row, j).getPlantInGame() != null) {
-                    gameMap.getCell(row, j).getZombies().add(this);
-                    this.setCurrentCell(gameMap.getCell(row, j));
+                    ZombieCanMove(gameMap, row, j);
                     this.action();
                     return;
                 } else if (j == MAP_COLUMNS_COUNT - 1) {
-                    gameMap.getCell(row, j).getZombies().add(this);
-                   this.setCurrentCell(gameMap.getCell(row, j));
+                    ZombieCanMove(gameMap, row, j);
 //                    reachLawnMower(currentCell, gameMap
                     return;
                 }
-                gameMap.getCell(row, j).getZombies().add(this);
-                this.setCurrentCell(gameMap.getCell(row, j));
-                checkHasFruit(gameMap.getCell(row, j));
-                if (j == column + speed){
+                ZombieCanMove(gameMap, row, j);
+                if (j == column + speed) {
                     this.action();
                     return;
                 }
@@ -103,6 +95,29 @@ public class ZombieInGame {
         checkHasFruit(this.getCurrentCell());
         this.action();
     }
+
+    public int doExistingEffect(int speed){
+        if (isEffected()) {
+            if (bulletEffect.getStopTime() > 0) {
+                bulletEffect.setStopTime(bulletEffect.getStopTime() - 1);
+                if (bulletEffect.getStopTime() == 0)
+                    setEffected(false);
+                bulletEffect.setSpeedLimit(0);
+            }
+            if (bulletEffect.getSpeedLimit() > 0) {
+                speed /= bulletEffect.getSpeedLimit();
+                bulletEffect.setSpeedLimit(0);
+                setEffected(false);
+            }
+        }
+        return speed;
+    }
+    private void ZombieCanMove(Map gameMap, int row, int j) {
+        gameMap.getCell(row, j).getZombies().add(this);
+        this.setCurrentCell(gameMap.getCell(row, j));
+        checkHasFruit(gameMap.getCell(row, j));
+    }
+
     public void checkHasFruit(Cell cell) {
         if (cell.getFruits() != null) {
             for (Fruit f : cell.getFruits()) {
@@ -110,6 +125,15 @@ public class ZombieInGame {
             }
         }
     }
+
+    public boolean isEffected() {
+        return isEffected;
+    }
+
+    public void setEffected(boolean effected) {
+        isEffected = effected;
+    }
+
     private void otherAction() {
         this.move();
         //zombie moves first then if the cell has plant it attacks or does it's particular action
@@ -117,7 +141,7 @@ public class ZombieInGame {
     }
 
     private void pogoZombieAction() {
-       this.move();
+        this.move();
         //jumps from plants
     }
 
@@ -127,17 +151,17 @@ public class ZombieInGame {
     }
 
     private void bungeeZombieAction() {
-       this.move();
+        this.move();
         //steals a plant
     }
 
     private void balloonZombieAction() {
-       this.move();
+        this.move();
         //doesn't get hurt by catapult
     }
 
     private void gigagargantuarAction() {
-       this.move();
+        this.move();
         //destroys plant
     }
 

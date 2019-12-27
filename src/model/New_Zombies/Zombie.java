@@ -17,8 +17,6 @@ abstract public class Zombie implements Cloneable {
     private int attackPower;
     private int speed;
     private int shieldHP;
-    private int speedLimited = 0;
-    private int stopTime = 0;
     private boolean isLandZombie;
     private boolean hasDuck;
     private boolean hasHelmet;
@@ -74,13 +72,6 @@ abstract public class Zombie implements Cloneable {
         return hasArmor;
     }
 
-    public int getSpeedLimited() {
-        return speedLimited;
-    }
-
-    public void setSpeedLimited(int speedLimited) {
-        this.speedLimited = speedLimited;
-    }
 
     public void setHasArmor(boolean hasArmor) {
         this.hasArmor = hasArmor;
@@ -90,13 +81,6 @@ abstract public class Zombie implements Cloneable {
         return hasHelmet;
     }
 
-    public int getStopTime() {
-        return stopTime;
-    }
-
-    public void setStopTime(int stopTime) {
-        this.stopTime = stopTime;
-    }
 
     public void setHasHelmet(boolean hasHelmet) {
         this.hasHelmet = hasHelmet;

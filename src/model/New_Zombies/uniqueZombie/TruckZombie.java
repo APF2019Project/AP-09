@@ -39,14 +39,15 @@ public class TruckZombie extends Zombie {
             }
         }
     }
+
     /*
     public void truckDeath(){
         if(hasStrongTruck){
+            this.setZombieName("Zombie");
             this.setHealthPoint(2);
             this.setAttackPower(1);
             this.setSpeed(2);
             this.setZombieKind(ZombieKind.OTHER);
-            setHasStrongTruck(false);
         }
         else{
            TRUCK ZOMBIE DIES
@@ -54,4 +55,5 @@ public class TruckZombie extends Zombie {
         }
     }
     */
+
 }
