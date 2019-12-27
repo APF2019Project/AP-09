@@ -85,6 +85,49 @@ public class ZombieInGame {
                     return;
                 } else if (j == MAP_COLUMNS_COUNT - 1) {
                     gameMap.getCell(row, j).getZombies().add(this);
+                    this.setCurrentCell(gameMap.getCell(row, j));
+//                    reachLawnMower(currentCell, gameMap
+                    return;
+                }
+                gameMap.getCell(row, j).getZombies().add(this);
+                this.setCurrentCell(gameMap.getCell(row, j));
+                checkHasFruit(gameMap.getCell(row, j));
+                if (j == column + speed){
+                    this.action();
+                    return;
+                }
+
+            }
+        }
+        checkHasFruit(this.getCurrentCell());
+        this.action();
+    }
+    public void move() {
+        Cell cell = this.getCurrentCell();
+        Zombie zombie = this.getZombie();
+        Map gameMap = Battle.getRunningBattle().getMap();
+        int row = cell.getRow();
+        int column = cell.getColumn();
+        int speed = zombie.getSpeed();
+        if(zombie.getStopTime() > 0){
+            zombie.setStopTime(zombie.getStopTime() - 1);
+            zombie.setSpeedLimited(0);
+            return;
+        }
+        if (zombie.getSpeedLimited() > 0) {
+            speed /= zombie.getSpeedLimited();
+            zombie.setSpeedLimited(0);
+        }
+        if (cell.getPlantInGame() == null) {
+            gameMap.getCell(row, column).getZombies().remove(this);
+            for (int j = column + 1; j <= column + speed; ++j) {
+                if (gameMap.getCell(row, j).getPlantInGame() != null) {
+                    gameMap.getCell(row, j).getZombies().add(this);
+                    this.setCurrentCell(gameMap.getCell(row, j));
+                    this.action();
+                    return;
+                } else if (j == MAP_COLUMNS_COUNT - 1) {
+                    gameMap.getCell(row, j).getZombies().add(this);
                    this.setCurrentCell(gameMap.getCell(row, j));
 //                    reachLawnMower(currentCell, gameMap
                     return;
