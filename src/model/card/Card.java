@@ -2,15 +2,15 @@ package model.card;
 
 import java.util.ArrayList;
 
-abstract  public class Card {
-       private static ArrayList<Card> cards = new ArrayList<>() ;
+abstract public class Card {
+    private static ArrayList<Card> cards = new ArrayList<>();
     private int price;
-    private boolean isBought = false ;
-    private CardType cardType ;
+    private boolean isBought = false;
+    private CardType cardType;
     private String cardName;
 
-    public Card(CardType cardType){
-        this.cardType = cardType ;
+    public Card(CardType cardType) {
+        this.cardType = cardType;
     }
 
     public int getPrice() {
@@ -18,11 +18,13 @@ abstract  public class Card {
     }
 
 
-       public void setPrice(int price) {
-           this.price = price;
-       }
-       abstract public void calculatePrice() ;
-    abstract  public void defineAllCards(); //Todo this function must be called at the first of the program
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    abstract public void calculatePrice();
+
+    abstract public void defineAllCards(); //Todo this function must be called at the first of the program
 
     public static ArrayList<Card> getCards() {
         return cards;

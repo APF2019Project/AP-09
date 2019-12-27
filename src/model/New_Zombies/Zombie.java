@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import static constants.Constants.MAP_COLUMNS_COUNT;
 
-abstract public class Zombie {
+abstract public class Zombie implements Cloneable {
     private static ArrayList<Zombie> zombies = new ArrayList<>();
     private String zombieName;
     private int healthPoint;
@@ -154,6 +154,7 @@ abstract public class Zombie {
     public boolean hasHelmet() {
         return hasHelmet;
     }
+
 
     public void setHasHelmet(boolean hasHelmet) {
         this.hasHelmet = hasHelmet;

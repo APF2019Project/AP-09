@@ -1,14 +1,11 @@
 package model.New_Zombies.uniqueZombie;
 
 import model.Cell;
-import model.Map;
 import model.New_Plants.PlantKind;
 import model.New_Zombies.Zombie;
 import model.New_Zombies.ZombieKind;
-import model.battle.Battle;
 import model.battle.GraveYard;
-
-import java.util.ArrayList;
+import model.battle.ZombieInGame;
 
 public class TruckZombie extends Zombie {
     private boolean hasStrongTruck;
@@ -29,27 +26,28 @@ public class TruckZombie extends Zombie {
 
     @Override
     public <T> void action() {
-        Cell cell = this.getCurrentCell();
+        ZombieInGame zombieInGame = ZombieInGame.findZombieInGame(this);
+        Cell cell = zombieInGame.getCurrentCell();
         attack(cell);
     }
 
     @Override
     public void attack(Cell cell) {
-        if (cell.getPlant() != null) {
-            if(cell.getPlant().getPlantKind() != PlantKind.BOMB) {
-                cell.getPlant().setDead(true);
-                cell.setPlant(null);
+        if (cell.getPlantInGame() != null) {
+            if (cell.getPlantInGame().getPlant().getPlantKind() != PlantKind.BOMB) {
+                cell.getPlantInGame().getPlant().setDead(true);
             }
         }
     }
+
     /*
     public void truckDeath(){
         if(hasStrongTruck){
+            this.setZombieName("Zombie");
             this.setHealthPoint(2);
             this.setAttackPower(1);
             this.setSpeed(2);
             this.setZombieKind(ZombieKind.OTHER);
-            setHasStrongTruck(false);
         }
         else{
            TRUCK ZOMBIE DIES
@@ -57,4 +55,5 @@ public class TruckZombie extends Zombie {
         }
     }
     */
+
 }

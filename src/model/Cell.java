@@ -3,6 +3,7 @@ package model;
 import model.New_Plants.*;
 import model.New_Plants.fruits.Fruit;
 import model.New_Zombies.Zombie;
+import model.battle.PlantInGame;
 import model.battle.ZombieInGame;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 public class Cell {
     private int row;
     private int column;
-    private Plant plant;
+    private PlantInGame plant;
     private ArrayList<ZombieInGame> zombies = new ArrayList<>();
     private ArrayList<Fruit> fruits = new ArrayList<>();
     private boolean isLand;
@@ -40,11 +41,11 @@ public class Cell {
         this.zombies = zombies;
     }
 
-    public Plant getPlant() {
+    public PlantInGame getPlantInGame() {
         return plant;
     }
 
-    public void setPlant(Plant plants) {
+    public void setPlantInGame(PlantInGame plants) {
         plant = plants;
     }
 

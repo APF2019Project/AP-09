@@ -25,6 +25,8 @@ public class PlantInGame {
     public PlantInGame(Plant plant, Cell currentCell, int readyToFireCounter) {  //todo baraye musketeer o catapult 0 byd bashe baraye bomb o sun byd readtofire khodeshooon bashe
         this.plant = plant;
         this.currentCell = currentCell;
+        currentCell.setPlantInGame(this);
+        Battle.getRunningBattle().getBattleComponents().addPlantInGame(this);
         this.readyToFireCounter = readyToFireCounter ;
     }
 

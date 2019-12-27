@@ -1,14 +1,11 @@
 package model.New_Zombies.uniqueZombie;
 
 import model.Cell;
-import model.Map;
 import model.New_Plants.PlantKind;
 import model.New_Zombies.Zombie;
 import model.New_Zombies.ZombieKind;
-import model.New_Plants.Plant;
 import model.battle.GraveYard;
-
-import java.util.ArrayList;
+import model.battle.ZombieInGame;
 
 public class BalloonZombie extends Zombie {
     public BalloonZombie(String zombieName, int healthPoint, int attackPower, int speed, int shieldHP, boolean isLandZombie, boolean hasDuck, boolean hasHelmet, boolean hasArmor) {
@@ -18,19 +15,19 @@ public class BalloonZombie extends Zombie {
 
     @Override
     public <T> void action() {
-        Cell cell = this.getCurrentCell();
+        ZombieInGame zombieInGame = ZombieInGame.findZombieInGame(this);
+        Cell cell = zombieInGame.getCurrentCell();
         attack(cell);
     }
 
     @Override
     public void attack(Cell cell) {
-        if (cell.getPlant() != null) {
-            if (cell.getPlant().getPlantKind() != PlantKind.BOMB) {
+        if (cell.getPlantInGame() != null) {
+            if (cell.getPlantInGame().getPlant().getPlantKind() != PlantKind.BOMB) {
                 int attackPower = this.getAttackPower();
-                cell.getPlant().setHealthPoint(cell.getPlant().getHealthPoint() - attackPower);
-                if (cell.getPlant().getHealthPoint() <= 0) {
-                    cell.getPlant().setDead(true);
-                    cell.setPlant(null);
+                cell.getPlantInGame().getPlant().setHealthPoint(cell.getPlantInGame().getPlant().getHealthPoint() - attackPower);
+                if (cell.getPlantInGame().getPlant().getHealthPoint() <= 0) {
+                    cell.getPlantInGame().getPlant().setDead(true);
                 }
             }
         }

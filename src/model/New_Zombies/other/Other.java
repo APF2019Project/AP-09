@@ -1,14 +1,10 @@
 package model.New_Zombies.other;
 
 import model.Cell;
-import model.Map;
 import model.New_Plants.PlantKind;
 import model.New_Zombies.Zombie;
 import model.New_Zombies.ZombieKind;
-import model.battle.Battle;
 import model.battle.GraveYard;
-
-import java.util.ArrayList;
 
 public class Other extends Zombie {
     private HelmetType helmetType;
@@ -35,13 +31,12 @@ public class Other extends Zombie {
 
     @Override
     public void attack(Cell cell) {
-        if (cell.getPlant() != null) {
-            if (cell.getPlant().getPlantKind() != PlantKind.BOMB) {
+        if (cell.getPlantInGame() != null) {
+            if (cell.getPlantInGame().getPlant().getPlantKind() != PlantKind.BOMB) {
                 int attackPower = this.getAttackPower();
-                cell.getPlant().setHealthPoint(cell.getPlant().getHealthPoint() - attackPower);
-                if (cell.getPlant().getHealthPoint() <= 0) {
-                    cell.getPlant().setDead(true);
-                    cell.setPlant(null);
+                cell.getPlantInGame().getPlant().setHealthPoint(cell.getPlantInGame().getPlant().getHealthPoint() - attackPower);
+                if (cell.getPlantInGame().getPlant().getHealthPoint() <= 0) {
+                    cell.getPlantInGame().getPlant().setDead(true);
                 }
             }
         }

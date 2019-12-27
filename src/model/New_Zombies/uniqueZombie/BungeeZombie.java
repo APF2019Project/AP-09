@@ -6,6 +6,8 @@ import model.New_Zombies.Zombie;
 import model.New_Zombies.ZombieKind;
 import model.battle.Battle;
 import model.battle.GraveYard;
+import model.battle.PlantInGame;
+import model.battle.ZombieInGame;
 
 import java.util.Random;
 
@@ -18,7 +20,10 @@ public class BungeeZombie extends Zombie {
 
     @Override
     public <T> void action() {
-        Cell cell = this.getCurrentCell();
+        ZombieInGame zombieInGame = ZombieInGame.findZombieInGame(this);
+        if (turnCounter == 0)
+            this.randomCell(zombieInGame);
+        Cell cell = zombieInGame.getCurrentCell();
         if (turnCounter == 3) {
             attack(cell);
             turnCounter = 0;
@@ -28,16 +33,14 @@ public class BungeeZombie extends Zombie {
 
     @Override
     public void attack(Cell cell) {
-        cell.getPlant().setDead(true);
-        cell.setPlant(null);
+        cell.getPlantInGame().getPlant().setDead(true);
     }
 
-    public void randomCell() {
+    public void randomCell(ZombieInGame zombieInGame) {
         Random rand = new Random();
-        int row = rand.nextInt(6);
-        int column = rand.nextInt(19);
-        Map gameMap = Battle.getRunningBattle().getMap();
-        Cell bungeeCell = gameMap.getCell(row , column);
-        setCurrentCell(bungeeCell);
+        int randomPlantNumber = rand.nextInt(Battle.getRunningBattle().getBattleComponents().getAllPlantsInGame().size());
+        PlantInGame randomPlantInGame = Battle.getRunningBattle().getBattleComponents().getAllPlantsInGame().get(randomPlantNumber);
+        Cell bungeeCell = randomPlantInGame.getCurrentCell();
+        zombieInGame.setCurrentCell(bungeeCell);
     }
 }

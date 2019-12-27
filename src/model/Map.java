@@ -2,7 +2,6 @@ package model;
 
 import constants.Constants;
 import model.New_Plants.fruits.Fruit;
-import model.New_Zombies.Zombie;
 import model.battle.ZombieInGame;
 
 import java.util.ArrayList;
@@ -35,8 +34,8 @@ public class Map {
     public void deleteDeadPlants() {
         for (int i = 0; i < this.cells.length; i++) {
             for (int j = 0; j < this.cells[i].length; j++) {
-                if (this.cells[i][j].getPlant().isDead()) {
-                    this.cells[i][j].setPlant(null);
+                if (this.cells[i][j].getPlantInGame().getPlant().isDead()) {
+                    this.cells[i][j].setPlantInGame(null);
                 }
             }
         }
