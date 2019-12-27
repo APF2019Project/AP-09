@@ -14,7 +14,8 @@ public class PogoZombie extends Zombie {
 
     @Override
     public <T> void action() {
-        Cell cell = this.getCurrentCell();
+        ZombieInGame zombieInGame = ZombieInGame.findZombieInGame(this);
+        Cell cell = zombieInGame.getCurrentCell();
         Map gameMap = Battle.getRunningBattle().getMap();
         if (cell.getPlantInGame() != null) {
             pogoMove(gameMap, cell);
@@ -28,7 +29,6 @@ public class PogoZombie extends Zombie {
         gameMap.getCell(row, column).getZombies().remove(zombieInGame);
         gameMap.getCell(row,column + 1).getZombies().add(zombieInGame);
         zombieInGame.setCurrentCell(gameMap.getCell(row,column + 1));
-        setCurrentCell(gameMap.getCell(row,column + 1));
 //        if(column + 1 == MAP_COLUMNS_COUNT - 1){
 //
 //            reachLawnMower(getCurrentCell(), gameMap);

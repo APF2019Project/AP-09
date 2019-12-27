@@ -18,13 +18,13 @@ abstract public class Zombie implements Cloneable {
     private int speed;
     private int shieldHP;
     private int speedLimited = 0;
+    private int stopTime = 0;
     private boolean isLandZombie;
     private boolean hasDuck;
     private boolean hasHelmet;
     private boolean hasArmor;
     private boolean isDead = false;
     private ZombieKind zombieKind;
-    private Cell currentCell;
 
     public Zombie(String zombieName, int healthPoint, int attackPower, int speed, int shieldHP, boolean isLandZombie, boolean hasDuck, boolean hasHelmet, boolean hasArmor, ZombieKind zombieKind) {
         setZombieName(zombieName);
@@ -43,7 +43,7 @@ abstract public class Zombie implements Cloneable {
 
     public void move() {
         ZombieInGame zombieInGame = Battle.getRunningBattle().getBattleComponents().findZombieInGame(this);
-        Cell cell = this.getCurrentCell();
+        Cell cell = zombieInGame.getCurrentCell();
         Map gameMap = Battle.getRunningBattle().getMap();
         int row = cell.getRow();
         int column = cell.getColumn();
@@ -52,31 +52,32 @@ abstract public class Zombie implements Cloneable {
             speed /= speedLimited;
             setSpeedLimited(0);
         }
+        if(stopTime > 0){
+            --stopTime;
+            return;
+        }
         if (cell.getPlantInGame() == null) {
             gameMap.getCell(row, column).getZombies().remove(zombieInGame);
             for (int j = column + 1; j <= column + speed; ++j) {
                 if (gameMap.getCell(row, j).getPlantInGame() != null) {
                     gameMap.getCell(row, j).getZombies().add(zombieInGame);
                     zombieInGame.setCurrentCell(gameMap.getCell(row, j));
-                    setCurrentCell(gameMap.getCell(row, j));
                     this.action();
                     return;
                 } else if (j == MAP_COLUMNS_COUNT - 1) {
                     gameMap.getCell(row, j).getZombies().add(zombieInGame);
                     zombieInGame.setCurrentCell(gameMap.getCell(row, j));
-                    setCurrentCell(gameMap.getCell(row, j));
 //                    reachLawnMower(currentCell, gameMap
                     return;
                 }
                 gameMap.getCell(row, j).getZombies().add(zombieInGame);
                 zombieInGame.setCurrentCell(gameMap.getCell(row, j));
-                setCurrentCell(gameMap.getCell(row, j));
                 checkHasFruit(gameMap.getCell(row, j));
                 if (j == column + speed)
                     return;
             }
         }
-        checkHasFruit(currentCell);
+        checkHasFruit(zombieInGame.getCurrentCell());
         this.action();
     }
 
@@ -114,13 +115,6 @@ abstract public class Zombie implements Cloneable {
         healthPoint -= attack;
     }
 
-    public Cell getCurrentCell() {
-        return currentCell;
-    }
-
-    public void setCurrentCell(Cell currentCell) {
-        this.currentCell = currentCell;
-    }
 
     abstract public <T> void action();
 
@@ -142,6 +136,14 @@ abstract public class Zombie implements Cloneable {
 
     public boolean hasHelmet() {
         return hasHelmet;
+    }
+
+    public int getStopTime() {
+        return stopTime;
+    }
+
+    public void setStopTime(int stopTime) {
+        this.stopTime = stopTime;
     }
 
     public void setHasHelmet(boolean hasHelmet) {

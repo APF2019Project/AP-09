@@ -5,6 +5,7 @@ import model.New_Plants.PlantKind;
 import model.New_Zombies.Zombie;
 import model.New_Zombies.ZombieKind;
 import model.battle.GraveYard;
+import model.battle.ZombieInGame;
 
 public class BalloonZombie extends Zombie {
     public BalloonZombie(String zombieName, int healthPoint, int attackPower, int speed, int shieldHP, boolean isLandZombie, boolean hasDuck, boolean hasHelmet, boolean hasArmor) {
@@ -14,7 +15,8 @@ public class BalloonZombie extends Zombie {
 
     @Override
     public <T> void action() {
-        Cell cell = this.getCurrentCell();
+        ZombieInGame zombieInGame = ZombieInGame.findZombieInGame(this);
+        Cell cell = zombieInGame.getCurrentCell();
         attack(cell);
     }
 
