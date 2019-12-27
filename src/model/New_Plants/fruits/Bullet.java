@@ -1,11 +1,8 @@
 package model.New_Plants.fruits;
 
 import constants.Constants;
-import model.Cell;
 import model.Map;
 import model.New_Plants.warrior.FireRate;
-import model.battle.Battle;
-import model.battle.GraveYard;
 import model.battle.ZombieInGame;
 
 import java.util.ArrayList;
@@ -18,12 +15,14 @@ public class Bullet extends Fruit {
     private int damagingPower;
     private int speedLimiter;
     private int radius;
+    private int stopPower ;
 
-    public Bullet(BulletKind bulletKind, FireRate fireRate, int damagingPower, int speedLimiter) {
+    public Bullet(BulletKind bulletKind, FireRate fireRate, int damagingPower, int speedLimiter, int stopPower) {
         this.bulletKind = bulletKind;
         this.fireRate = fireRate;
         this.damagingPower = damagingPower;
         this.speedLimiter = speedLimiter;
+        this.stopPower = stopPower ;
     }
 
 
@@ -45,8 +44,6 @@ public class Bullet extends Fruit {
                 }
                 if (this.getPosition().getZombies().get(0).getZombie().getHealthPoint() <= 0) {
                     this.getPosition().getZombies().get(0).getZombie().setDead(true);
-                    ZombieInGame.removeZombieFromGame(this.getPosition().getZombies().get(0));
-                    this.getPosition().getZombies().remove(0);
                 }
                 this.setDead(true);
             } else {
@@ -99,5 +96,13 @@ public class Bullet extends Fruit {
 
     public void setRadius(int radius) {
         this.radius = radius;
+    }
+
+    public int getStopPower() {
+        return stopPower;
+    }
+
+    public void setStopPower(int stopPower) {
+        this.stopPower = stopPower;
     }
 }

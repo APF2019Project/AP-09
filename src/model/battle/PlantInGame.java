@@ -3,10 +3,12 @@ package model.battle;
 import model.Cell;
 import model.Map;
 import model.New_Plants.bomb.Bomb;
+import model.New_Plants.deffence.Wall;
 import model.New_Plants.fruits.Explosive;
 import model.New_Plants.fruits.Bullet;
 import model.New_Plants.Plant;
 import model.New_Plants.fruits.Fruit;
+import model.New_Plants.warrior.Catapult;
 import model.New_Plants.warrior.Musketeer;
 
 import java.util.ArrayList;
@@ -57,7 +59,7 @@ public class PlantInGame {
         int flagOfShooting = 0;
         if (readyToFireCounter == 0) {
             for (int i = -musketeer.getRangeOfAttack(); i <= musketeer.getRangeOfAttack(); i++) {
-                if ((Map.getCurrentMap().isContainZombieInRow(this.getCurrentCell().getRow() + i))) {
+                if ((Battle.getRunningBattle().getMap().isContainZombieInRow(this.getCurrentCell().getRow() + i))) {
                     flagOfShooting = 1;
                     ArrayList<Bullet> bullets = this.plant.operate(Bullet.class);
                     for (Bullet bullet : bullets) {
@@ -73,11 +75,21 @@ public class PlantInGame {
             }
         } else
             this.readyToFireCounter--;
+        if (this.getCurrentCell().getZombies() != null){
+            this.getCurrentCell().getZombies().get(0).getZombie().decreaseZombieHealthStraight(musketeer.getPhysicalAttack());
+            if (this.getCurrentCell().getZombies().get(0).getZombie().getHealthPoint() <= 0)
+                this.getCurrentCell().getZombies().get(0).getZombie().setDead(true);
+        }
     }
 
     public void catapultAction() {
-        //TODO
-        ArrayList<Bullet> bullets = this.plant.operate(Bullet.class);
+        Catapult catapult = (Catapult) this.plant ;
+        if ((readyToFireCounter == 0) && (Battle.getRunningBattle().getMap().isContainZombieInRow(this.getCurrentCell().getRow()))){
+            ArrayList<Bullet> bullets = this.plant.operate(Bullet.class);
+            readyToFireCounter =  catapult.getFireRate().getTurnCount() ;
+        }else  if (readyToFireCounter != 0){
+            readyToFireCounter -- ;
+        }
     }
 
     public void bombAction() {
@@ -94,7 +106,14 @@ public class PlantInGame {
         }
 
     public void wallAction() {
-        //TODO
+        Wall wall = (Wall) this.plant ;
+        if (wall.getPhysicalAttack() != 0){
+            if (this.getCurrentCell().getZombies() != null){
+                this.getCurrentCell().getZombies().get(0).getZombie().decreaseZombieHealthStraight(wall.getPhysicalAttack());
+                if (this.getCurrentCell().getZombies().get(0).getZombie().getHealthPoint() <= 0)
+                    this.getCurrentCell().getZombies().get(0).getZombie().setDead(true);
+            }
+        }
     }
 
     public void otherAction() {

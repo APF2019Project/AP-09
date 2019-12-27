@@ -143,6 +143,7 @@ abstract public class Zombie {
     }
 
     public void setSpeedLimited(int speedLimited) {
+        if(this.speedLimited <= speedLimited)
         this.speedLimited = speedLimited;
     }
 
