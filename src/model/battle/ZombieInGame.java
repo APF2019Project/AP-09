@@ -74,17 +74,17 @@ public class ZombieInGame {
         speed = doExistingEffect(speed);
         if (gameMap.getCell(row, column + 1) == null) {
             gameMap.getCell(row, column).getZombies().remove(this);
-            for (int j = column + 2; j <= column + 1 + speed; ++j) {
+            for (int j = column + 1; j <= column + speed; ++j) {
                 if (gameMap.getCell(row, j).getPlantInGame() != null) {
                     ZombieCanMove(gameMap, row, j);
                     this.action();
                     return;
-                } else if (j == MAP_COLUMNS_COUNT - 1) {
+                } else if (j == MAP_COLUMNS_COUNT - 2) {
                     ZombieCanMove(gameMap, row, j);
 //                    reachLawnMower(currentCell, gameMap
                     return;
                 }
-                if (j == column + 1 + speed) {
+                if (j == column + speed) {
                     ZombieCanMove(gameMap, row, j);
                     this.action();
                     return;

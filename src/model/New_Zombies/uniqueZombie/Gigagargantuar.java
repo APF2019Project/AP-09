@@ -1,9 +1,11 @@
 package model.New_Zombies.uniqueZombie;
 
 import model.Cell;
+import model.Map;
 import model.New_Plants.PlantKind;
 import model.New_Zombies.Zombie;
 import model.New_Zombies.ZombieKind;
+import model.battle.Battle;
 import model.battle.GraveYard;
 import model.battle.ZombieInGame;
 
@@ -21,9 +23,12 @@ public class Gigagargantuar extends Zombie {
 
     @Override
     public void attack(Cell cell) {
-        if (cell.getPlantInGame() != null) {
-            if (cell.getPlantInGame().getPlant().getPlantKind() != PlantKind.BOMB) {
-                cell.getPlantInGame().getPlant().setDead(true);
+        Map gameMap = Battle.getRunningBattle().getMap();
+        int row = cell.getRow();
+        int column = cell.getColumn();
+        if (gameMap.getCell(row , column + 1).getPlantInGame() != null) {
+            if (gameMap.getCell(row , column + 1).getPlantInGame().getPlant().getPlantKind() != PlantKind.BOMB) {
+                gameMap.getCell(row , column + 1).getPlantInGame().getPlant().setDead(true);
             }
         }
     }

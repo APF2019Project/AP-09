@@ -1,9 +1,11 @@
 package model.New_Zombies.uniqueZombie;
 
 import model.Cell;
+import model.Map;
 import model.New_Plants.PlantKind;
 import model.New_Zombies.Zombie;
 import model.New_Zombies.ZombieKind;
+import model.battle.Battle;
 import model.battle.GraveYard;
 import model.battle.ZombieInGame;
 
@@ -22,12 +24,15 @@ public class BalloonZombie extends Zombie {
 
     @Override
     public void attack(Cell cell) {
-        if (cell.getPlantInGame() != null) {
-            if (cell.getPlantInGame().getPlant().getPlantKind() != PlantKind.BOMB) {
+        int row = cell.getRow();
+        int column = cell.getColumn();
+        Map gameMap = Battle.getRunningBattle().getMap();
+        if (gameMap.getCell(row, column + 1).getPlantInGame() != null) {
+            if (gameMap.getCell(row, column + 1).getPlantInGame().getPlant().getPlantKind() != PlantKind.BOMB) {
                 int attackPower = this.getAttackPower();
-                cell.getPlantInGame().getPlant().setHealthPoint(cell.getPlantInGame().getPlant().getHealthPoint() - attackPower);
-                if (cell.getPlantInGame().getPlant().getHealthPoint() <= 0) {
-                    cell.getPlantInGame().getPlant().setDead(true);
+                gameMap.getCell(row, column + 1).getPlantInGame().getPlant().setHealthPoint(gameMap.getCell(row, column + 1).getPlantInGame().getPlant().getHealthPoint() - attackPower);
+                if (gameMap.getCell(row, column + 1).getPlantInGame().getPlant().getHealthPoint() <= 0) {
+                    gameMap.getCell(row, column + 1).getPlantInGame().getPlant().setDead(true);
                 }
             }
         }

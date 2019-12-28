@@ -33,14 +33,19 @@ public class BungeeZombie extends Zombie {
 
     @Override
     public void attack(Cell cell) {
-        cell.getPlantInGame().getPlant().setDead(true);
+        Map gameMap = Battle.getRunningBattle().getMap();
+        gameMap.getCell(cell.getRow(), cell.getColumn() + 1).getPlantInGame().getPlant().setDead(true);
     }
 
     public void randomCell(ZombieInGame zombieInGame) {
         Random rand = new Random();
+        Map gameMap = Battle.getRunningBattle().getMap();
         int randomPlantNumber = rand.nextInt(Battle.getRunningBattle().getBattleComponents().getAllPlantsInGame().size());
         PlantInGame randomPlantInGame = Battle.getRunningBattle().getBattleComponents().getAllPlantsInGame().get(randomPlantNumber);
         Cell bungeeCell = randomPlantInGame.getCurrentCell();
+        int row = bungeeCell.getRow();
+        int column = bungeeCell.getColumn();
+        bungeeCell = gameMap.getCell(row, column - 1);
         zombieInGame.setCurrentCell(bungeeCell);
     }
 }

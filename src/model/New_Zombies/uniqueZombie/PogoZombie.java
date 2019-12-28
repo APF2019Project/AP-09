@@ -16,8 +16,10 @@ public class PogoZombie extends Zombie {
     public <T> void action() {
         ZombieInGame zombieInGame = ZombieInGame.findZombieInGame(this);
         Cell cell = zombieInGame.getCurrentCell();
+        int row = cell.getRow();
+        int column = cell.getColumn();
         Map gameMap = Battle.getRunningBattle().getMap();
-        if (cell.getPlantInGame() != null) {
+        if (gameMap.getCell(row, column + 1).getPlantInGame() != null) {
             pogoMove(gameMap, cell);
         }
     }
