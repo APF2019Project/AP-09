@@ -17,6 +17,10 @@ public class Request {
     private ProfileMenuCommand lastProfileMenuCommand;
     private ShopCommand lastShopCommand;
     private CollectionCommand lastCollectionCommand;
+    private boolean exit ;
+    private  boolean help ;
+    private boolean isInvalidCommand= false ;
+
 
     private Request() {
         menus.add(Menu.MAJOR_LOGIN);
@@ -28,6 +32,14 @@ public class Request {
 
     public void getRequest() {
         String command = scanner.nextLine();
+        if (command.toLowerCase().equals("exit")) {
+            exit = true;
+            return;
+        }
+        if (command.toLowerCase().equals("help")) {
+            help = true;
+            return;
+        }
         transferCommandToRightPlace(command);
     }
 
@@ -55,6 +67,8 @@ public class Request {
                 break;
             case COLLECTION:
                 collection(command.toLowerCase());
+            case SHOP:
+                shop(command.toLowerCase());
         }
     }
 
@@ -66,7 +80,7 @@ public class Request {
                 return;
             }
         }
-        //TODO handle errors
+        isInvalidCommand = true ;
     }
 
     private void setCommandOfProfile(Matcher matcher, int i) {
@@ -92,7 +106,7 @@ public class Request {
                 return;
             }
         }
-        //TODO handle errors
+        isInvalidCommand= true ;
     }
 
     private void setCommandOfCollection(Matcher matcher, int i) {
@@ -114,7 +128,7 @@ public class Request {
                 return;
             }
         }
-        //Todo handle Errors
+        isInvalidCommand = true ;
     }
 
     public void setCommandOfShop(Matcher matcher, int i) {
@@ -132,8 +146,8 @@ public class Request {
             lastSignUpCommand = SignUpCommand.USERNAME_PASSWORD;
             lastSignUpCommand.setName(matcher.group(0));
             lastSignUpCommand.setPassword(matcher.group(1));
-        }
-        // TODO error
+        }else
+            isInvalidCommand = true ;
     }
 
     public void login(String command) {
@@ -142,8 +156,8 @@ public class Request {
             lastLoginCommand = LoginCommand.USERNAME_PASSWORD;
             lastLoginCommand.setName(matcher.group(0));
             lastLoginCommand.setPassword(matcher.group(1));
-        }
-        //TODO error
+        }else
+            isInvalidCommand = true ;
     }
 
 
@@ -155,7 +169,7 @@ public class Request {
                 return;
             }
         }
-        //Todo handle Errors
+        isInvalidCommand = true ;
     }
 
     public SignUpCommand getLastSignUpCommand() {
@@ -216,5 +230,29 @@ public class Request {
 
     public void setLastSignUpCommand(SignUpCommand lastSignUpCommand) {
         this.lastSignUpCommand = lastSignUpCommand;
+    }
+
+    public boolean isHelp() {
+        return help;
+    }
+
+    public void setHelp(boolean help) {
+        this.help = help;
+    }
+
+    public boolean isExit() {
+        return exit;
+    }
+
+    public void setExit(boolean exit) {
+        this.exit = exit;
+    }
+
+    public boolean isInvalidCommand() {
+        return isInvalidCommand;
+    }
+
+    public void setInvalidCommand(boolean invalidCommand) {
+        isInvalidCommand = invalidCommand;
     }
 }

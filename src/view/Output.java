@@ -124,4 +124,7 @@ public class Output {
             System.out.println(card.getCardName());
         }
     }
+    public void invalidCommand(){
+        System.out.println("invalid command");
+    }
 }

@@ -33,7 +33,6 @@ public class Controller {
             request.getRequest();
             commandManagement(request, request.getCurrentMenu());
 
-            //TODO call Output(ali it's not for you :) )
         }
         Account.toJson();
     }
@@ -210,18 +209,19 @@ public class Controller {
 
 
     private boolean firstCheck() {
-        if (Input.getInstance().isInvalidCommand()) {
-            Input.getInstance().setInvalidCommand(false);
+        if (Request.getInstance().isInvalidCommand()) {
+            Output.getInstance().invalidCommand();
+            Request.getInstance().setInvalidCommand(false);
             return true;
         }
-        if (Input.getInstance().isExit()) {
+        if (Request.getInstance().isExit()) {
             exit();
-            Input.getInstance().setExit(false);
+            Request.getInstance().setExit(false);
             return true;
         }
-        if (Input.getInstance().isHelp()) {
+        if (Request.getInstance().isHelp()) {
             help();
-            Input.getInstance().setHelp(false);
+            Request.getInstance().setHelp(false);
             return true;
         }
         return false;
