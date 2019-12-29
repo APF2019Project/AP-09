@@ -10,6 +10,7 @@ import model.New_Plants.Plant;
 import model.New_Plants.fruits.Fruit;
 import model.New_Plants.warrior.Catapult;
 import model.New_Plants.warrior.Musketeer;
+import model.New_Zombies.ZombieKind;
 
 import java.util.ArrayList;
 
@@ -77,10 +78,16 @@ public class PlantInGame {
             }
         } else
             this.readyToFireCounter--;
-        if (this.getCurrentCell().getZombies() != null){
-            this.getCurrentCell().getZombies().get(0).getZombie().decreaseZombieHealthStraight(musketeer.getPhysicalAttack());
-            if (this.getCurrentCell().getZombies().get(0).getZombie().getHealthPoint() <= 0)
-                this.getCurrentCell().getZombies().get(0).getZombie().setDead(true);
+        ArrayList<ZombieInGame> zombiesInCell = Battle.getRunningBattle().getMap().getCell(this.getCurrentCell().getRow(), this.getCurrentCell().getColumn() +1).getZombies() ;
+        if (zombiesInCell != null){
+            for (ZombieInGame zombie:zombiesInCell) {
+                if (zombie.getZombie().getZombieName().toLowerCase().equals("football zombie")){
+                    return;
+                }
+            }
+            zombiesInCell.get(0).getZombie().decreaseZombieHealthStraight(musketeer.getPhysicalAttack());
+            if (zombiesInCell.get(0).getZombie().getHealthPoint() <= 0)
+                zombiesInCell.get(0).getZombie().setDead(true);
         }
     }
 
