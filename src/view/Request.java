@@ -1,10 +1,13 @@
 package view;
 
+import model.Account;
 import model.card.Card;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
+
+import static javax.xml.ws.Endpoint.create;
 
 public class Request {
     private static final Request request = new Request();
@@ -17,9 +20,9 @@ public class Request {
     private ProfileMenuCommand lastProfileMenuCommand;
     private ShopCommand lastShopCommand;
     private CollectionCommand lastCollectionCommand;
-    private boolean exit ;
-    private  boolean help ;
-    private boolean isInvalidCommand= false ;
+    private boolean exit;
+    private boolean help;
+    private boolean isInvalidCommand = false;
 
 
     private Request() {
@@ -69,32 +72,125 @@ public class Request {
                 collection(command.toLowerCase());
             case SHOP:
                 shop(command.toLowerCase());
+                break;
+            case MAIN:
+                main(command.toLowerCase());
+                break;
+            case LEADER_BOARD:
+                leaderBoard();
+                break;
         }
     }
 
+    private void leaderBoard() {
+        //Output.getInstance().printLeaderBoard();
+        //TODO need to fix leaderBoardPrint method
+    }
+
+    private void main(String command) {
+        for (int i = 0; i < Patterns.mainPatterns.length; ++i) {
+            Matcher matcher = Patterns.mainPatterns[i].matcher(command);
+            if (matcher.matches()) {
+                setCommandOfMain(i);
+                return;
+            }
+        }
+        isInvalidCommand = true;
+    }
+
+    private void setCommandOfMain(int i) {
+        lastMainMenuCommand = MainMenuCommand.values()[i];
+    }
+
     private void profile(String command) {
-        for(int i = 0; i < Patterns.profilePatterns.length; ++i){
+        for (int i = 0; i < Patterns.profilePatterns.length; ++i) {
             Matcher matcher = Patterns.profilePatterns[i].matcher(command);
-            if(matcher.matches()){
+            if (matcher.matches()) {
                 setCommandOfProfile(matcher, i);
                 return;
             }
         }
-        isInvalidCommand = true ;
+        isInvalidCommand = true;
     }
 
     private void setCommandOfProfile(Matcher matcher, int i) {
-        if(i == 3){
+        if (i == 3) {
             lastProfileMenuCommand = ProfileMenuCommand.values()[i];
             lastProfileMenuCommand.setName(matcher.group(1));
-        }
-        else if(i == 4){
+        } else if (i == 4) {
             lastProfileMenuCommand = ProfileMenuCommand.values()[i];
-        }
-        else{
+        } else {
             lastProfileMenuCommand = ProfileMenuCommand.values()[i];
             lastProfileMenuCommand.setName(matcher.group(1));
             lastProfileMenuCommand.setPassword(matcher.group(2));
+        }
+        doProfileCommand(lastProfileMenuCommand);
+    }
+
+    private void doProfileCommand(ProfileMenuCommand command) {
+        switch (command) {
+            case CHANGE:
+                change(command);
+                break;
+            case RENAME:
+                rename(command);
+                break;
+            case DELETE:
+                delete(command);
+                break;
+            case CREATE:
+                create(command);
+                break;
+            case SHOW:
+                show(command);
+                break;
+        }
+    }
+
+    private void show(ProfileMenuCommand command) {
+        Output.getInstance().printCurrentUserName();
+    }
+
+    private void delete(ProfileMenuCommand command) {
+        if(Account.getLoggedAccount().getUserName().equals(command.getName())){
+            if(Account.getLoggedAccount().getPassWord().equals(command.getPassword())){
+                Account.getAllAccount().remove(Account.getLoggedAccount());
+                Account.setLoggedAccount(null);
+                return;
+            }
+            Output.getInstance().invalidPassword();
+            return;
+        }
+        Output.getInstance().invalidUsername();
+    }
+
+    private void create(ProfileMenuCommand command) {
+        for(Account account : Account.getAllAccount()){
+            if(account.getUserName().equals(command.getName())){
+                Output.getInstance().invalidUsername();
+                return;
+            }
+        }
+        Account account = new Account(command.getName(), command.getPassword());
+        Account.getAllAccount().add(account);
+        Account.setLoggedAccount(account);
+    }
+
+    private void rename(ProfileMenuCommand command) {
+        Account.getLoggedAccount().setUserName(command.getName());
+    }
+
+    private void change(ProfileMenuCommand command) {
+        for(Account account : Account.getAllAccount()){
+            if(account.getUserName().equals(command.getName())){
+                if(account.getPassWord().equals(command.getPassword())){
+                    Account.setLoggedAccount(account);
+                    return;
+                }
+                Output.getInstance().invalidPassword();
+                return;
+            }
+            Output.getInstance().invalidUsername();
         }
     }
 
@@ -106,7 +202,7 @@ public class Request {
                 return;
             }
         }
-        isInvalidCommand= true ;
+        isInvalidCommand = true;
     }
 
     private void setCommandOfCollection(Matcher matcher, int i) {
@@ -118,6 +214,52 @@ public class Request {
             lastCollectionCommand.setName(matcher.group(1));
         } else
             lastShopCommand = ShopCommand.values()[i];
+        doCollectionCommand(lastCollectionCommand);
+    }
+
+    private void doCollectionCommand(CollectionCommand command) {
+        switch (command){
+            case SHOW_COLLECTION:
+                Output.getInstance().showCollection();
+                break;
+            case SELECT:
+                selectCard(command);
+                break;
+            case REMOVE:
+                removeCard(command);
+                break;
+            case SHOW_HAND:
+                Output.getInstance().showHand();
+                break;
+            case PLAY:
+                break;
+        }
+    }
+
+    private void removeCard(CollectionCommand command) {
+        String name = command.getName();
+        for(Card card : Account.getLoggedAccount().getDeck()){
+            if(card.getCardName().equals(name)){
+                Account.getLoggedAccount().getDeck().remove(card);
+                return;
+            }
+        }
+        Output.getInstance().invalidCard();
+    }
+
+    private void selectCard(CollectionCommand command) {
+        String name = command.getName();
+        for(Card card : Account.getLoggedAccount().getAllCard()){
+            if(card.getCardName().equals(name)){
+                if(Account.getLoggedAccount().getDeck().size() < 7) {
+                    Account.getLoggedAccount().getDeck().add(card);
+                    return;
+                }
+                Output.getInstance().cannotSelectMoreCards();
+                return;
+            }
+        }
+        Output.getInstance().invalidCard();
     }
 
     public void shop(String command) {
@@ -128,7 +270,7 @@ public class Request {
                 return;
             }
         }
-        isInvalidCommand = true ;
+        isInvalidCommand = true;
     }
 
     public void setCommandOfShop(Matcher matcher, int i) {
@@ -146,8 +288,21 @@ public class Request {
             lastSignUpCommand = SignUpCommand.USERNAME_PASSWORD;
             lastSignUpCommand.setName(matcher.group(0));
             lastSignUpCommand.setPassword(matcher.group(1));
-        }else
-            isInvalidCommand = true ;
+            doSignUpCommand(lastSignUpCommand);
+        } else
+            isInvalidCommand = true;
+    }
+
+    private void doSignUpCommand(SignUpCommand command) {
+        for(Account account : Account.getAllAccount()){
+            if(account.getUserName().equals(command.getName())){
+                Output.getInstance().invalidUsername();
+                return;
+            }
+        }
+        Account account = new Account(command.getName(), command.getPassword());
+        Account.getAllAccount().add(account);
+        Account.setLoggedAccount(account);
     }
 
     public void login(String command) {
@@ -156,8 +311,23 @@ public class Request {
             lastLoginCommand = LoginCommand.USERNAME_PASSWORD;
             lastLoginCommand.setName(matcher.group(0));
             lastLoginCommand.setPassword(matcher.group(1));
-        }else
-            isInvalidCommand = true ;
+            doLoginCommand(lastLoginCommand);
+        } else
+            isInvalidCommand = true;
+    }
+
+    private void doLoginCommand(LoginCommand command) {
+        for(Account account : Account.getAllAccount()){
+            if(account.getUserName().equals(command.getName())){
+                if(account.getPassWord().equals(command.getPassword())){
+                    Account.setLoggedAccount(account);
+                    return;
+                }
+                Output.getInstance().invalidPassword();
+                return;
+            }
+            Output.getInstance().invalidUsername();
+        }
     }
 
 
@@ -169,7 +339,7 @@ public class Request {
                 return;
             }
         }
-        isInvalidCommand = true ;
+        isInvalidCommand = true;
     }
 
     public SignUpCommand getLastSignUpCommand() {

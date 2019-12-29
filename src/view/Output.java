@@ -111,6 +111,9 @@ public class Output {
         System.out.println(account.getUserName() + " " + account.getKilledZombies());
     }
 
+    public void invalidPassword(){
+        System.out.println("invalid password");
+    }
     public void showHand() {
         System.out.println("your hand is :");
         for(Card card : Account.getLoggedAccount().getDeck()){
@@ -126,5 +129,17 @@ public class Output {
     }
     public void invalidCommand(){
         System.out.println("invalid command");
+    }
+
+    public void invalidUsername() {
+        System.out.println("invalid username");
+    }
+
+    public void printCurrentUserName() {
+        System.out.println(Account.getLoggedAccount().getUserName());
+    }
+
+    public void cannotSelectMoreCards() {
+        System.out.println("cannot select more cards");
     }
 }

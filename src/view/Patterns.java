@@ -63,4 +63,10 @@ public class Patterns {
             Pattern.compile("^(?i)end turn\\s*$"),
             Pattern.compile("^(?i)show lawn\\s*$"),
     };
+    static Pattern[] mainPatterns = new Pattern[]{
+            Pattern.compile("^(?i)play\\s*$"),
+            Pattern.compile("^(?i)profile\\s*$"),
+            Pattern.compile("^(?i)shop\\s*$"),
+
+    };
 }
