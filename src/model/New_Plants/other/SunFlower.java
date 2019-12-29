@@ -17,7 +17,7 @@ public class SunFlower extends Other {
     @Override
     public <T> ArrayList<T> operate(Class<T> type) {
         ArrayList<T> suns = new ArrayList<>();
-        Sun sun = new Sun(1, this.fireRate);
+        Sun sun = new Sun(this.getFireRate().getBulletCount());
         suns.add(type.cast(sun));
         return suns;
     }

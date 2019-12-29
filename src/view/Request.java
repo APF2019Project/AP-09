@@ -178,6 +178,7 @@ public class Request {
 
     public void setCommandOfMajorLogin(int i) {
         lastMajorLoginCommand = MajorLoginCommand.values()[i];
+        System.out.println(lastMajorLoginCommand);
     }
 
     public MajorLoginCommand getLastMajorLoginCommand() {

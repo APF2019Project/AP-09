@@ -9,18 +9,17 @@ import java.util.ArrayList;
 public class Sun extends Fruit {
 
     private int increaseAmount;
-    private FireRate fireRate;
 
 
-    public Sun(int increaseAmount, FireRate fireRate) {
+    public Sun(int increaseAmount) {
         this.increaseAmount = increaseAmount;
-        this.fireRate = fireRate;
     }
 
     @Override
     public <T> void action(ArrayList<T> inputs) {
         Battle battle = Battle.getRunningBattle();
         battle.getPlants().increaseSun(this.increaseAmount);
+        this.setDead(true);
     }
 
     public int getIncreaseAmount() {
@@ -29,9 +28,5 @@ public class Sun extends Fruit {
 
     public void setIncreaseAmount(int increaseAmount) {
         this.increaseAmount = increaseAmount;
-    }
-
-    public FireRate getFireRate() {
-        return fireRate;
     }
 }

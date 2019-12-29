@@ -190,19 +190,14 @@ public class Controller {
     private void majorLoginMenu(MajorLoginCommand majorLoginCommand) {
         switch (majorLoginCommand) {
             case LOGIN:
+                System.out.println("im in :)");
                 Request.getInstance().nextMenu(Menu.LOGIN);
-                break;
-            case EXIT:
-                endGame();
                 break;
             case SIGN_UP:
                 Request.getInstance().nextMenu(Menu.SIGN_UP);
                 break;
             case LEADER_BOARD:
                 Request.getInstance().nextMenu(Menu.LEADER_BOARD);
-                break;
-            case HELP:
-                help();
                 break;
         }
     }
