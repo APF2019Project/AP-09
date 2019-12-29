@@ -100,7 +100,20 @@ public class Request {
 
     private void setCommandOfMain(int i) {
         lastMainMenuCommand = MainMenuCommand.values()[i];
+       // doMainCommand(lastMainMenuCommand);
     }
+
+  /*  private void doMainCommand(MainMenuCommand command) {
+        switch (command){
+            case PROFILE:
+                break;
+            case SHOP:
+                break;
+            case PLAY:
+                break;
+        }
+    }
+    */
 
     private void profile(String command) {
         for (int i = 0; i < Patterns.profilePatterns.length; ++i) {
