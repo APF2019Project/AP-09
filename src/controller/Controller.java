@@ -26,15 +26,14 @@ public class Controller {
     public void main() {
         Request request = Request.getInstance();
         while (!endGame) {
-
-            if (firstCheck())
-                continue;
             Output.getInstance().showMenu(request.getCurrentMenu());
             request.getRequest();
+            if (firstCheck())
+                continue;
             commandManagement(request, request.getCurrentMenu());
 
         }
-        Account.toJson();
+      //  Account.toJson();
     }
 
     private void commandManagement(Request request, Menu currentMenu) {
@@ -60,7 +59,8 @@ public class Controller {
             case COLLECTION:
                 collectionMenu(request.getLastCollectionCommand());
                 break;
-            //todo do the rest except play and shop
+            case SHOP:
+                shopMenu(request.getLastShopCommand());
         }
     }
 
