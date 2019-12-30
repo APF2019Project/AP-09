@@ -333,13 +333,16 @@ public class Request {
 
     public void signUp(String command) {
         Matcher matcher = Patterns.signUpPatterns[0].matcher(command);
+        System.out.println(matcher.matches());
+        System.out.println(isInvalidCommand);
         if (matcher.matches()) {
             lastSignUpCommand = SignUpCommand.USERNAME_PASSWORD;
-            lastSignUpCommand.setName(matcher.group(0));
-            lastSignUpCommand.setPassword(matcher.group(1));
+            lastSignUpCommand.setName(matcher.group(1));
+            lastSignUpCommand.setPassword(matcher.group(2));
             doSignUpCommand(lastSignUpCommand);
         } else
             isInvalidCommand = true;
+        System.out.println(isInvalidCommand);
     }
 
     private void doSignUpCommand(SignUpCommand command) {
@@ -358,26 +361,25 @@ public class Request {
         Matcher matcher = Patterns.loginPattern[0].matcher(command);
         if (matcher.matches()) {
             lastLoginCommand = LoginCommand.USERNAME_PASSWORD;
-            lastLoginCommand.setName(matcher.group(0));
-            lastLoginCommand.setPassword(matcher.group(1));
-            doLoginCommand(lastLoginCommand);
+            lastLoginCommand.setName(matcher.group(1));
+            lastLoginCommand.setPassword(matcher.group());
         } else
             isInvalidCommand = true;
     }
 
-    private void doLoginCommand(LoginCommand command) {
-        for (Account account : Account.getAllAccount()) {
-            if (account.getUserName().equals(command.getName())) {
-                if (account.getPassWord().equals(command.getPassword())) {
-                    Account.setLoggedAccount(account);
-                    return;
-                }
-                Output.getInstance().invalidPassword();
-                return;
-            }
-            Output.getInstance().invalidUsername();
-        }
-    }
+//    public void doLoginCommand(LoginCommand command) {
+//        for (Account account : Account.getAllAccount()) {
+//            if (account.getUserName().equals(command.getName())) {
+//                if (account.getPassWord().equals(command.getPassword())) {
+//                    Account.setLoggedAccount(account);
+//                    return;
+//                }
+//                Output.getInstance().invalidPassword();
+//                return;
+//            }
+//            Output.getInstance().invalidUsername();
+//        }
+//    }
 
 
     public void majorLogin(String command) {
