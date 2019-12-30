@@ -1,4 +1,4 @@
-package model.New_Plants.other;
+package model.New_Plants.magnetic;
 
 import model.Cell;
 

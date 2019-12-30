@@ -2,12 +2,14 @@ package model.battle;
 
 import model.Cell;
 import model.Map;
+import model.New_Plants.PlantKind;
 import model.New_Plants.bomb.Bomb;
 import model.New_Plants.deffence.Wall;
 import model.New_Plants.fruits.Explosive;
 import model.New_Plants.fruits.Bullet;
 import model.New_Plants.Plant;
 import model.New_Plants.fruits.Fruit;
+import model.New_Plants.sunFlower.SunFlower;
 import model.New_Plants.warrior.Catapult;
 import model.New_Plants.warrior.Musketeer;
 import model.New_Zombies.ZombieKind;
@@ -23,12 +25,21 @@ public class PlantInGame {
 
     private static ArrayList<PlantInGame> allPlantsInGame ;
 
-    public PlantInGame(Plant plant, Cell currentCell, int readyToFireCounter) {  //todo baraye musketeer o catapult 0 byd bashe baraye bomb o sun byd readtofire khodeshooon bashe
+    public PlantInGame(Plant plant, Cell currentCell, int readyToFireCounter) {
         this.plant = plant;
         this.currentCell = currentCell;
         currentCell.setPlantInGame(this);
         Battle.getRunningBattle().getBattleComponents().addPlantInGame(this);
-        this.readyToFireCounter = readyToFireCounter ;
+        if (this.plant.getPlantKind() == PlantKind.MUSKETEER || this.plant.getPlantKind() == PlantKind.CATAPULT || this.plant.getPlantKind() == PlantKind.WALL || this.plant.getPlantKind() == PlantKind.MAGNETIC){
+            this.readyToFireCounter = 0 ;
+        }else if (this.plant.getPlantKind() == PlantKind.BOMB){
+            Bomb bomb = (Bomb) this.plant ;
+            this.readyToFireCounter = bomb.getReadyToFireCounter() ;
+        }else if (this.plant.getPlantKind() == PlantKind.SUNFLOWER){
+            SunFlower sunFlower = (SunFlower) this.plant ;
+            this.readyToFireCounter = sunFlower.getFireRate().getBulletCount() ;
+        }
+
     }
 
     public static ArrayList<PlantInGame> getAllPlantsInGame() {
