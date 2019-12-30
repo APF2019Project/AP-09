@@ -1,16 +1,18 @@
-package model.New_Plants.other;
+package model.New_Plants.sunFlower;
 
+import model.New_Plants.Plant;
+import model.New_Plants.PlantKind;
 import model.New_Plants.fruits.Sun;
 import model.New_Plants.warrior.FireRate;
 
 import java.util.ArrayList;
 
-public class SunFlower extends Other {
+public class SunFlower extends Plant {
 
     private FireRate fireRate;
 
     public SunFlower(String plantName, int healthPoint, int attackPower, int coolDown, int sunUsage, FireRate fireRate) {
-        super(plantName, healthPoint, attackPower, coolDown, sunUsage);
+        super(plantName, healthPoint, attackPower, coolDown, sunUsage, PlantKind.SUNFLOWER);
         this.fireRate = fireRate;
     }
 

@@ -1,12 +1,16 @@
-package model.New_Plants.other;
+package model.New_Plants.magnetic;
+
+import model.New_Plants.Plant;
+import model.New_Plants.PlantKind;
+
 
 import java.util.ArrayList;
 
-public class Magnetic extends Other {
+public class Magnetic extends Plant {
 
 
     public Magnetic(String plantName, int healthPoint, int attackPower, int coolDown, int sunUsage) {
-        super(plantName, healthPoint, attackPower, coolDown, sunUsage);
+        super(plantName, healthPoint, attackPower, coolDown, sunUsage, PlantKind.MAGNETIC);
     }
 
     @Override
