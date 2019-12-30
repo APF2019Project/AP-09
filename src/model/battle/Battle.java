@@ -1,15 +1,14 @@
 package model.battle;
 
+
 import com.rits.cloning.Cloner;
-import constants.Constants;
 import model.*;
 
-import model.New_Zombies.Zombie;
+import model.New_Plants.Plant;
 import model.battle.managers.*;
 import model.card.Card;
-import model.card.CardOfZombie;
+import model.card.CardOfPlant;
 
-import java.util.Random;
 
 import static constants.Constants.MAP_COLUMNS_COUNT;
 
@@ -37,7 +36,7 @@ public class Battle {
         this.plants = plants;
         this.zombies = zombies;
         this.gameMode = gameMode;
-        setBattleManager(gameMode);
+        this.setBattleManager(gameMode);
         this.wavesCount = wavesCount;
         Battle.runningBattle = this;
         this.battleComponents = new BattleComponents();
@@ -58,52 +57,12 @@ public class Battle {
         }
     }
 
-    public static void zombieWins() {
-        Battle battle = Battle.getRunningBattle();
-        battle.setWinnerPlayer(battle.zombies);
-        if (battle.getCurrentPlayer().equals(battle.zombies)) {
-            Account account = Account.getLoggedAccount();
-            battle.increaseZombieMoney(account);
-        }
-        battle.setEndGame(true);
-    }
-
     public void initTurn() {
         if (!this.isEndGame()) {
-              this.battleManager.manage();
-//            this.getBattleComponents().manage();
-//            this.checkForZombiesWin();
-//            this.checkForPlantsWin();
-//            this.nextTurn();
-//            this.nextWaveCheck();
+            this.battleManager.manage();
         } else {
-
+            System.out.println("Player " + this.getWinnerPlayer().getAccount().getUserName() + " won!");
         }
-    }
-
-    public void nextWaveCheck() {
-        if (this.getBattleComponents().getAllZombiesInGame().size() == 0) {
-            this.wavesCount -= 1;
-            insertNextWaveZombies();
-        }
-    }
-
-    public void insertNextWaveZombies() {
-        Random random = new Random();
-        int zombiesCount = random.nextInt(7) + 4;
-        for (int i = 0; i < zombiesCount; i++) {
-            generateRandomZombie();
-        }
-    }
-
-    private void generateRandomZombie() {
-        Random random = new Random();
-        int randomRow = random.nextInt(6);
-        int randomCard = random.nextInt(this.zombies.getAccount().getDeck().size());
-        Zombie zombie = ((CardOfZombie) this.zombies.getAccount().getDeck().get(randomCard)).getZombie();
-        Cloner cloner = new Cloner();
-        Zombie newRandomZombie = cloner.deepClone(zombie);
-        new ZombieInGame(newRandomZombie, this.map.getCell(randomRow, 18));
     }
 
 
@@ -114,29 +73,9 @@ public class Battle {
     }
 
     public boolean checkSelectedCellForSpace(Cell selectedCell) {
-        if (selectedCell.getPlantInGame() != null)
-            return false;
-        return true;
+        return selectedCell.getPlantInGame() == null;
     }
 
-    public void checkForZombiesWin() {
-
-        for (int i = 0; i < Constants.MAP_ROWS_COUNT; i++) {
-            Cell cell = Battle.getRunningBattle().getMap().getCell(i, 0);
-            if (cell.getZombies().size() >= 1 && !this.map.getLawnMower()[cell.getRow()]) {
-                this.setWinnerPlayer(this.zombies);
-                this.setEndGame(true);
-                increaseZombieMoney(this.zombies.getAccount());
-            }
-        }
-    }
-
-    public void checkForPlantsWin() {
-        if (this.wavesCount == 0) {
-            this.setWinnerPlayer(this.plants);
-            this.setEndGame(true);
-        }
-    }
 
     public void lawnMowerActivated(Cell cell) {
         for (int j = 0; j < MAP_COLUMNS_COUNT; ++j) {
@@ -150,7 +89,19 @@ public class Battle {
         }
     }
 
-    public boolean checkSelectedCellIsValidForInsert(Cell cell) {
+    public void increasePlantsSun(int sunCount) {
+        this.plants.increaseSun(sunCount);
+    }
+
+    public void insertPlantCard() {
+        if (this.checkSelectedCellIsValidForInsertPlant(this.selectedCell)) {
+            Cloner cloner = new Cloner();
+            Plant newPlantInGame = cloner.deepClone(((CardOfPlant) this.selectedCard).getPlant());
+            new PlantInGame(newPlantInGame, this.selectedCell, 1);
+        }
+    }
+
+    public boolean checkSelectedCellIsValidForInsertPlant(Cell cell) {
         return cell.getPlantInGame() == null && cell.getColumn() % 2 == 0;
     }
 
@@ -248,6 +199,10 @@ public class Battle {
 
     public int getWavesCount() {
         return wavesCount;
+    }
+
+    public void decrementWavesCount() {
+        this.wavesCount -= 1;
     }
 
     public GraveYard getGraveYard() {
