@@ -25,8 +25,8 @@ public class Controller {
 
     public void main() {
         Request request = Request.getInstance();
+        Output.getInstance().showMenu(request.getCurrentMenu());
         while (!endGame) {
-            Output.getInstance().showMenu(request.getCurrentMenu());
             request.getRequest();
             if (firstCheck())
                 continue;
@@ -190,11 +190,11 @@ public class Controller {
     private void majorLoginMenu(MajorLoginCommand majorLoginCommand) {
         switch (majorLoginCommand) {
             case LOGIN:
-                System.out.println("im in :)");
                 Request.getInstance().nextMenu(Menu.LOGIN);
                 break;
             case SIGN_UP:
                 Request.getInstance().nextMenu(Menu.SIGN_UP);
+                Output.getInstance().showMenu(Menu.SIGN_UP);
                 break;
             case LEADER_BOARD:
                 Request.getInstance().nextMenu(Menu.LEADER_BOARD);
@@ -285,6 +285,7 @@ public class Controller {
         }
         if (flagOfExistence == 0) {
             Account.getAllAccount().add(new Account(name, password));
+            System.out.println("account created :)))))");
             Request.getInstance().nextMenu(MAJOR_LOGIN);
             Request.getInstance().nextMenu(MAIN);
 

@@ -333,16 +333,13 @@ public class Request {
 
     public void signUp(String command) {
         Matcher matcher = Patterns.signUpPatterns[0].matcher(command);
-        System.out.println(matcher.matches());
-        System.out.println(isInvalidCommand);
         if (matcher.matches()) {
             lastSignUpCommand = SignUpCommand.USERNAME_PASSWORD;
             lastSignUpCommand.setName(matcher.group(1));
             lastSignUpCommand.setPassword(matcher.group(2));
-            doSignUpCommand(lastSignUpCommand);
+          //  doSignUpCommand(lastSignUpCommand);
         } else
             isInvalidCommand = true;
-        System.out.println(isInvalidCommand);
     }
 
     private void doSignUpCommand(SignUpCommand command) {
@@ -399,7 +396,6 @@ public class Request {
 
     public void setCommandOfMajorLogin(int i) {
         lastMajorLoginCommand = MajorLoginCommand.values()[i];
-        System.out.println(lastMajorLoginCommand);
     }
 
     public MajorLoginCommand getLastMajorLoginCommand() {
