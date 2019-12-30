@@ -100,7 +100,7 @@ public class Request {
 
     private void setCommandOfMain(int i) {
         lastMainMenuCommand = MainMenuCommand.values()[i];
-       // doMainCommand(lastMainMenuCommand);
+        // doMainCommand(lastMainMenuCommand);
     }
 
   /*  private void doMainCommand(MainMenuCommand command) {
@@ -165,8 +165,8 @@ public class Request {
     }
 
     private void delete(ProfileMenuCommand command) {
-        if(Account.getLoggedAccount().getUserName().equals(command.getName())){
-            if(Account.getLoggedAccount().getPassWord().equals(command.getPassword())){
+        if (Account.getLoggedAccount().getUserName().equals(command.getName())) {
+            if (Account.getLoggedAccount().getPassWord().equals(command.getPassword())) {
                 Account.getAllAccount().remove(Account.getLoggedAccount());
                 Account.setLoggedAccount(null);
                 return;
@@ -178,8 +178,8 @@ public class Request {
     }
 
     private void create(ProfileMenuCommand command) {
-        for(Account account : Account.getAllAccount()){
-            if(account.getUserName().equals(command.getName())){
+        for (Account account : Account.getAllAccount()) {
+            if (account.getUserName().equals(command.getName())) {
                 Output.getInstance().invalidUsername();
                 return;
             }
@@ -194,9 +194,9 @@ public class Request {
     }
 
     private void change(ProfileMenuCommand command) {
-        for(Account account : Account.getAllAccount()){
-            if(account.getUserName().equals(command.getName())){
-                if(account.getPassWord().equals(command.getPassword())){
+        for (Account account : Account.getAllAccount()) {
+            if (account.getUserName().equals(command.getName())) {
+                if (account.getPassWord().equals(command.getPassword())) {
                     Account.setLoggedAccount(account);
                     return;
                 }
@@ -231,7 +231,7 @@ public class Request {
     }
 
     private void doCollectionCommand(CollectionCommand command) {
-        switch (command){
+        switch (command) {
             case SHOW_COLLECTION:
                 Output.getInstance().showCollection();
                 break;
@@ -251,8 +251,8 @@ public class Request {
 
     private void removeCard(CollectionCommand command) {
         String name = command.getName();
-        for(Card card : Account.getLoggedAccount().getDeck()){
-            if(card.getCardName().equals(name)){
+        for (Card card : Account.getLoggedAccount().getDeck()) {
+            if (card.getCardName().equals(name)) {
                 Account.getLoggedAccount().getDeck().remove(card);
                 return;
             }
@@ -262,9 +262,9 @@ public class Request {
 
     private void selectCard(CollectionCommand command) {
         String name = command.getName();
-        for(Card card : Account.getLoggedAccount().getAllCard()){
-            if(card.getCardName().equals(name)){
-                if(Account.getLoggedAccount().getDeck().size() < 7) {
+        for (Card card : Account.getLoggedAccount().getAllCard()) {
+            if (card.getCardName().equals(name)) {
+                if (Account.getLoggedAccount().getDeck().size() < 7) {
                     Account.getLoggedAccount().getDeck().add(card);
                     return;
                 }
@@ -292,6 +292,42 @@ public class Request {
             lastShopCommand.setName(matcher.group(1));
         } else
             lastShopCommand = ShopCommand.values()[i];
+        doShopCommand(lastShopCommand);
+    }
+
+    private void doShopCommand(ShopCommand shopCommand) {
+        switch (shopCommand) {
+            case BUY:
+                String cardNameFromConsole = shopCommand.getName();
+                Boolean isContainCard = Card.getCards().stream().anyMatch(card -> card.getCardName().equals(cardNameFromConsole));
+                if (!isContainCard)
+                    Output.getInstance().invalidCard();
+                else {
+                    Card targetCard = (Card) Card.getCards().stream().filter(card -> card.getCardName().equals(cardNameFromConsole)).toArray()[0];
+                    if (targetCard.isBought())
+                        Output.getInstance().soldCard();
+                    else {
+                        if (targetCard.getPrice() <= Account.getLoggedAccount().getMoney()) {
+                            Account.getLoggedAccount().decreaseMoney(targetCard.getPrice());
+                            Account.getLoggedAccount().getAllCard().add(targetCard);
+                            targetCard.setBought(true);
+                            Output.getInstance().boughtSuccessfully();
+                        } else
+                            Output.getInstance().notEnoughMoney();
+                    }
+                }
+                break;
+            case MONEY:
+                Output.getInstance().showAccountMoney();
+                break;
+            case SHOW_SHOP:
+                Output.getInstance().showShop();
+                break;
+            case SHOW_BOUGHT_CARDS:
+                Output.getInstance().showBoughtCards();
+                break;
+        }
+
     }
 
 
@@ -307,8 +343,8 @@ public class Request {
     }
 
     private void doSignUpCommand(SignUpCommand command) {
-        for(Account account : Account.getAllAccount()){
-            if(account.getUserName().equals(command.getName())){
+        for (Account account : Account.getAllAccount()) {
+            if (account.getUserName().equals(command.getName())) {
                 Output.getInstance().invalidUsername();
                 return;
             }
@@ -330,9 +366,9 @@ public class Request {
     }
 
     private void doLoginCommand(LoginCommand command) {
-        for(Account account : Account.getAllAccount()){
-            if(account.getUserName().equals(command.getName())){
-                if(account.getPassWord().equals(command.getPassword())){
+        for (Account account : Account.getAllAccount()) {
+            if (account.getUserName().equals(command.getName())) {
+                if (account.getPassWord().equals(command.getPassword())) {
                     Account.setLoggedAccount(account);
                     return;
                 }
