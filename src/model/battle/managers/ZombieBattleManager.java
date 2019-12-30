@@ -6,7 +6,6 @@ public class ZombieBattleManager extends BattleManager {
     @Override
     public void manage() {
 
-        this.getSunGenerator().generateSun();
     }
 
 

@@ -34,8 +34,7 @@ public class RailGenerator {
 
     private void randomPlantGenerator() {
         int randomIndex = this.random.nextInt(Plant.getPlants().size());
-        // TODO Selected Plant should not be SunFlower, so fix following while condition
-        while (Plant.getPlants().get(randomIndex).getPlantKind() == PlantKind.OTHER) {
+        while (Plant.getPlants().get(randomIndex).getPlantKind() == PlantKind.SUNFLOWER) {
             randomIndex = this.random.nextInt(Plant.getPlants().size());
         }
         Cloner cloner = new Cloner();

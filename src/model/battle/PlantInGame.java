@@ -19,25 +19,25 @@ import java.util.ArrayList;
 public class PlantInGame {
 
     private Plant plant;
-    private  int readyToFireCounter ;
+    private int readyToFireCounter;
     private Cell currentCell;
     private ArrayList<Bullet> bullets = new ArrayList<>();
 
-    private static ArrayList<PlantInGame> allPlantsInGame ;
+    private static ArrayList<PlantInGame> allPlantsInGame;
 
-    public PlantInGame(Plant plant, Cell currentCell, int readyToFireCounter) {
+    public PlantInGame(Plant plant, Cell currentCell) {
         this.plant = plant;
         this.currentCell = currentCell;
         currentCell.setPlantInGame(this);
         Battle.getRunningBattle().getBattleComponents().addPlantInGame(this);
-        if (this.plant.getPlantKind() == PlantKind.MUSKETEER || this.plant.getPlantKind() == PlantKind.CATAPULT || this.plant.getPlantKind() == PlantKind.WALL || this.plant.getPlantKind() == PlantKind.MAGNETIC){
-            this.readyToFireCounter = 0 ;
-        }else if (this.plant.getPlantKind() == PlantKind.BOMB){
-            Bomb bomb = (Bomb) this.plant ;
-            this.readyToFireCounter = bomb.getReadyToFireCounter() ;
-        }else if (this.plant.getPlantKind() == PlantKind.SUNFLOWER){
-            SunFlower sunFlower = (SunFlower) this.plant ;
-            this.readyToFireCounter = sunFlower.getFireRate().getBulletCount() ;
+        if (this.plant.getPlantKind() == PlantKind.MUSKETEER || this.plant.getPlantKind() == PlantKind.CATAPULT || this.plant.getPlantKind() == PlantKind.WALL || this.plant.getPlantKind() == PlantKind.MAGNETIC) {
+            this.readyToFireCounter = 0;
+        } else if (this.plant.getPlantKind() == PlantKind.BOMB) {
+            Bomb bomb = (Bomb) this.plant;
+            this.readyToFireCounter = bomb.getReadyToFireCounter();
+        } else if (this.plant.getPlantKind() == PlantKind.SUNFLOWER) {
+            SunFlower sunFlower = (SunFlower) this.plant;
+            this.readyToFireCounter = sunFlower.getFireRate().getBulletCount();
         }
 
     }
@@ -89,10 +89,10 @@ public class PlantInGame {
             }
         } else
             this.readyToFireCounter--;
-        ArrayList<ZombieInGame> zombiesInCell = Battle.getRunningBattle().getMap().getCell(this.getCurrentCell().getRow(), this.getCurrentCell().getColumn() +1).getZombies() ;
-        if (zombiesInCell != null){
-            for (ZombieInGame zombie:zombiesInCell) {
-                if (zombie.getZombie().getZombieName().toLowerCase().equals("football zombie")){
+        ArrayList<ZombieInGame> zombiesInCell = Battle.getRunningBattle().getMap().getCell(this.getCurrentCell().getRow(), this.getCurrentCell().getColumn() + 1).getZombies();
+        if (zombiesInCell != null) {
+            for (ZombieInGame zombie : zombiesInCell) {
+                if (zombie.getZombie().getZombieName().toLowerCase().equals("football zombie")) {
                     return;
                 }
             }
@@ -103,32 +103,32 @@ public class PlantInGame {
     }
 
     public void catapultAction() {
-        Catapult catapult = (Catapult) this.plant ;
-        if ((readyToFireCounter == 0) && (Battle.getRunningBattle().getMap().isContainZombieInRow(this.getCurrentCell().getRow()))){
+        Catapult catapult = (Catapult) this.plant;
+        if ((readyToFireCounter == 0) && (Battle.getRunningBattle().getMap().isContainZombieInRow(this.getCurrentCell().getRow()))) {
             ArrayList<Bullet> bullets = this.plant.operate(Bullet.class);
-            readyToFireCounter =  catapult.getFireRate().getTurnCount() ;
-        }else  if (readyToFireCounter != 0){
-            readyToFireCounter -- ;
+            readyToFireCounter = catapult.getFireRate().getTurnCount();
+        } else if (readyToFireCounter != 0) {
+            readyToFireCounter--;
         }
     }
 
     public void bombAction() {
-        if ((readyToFireCounter==0) && (this.getCurrentCell().getZombies() != null)) {
+        if ((readyToFireCounter == 0) && (this.getCurrentCell().getZombies() != null)) {
             ArrayList<Explosive> explosives = this.plant.operate(Explosive.class);
             for (Explosive explosive : explosives) {
                 explosive.setPosition(this.currentCell);
             }
             Battle.getRunningBattle().getBattleComponents().addExplosive(explosives);
             this.plant.setDead(true);
-        }else if (readyToFireCounter != 0){
-            readyToFireCounter -- ;
+        } else if (readyToFireCounter != 0) {
+            readyToFireCounter--;
         }
-        }
+    }
 
     public void wallAction() {
-        Wall wall = (Wall) this.plant ;
-        if (wall.getPhysicalAttack() != 0){
-            if (this.getCurrentCell().getZombies() != null){
+        Wall wall = (Wall) this.plant;
+        if (wall.getPhysicalAttack() != 0) {
+            if (this.getCurrentCell().getZombies() != null) {
                 this.getCurrentCell().getZombies().get(0).getZombie().decreaseZombieHealthStraight(wall.getPhysicalAttack());
                 if (this.getCurrentCell().getZombies().get(0).getZombie().getHealthPoint() <= 0)
                     this.getCurrentCell().getZombies().get(0).getZombie().setDead(true);
@@ -140,7 +140,6 @@ public class PlantInGame {
 
         //TODO
     }
-
 
 
     public Plant getPlant() {

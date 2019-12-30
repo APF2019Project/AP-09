@@ -25,7 +25,7 @@ public class RailBattleManager extends BattleManager {
         if (Battle.getRunningBattle().checkSelectedCellIsValidForInsertPlant(Battle.getRunningBattle().getSelectedCell())) {
             Cloner cloner = new Cloner();
             Plant newPlantInGame = cloner.deepClone(((CardOfPlant) Battle.getRunningBattle().getSelectedCard()).getPlant());
-            new PlantInGame(newPlantInGame, Battle.getRunningBattle().getSelectedCell(), 1);
+            new PlantInGame(newPlantInGame, Battle.getRunningBattle().getSelectedCell());
             this.railGenerator.removeCard((CardOfPlant) Battle.getRunningBattle().getSelectedCard());
         }
     }
