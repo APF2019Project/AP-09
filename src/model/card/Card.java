@@ -24,7 +24,6 @@ abstract public class Card {
 
     abstract public void calculatePrice();
 
-    abstract public void defineAllCards(); //Todo this function must be called at the first of the program
 
     public static ArrayList<Card> getCards() {
         return cards;

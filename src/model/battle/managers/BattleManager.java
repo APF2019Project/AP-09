@@ -3,20 +3,14 @@ package model.battle.managers;
 import constants.Constants;
 import model.Cell;
 import model.battle.Battle;
-import model.battle.SunGenerator;
 
 abstract public class BattleManager {
 
-    private SunGenerator sunGenerator = new SunGenerator();
 
 
     abstract public void manage();
 
-    abstract public void insertCard();
 
-    public SunGenerator getSunGenerator() {
-        return sunGenerator;
-    }
 
     void checkForZombiesWin() {
 

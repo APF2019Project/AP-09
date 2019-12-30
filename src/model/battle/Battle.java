@@ -57,7 +57,7 @@ public class Battle {
         }
     }
 
-    public void initTurn() {
+    public void nextTurnInit() {
         if (!this.isEndGame()) {
             this.battleManager.manage();
         } else {
@@ -93,12 +93,9 @@ public class Battle {
         this.plants.increaseSun(sunCount);
     }
 
-    public void insertPlantCard() {
-        if (this.checkSelectedCellIsValidForInsertPlant(this.selectedCell)) {
-            Cloner cloner = new Cloner();
-            Plant newPlantInGame = cloner.deepClone(((CardOfPlant) this.selectedCard).getPlant());
-            new PlantInGame(newPlantInGame, this.selectedCell, 1);
-        }
+
+    public void insertZombie() {
+        //TODO ZombieMode Game
     }
 
     public boolean checkSelectedCellIsValidForInsertPlant(Cell cell) {
@@ -181,7 +178,7 @@ public class Battle {
         return turn;
     }
 
-    public void nextTurn() {
+    public void incrementTurn() {
         this.turn += 1;
     }
 

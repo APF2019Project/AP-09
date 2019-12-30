@@ -41,15 +41,6 @@ abstract public class Zombie implements Cloneable {
 
     abstract public void attack(Cell currentCell);
 
-//    public void reachLawnMower(Cell cell, Map gameMap) {
-//        boolean[] lawnMower = gameMap.getLawnMower();
-//        if (lawnMower[cell.getRow()]) {
-//            lawnMower[cell.getRow()] = false;
-//            Battle.getRunningBattle().lawnMowerActivated(cell, gameMap);
-//        } else {
-//            Battle.zombieWins();
-//        }
-//    }
 
     public boolean isDead() {
         return isDead;
@@ -96,8 +87,8 @@ abstract public class Zombie implements Cloneable {
     }
 
     public void setSpeedLimited(int speedLimited) {
-        if(this.speedLimited <= speedLimited)
-        this.speedLimited = speedLimited;
+        if (this.speedLimited <= speedLimited)
+            this.speedLimited = speedLimited;
     }
 
     public void setHasArmor(boolean hasArmor) {

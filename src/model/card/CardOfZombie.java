@@ -20,8 +20,7 @@ public class CardOfZombie extends Card {
         this.zombie = zombie;
     }
 
-    @Override
-    public void defineAllCards() {
+    public static void defineAllCards() {
         for (Zombie zombie : Zombie.getZombies()) {
             Card.getCards().add(new CardOfZombie(zombie));
         }
