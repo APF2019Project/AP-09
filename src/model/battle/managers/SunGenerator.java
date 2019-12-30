@@ -1,4 +1,6 @@
-package model.battle;
+package model.battle.managers;
+
+import model.battle.Battle;
 
 import java.util.Random;
 

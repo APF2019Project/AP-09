@@ -20,8 +20,7 @@ public class CardOfPlant extends Card {
         this.plant = plant;
     }
 
-    @Override
-    public void defineAllCards(){
+    public static void defineAllCards(){
         for (Plant plant: Plant.getPlants()) {
             Card.getCards().add(new CardOfPlant(plant)) ;
         }

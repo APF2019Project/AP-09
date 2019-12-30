@@ -1,31 +1,39 @@
 package model.battle.managers;
 
 import com.rits.cloning.Cloner;
+import model.New_Plants.Plant;
 import model.New_Zombies.Zombie;
 import model.battle.Battle;
+import model.battle.PlantInGame;
 import model.battle.ZombieInGame;
+import model.card.CardOfPlant;
 import model.card.CardOfZombie;
 
 import java.util.Random;
 
 public class DayBattleManager extends BattleManager {
 
+    private SunGenerator sunGenerator = new SunGenerator();
+
 
     @Override
     public void manage() {
-        this.getSunGenerator().generateSun();
+        this.sunGenerator.generateSun();
         Battle.getRunningBattle().getBattleComponents().manage();
         this.checkForPlantsWin();
         this.checkForZombiesWin();
-        Battle.getRunningBattle().nextTurn();
+        Battle.getRunningBattle().incrementTurn();
         this.nextWaveCheck();
-        Battle.getRunningBattle().initTurn();
     }
 
-    @Override
-    public void insertCard() {
-
+    public void insertPlantCard() {
+        if (Battle.getRunningBattle().checkSelectedCellIsValidForInsertPlant(Battle.getRunningBattle().getSelectedCell())) {
+            Cloner cloner = new Cloner();
+            Plant newPlantInGame = cloner.deepClone(((CardOfPlant) Battle.getRunningBattle().getSelectedCard()).getPlant());
+            new PlantInGame(newPlantInGame, Battle.getRunningBattle().getSelectedCell(), 1);
+        }
     }
+
 
     private void nextWaveCheck() {
         if (Battle.getRunningBattle().getBattleComponents().getAllZombiesInGame().size() == 0) {
