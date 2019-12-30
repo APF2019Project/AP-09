@@ -1,6 +1,6 @@
 package model.battle;
 
-import constants.Constants;
+import model.constants.Constants;
 import model.Cell;
 import model.New_Plants.Plant;
 import model.New_Plants.fruits.Explosive;
@@ -9,7 +9,6 @@ import model.New_Plants.fruits.Fruit;
 import model.New_Plants.fruits.Sun;
 import model.New_Zombies.Zombie;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class BattleComponents {

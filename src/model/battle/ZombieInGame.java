@@ -7,7 +7,7 @@ import model.New_Zombies.Zombie;
 
 import java.util.ArrayList;
 
-import static constants.Constants.MAP_COLUMNS_COUNT;
+import static model.constants.Constants.MAP_COLUMNS_COUNT;
 
 public class ZombieInGame {
     private Zombie zombie;

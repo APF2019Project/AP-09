@@ -1,4 +1,4 @@
-package constants;
+package model.constants;
 
 public class Constants {
 
