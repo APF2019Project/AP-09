@@ -10,7 +10,7 @@ import model.card.Card;
 import model.card.CardOfPlant;
 
 
-import static constants.Constants.MAP_COLUMNS_COUNT;
+import static model.constants.Constants.MAP_COLUMNS_COUNT;
 
 public class Battle {
     private Player plants;

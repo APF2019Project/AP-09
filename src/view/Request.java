@@ -1,5 +1,6 @@
 package view;
 
+import controller.Controller;
 import model.Account;
 import model.card.Card;
 
@@ -22,7 +23,7 @@ public class Request {
     private CollectionCommand lastCollectionCommand;
     private boolean exit;
     private boolean help;
-    private boolean isInvalidCommand = false;
+    private boolean isInvalidCommand ;
 
 
     private Request() {
@@ -35,6 +36,9 @@ public class Request {
 
     public void getRequest() {
         String command = scanner.nextLine();
+        if (command.toLowerCase().equals("show menu")){
+            Output.getInstance().showMenu(getCurrentMenu());
+        }
         if (command.toLowerCase().equals("exit")) {
             exit = true;
             return;
@@ -65,6 +69,7 @@ public class Request {
                 break;
             case SIGN_UP:
                 signUp(command.toLowerCase());
+                break;
             case PROFILE:
                 profile(command.toLowerCase());
                 break;
@@ -333,28 +338,13 @@ public class Request {
 
     public void signUp(String command) {
         Matcher matcher = Patterns.signUpPatterns[0].matcher(command);
-        System.out.println(matcher.matches());
-        System.out.println(isInvalidCommand);
         if (matcher.matches()) {
             lastSignUpCommand = SignUpCommand.USERNAME_PASSWORD;
             lastSignUpCommand.setName(matcher.group(1));
             lastSignUpCommand.setPassword(matcher.group(2));
-            doSignUpCommand(lastSignUpCommand);
         } else
             isInvalidCommand = true;
-        System.out.println(isInvalidCommand);
-    }
 
-    private void doSignUpCommand(SignUpCommand command) {
-        for (Account account : Account.getAllAccount()) {
-            if (account.getUserName().equals(command.getName())) {
-                Output.getInstance().invalidUsername();
-                return;
-            }
-        }
-        Account account = new Account(command.getName(), command.getPassword());
-        Account.getAllAccount().add(account);
-        Account.setLoggedAccount(account);
     }
 
     public void login(String command) {
@@ -362,25 +352,10 @@ public class Request {
         if (matcher.matches()) {
             lastLoginCommand = LoginCommand.USERNAME_PASSWORD;
             lastLoginCommand.setName(matcher.group(1));
-            lastLoginCommand.setPassword(matcher.group());
+            lastLoginCommand.setPassword(matcher.group(2));
         } else
             isInvalidCommand = true;
     }
-
-//    public void doLoginCommand(LoginCommand command) {
-//        for (Account account : Account.getAllAccount()) {
-//            if (account.getUserName().equals(command.getName())) {
-//                if (account.getPassWord().equals(command.getPassword())) {
-//                    Account.setLoggedAccount(account);
-//                    return;
-//                }
-//                Output.getInstance().invalidPassword();
-//                return;
-//            }
-//            Output.getInstance().invalidUsername();
-//        }
-//    }
-
 
     public void majorLogin(String command) {
         for (int i = 0; i < Patterns.majorLoginPatterns.length; i++) {
@@ -399,7 +374,6 @@ public class Request {
 
     public void setCommandOfMajorLogin(int i) {
         lastMajorLoginCommand = MajorLoginCommand.values()[i];
-        System.out.println(lastMajorLoginCommand);
     }
 
     public MajorLoginCommand getLastMajorLoginCommand() {
@@ -476,5 +450,9 @@ public class Request {
 
     public void setInvalidCommand(boolean invalidCommand) {
         isInvalidCommand = invalidCommand;
+    }
+
+    public ArrayList<Menu> getMenus() {
+        return menus;
     }
 }

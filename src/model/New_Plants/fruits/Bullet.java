@@ -1,9 +1,8 @@
 package model.New_Plants.fruits;
 
-import constants.Constants;
+import model.constants.Constants;
 import model.Map;
 import model.New_Plants.warrior.FireRate;
-import model.battle.ZombieInGame;
 
 import java.util.ArrayList;
 

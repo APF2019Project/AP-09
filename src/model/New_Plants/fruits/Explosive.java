@@ -1,13 +1,10 @@
 package model.New_Plants.fruits;
 
-import constants.Constants;
+import model.constants.Constants;
 import model.Cell;
 import model.Map;
 import model.New_Plants.bomb.BombBox;
-import model.New_Zombies.Zombie;
 import model.battle.Battle;
-import model.battle.GraveYard;
-import model.battle.ZombieInGame;
 
 import java.util.ArrayList;
 

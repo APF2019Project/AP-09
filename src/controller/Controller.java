@@ -13,10 +13,8 @@ import static view.Menu.MAJOR_LOGIN;
 public class Controller {
     private final static Controller instance = new Controller();
     private boolean endGame = false;
-    private ArrayList<Menu> menus = new ArrayList<>();
 
     private Controller() {
-        menus.add(MAJOR_LOGIN);
     }
 
     public static Controller getInstance() {
@@ -25,8 +23,8 @@ public class Controller {
 
     public void main() {
         Request request = Request.getInstance();
+        Output.getInstance().showMenu(request.getCurrentMenu());
         while (!endGame) {
-            Output.getInstance().showMenu(request.getCurrentMenu());
             request.getRequest();
             if (firstCheck())
                 continue;
@@ -190,11 +188,11 @@ public class Controller {
     private void majorLoginMenu(MajorLoginCommand majorLoginCommand) {
         switch (majorLoginCommand) {
             case LOGIN:
-                System.out.println("im in :)");
                 Request.getInstance().nextMenu(Menu.LOGIN);
                 break;
             case SIGN_UP:
                 Request.getInstance().nextMenu(Menu.SIGN_UP);
+                Output.getInstance().showMenu(Menu.SIGN_UP);
                 break;
             case LEADER_BOARD:
                 Request.getInstance().nextMenu(Menu.LEADER_BOARD);
@@ -211,6 +209,7 @@ public class Controller {
         }
         if (Request.getInstance().isExit()) {
             exit();
+            Output.getInstance().showMenu(Request.getInstance().getCurrentMenu());
             Request.getInstance().setExit(false);
             return true;
         }
@@ -263,7 +262,7 @@ public class Controller {
             endGame();
             return;
         }
-        menus.remove(menus.size() - 1);
+        Request.getInstance().getMenus().remove(Request.getInstance().getMenus().size() - 1);
     }
 
     public void leaderBoard() {
@@ -285,12 +284,13 @@ public class Controller {
         }
         if (flagOfExistence == 0) {
             Account.getAllAccount().add(new Account(name, password));
+            System.out.println("account created :)))))");
+            System.out.println("***********  WELCOME TO THE GAME  ***********");
             Request.getInstance().nextMenu(MAJOR_LOGIN);
             Request.getInstance().nextMenu(MAIN);
 
         } else
             Output.getInstance().invalidSigning();
-
     }
 
     public void loginMenu(LoginCommand loginCommand) {
@@ -306,6 +306,7 @@ public class Controller {
         if (flagOfExistence == 1) {
             Request.getInstance().nextMenu(MAJOR_LOGIN);
             Request.getInstance().nextMenu(MAIN);
+            System.out.println("you logged in :)) ");
         } else
             Output.getInstance().invalidAccount();
     }
@@ -349,7 +350,4 @@ public class Controller {
         this.endGame = endGame;
     }
 
-    public ArrayList<Menu> getMenus() {
-        return menus;
-    }
 }

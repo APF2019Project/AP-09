@@ -1,6 +1,6 @@
 package model.battle.managers;
 
-import constants.Constants;
+import model.constants.Constants;
 import model.Cell;
 import model.battle.Battle;
 

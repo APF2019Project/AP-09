@@ -1,14 +1,8 @@
 package model.New_Zombies;
 
 import model.Cell;
-import model.Map;
-import model.New_Plants.fruits.Fruit;
-import model.battle.Battle;
-import model.battle.ZombieInGame;
 
 import java.util.ArrayList;
-
-import static constants.Constants.MAP_COLUMNS_COUNT;
 
 abstract public class Zombie implements Cloneable {
     private static ArrayList<Zombie> zombies = new ArrayList<>();

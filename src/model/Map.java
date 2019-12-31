@@ -1,6 +1,6 @@
 package model;
 
-import constants.Constants;
+import model.constants.Constants;
 import model.New_Plants.fruits.Fruit;
 import model.battle.ZombieInGame;
 
