@@ -30,13 +30,14 @@ public class Battle {
     private Map map;
     private int wavesCount;
     private BattleManager battleManager;
-
+    private CoolDownChecker[] coolDownCheckers = new CoolDownChecker[7];
 
     public Battle(Player plants, Player zombies, GameMode gameMode, int wavesCount) {
         this.plants = plants;
         this.zombies = zombies;
         this.gameMode = gameMode;
         this.setBattleManager(gameMode);
+        this.setCoolDownCheckers();
         this.wavesCount = wavesCount;
         Battle.runningBattle = this;
         this.battleComponents = new BattleComponents();
@@ -54,6 +55,15 @@ public class Battle {
                 this.battleManager = new ZombieBattleManager();
             case MULTIPLAYER:
                 this.battleManager = new PvPBattleManager();
+        }
+    }
+
+    private void setCoolDownCheckers() {
+        if (!this.gameMode.equals(GameMode.RAIL) && !this.gameMode.equals(GameMode.ZOMBIE)) {
+            for (int i = 0; i < this.coolDownCheckers.length; i++) {
+                Plant plant = ((CardOfPlant) this.plants.getAccount().getDeck().get(i)).getPlant();
+                this.coolDownCheckers[i] = new CoolDownChecker(plant.getPlantName(), plant.getCoolDown(), plant.getCoolDown());
+            }
         }
     }
 
@@ -204,5 +214,13 @@ public class Battle {
 
     public GraveYard getGraveYard() {
         return graveYard;
+    }
+
+    public CoolDownChecker[] getCoolDownCheckers() {
+        return coolDownCheckers;
+    }
+
+    public void setCoolDownCheckers(CoolDownChecker[] coolDownCheckers) {
+        this.coolDownCheckers = coolDownCheckers;
     }
 }
