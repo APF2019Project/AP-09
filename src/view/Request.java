@@ -342,22 +342,9 @@ public class Request {
             lastSignUpCommand = SignUpCommand.USERNAME_PASSWORD;
             lastSignUpCommand.setName(matcher.group(1));
             lastSignUpCommand.setPassword(matcher.group(2));
-          //  doSignUpCommand(lastSignUpCommand);
         } else
             isInvalidCommand = true;
 
-    }
-
-    private void doSignUpCommand(SignUpCommand command) {
-        for (Account account : Account.getAllAccount()) {
-            if (account.getUserName().equals(command.getName())) {
-                Output.getInstance().invalidUsername();
-                return;
-            }
-        }
-        Account account = new Account(command.getName(), command.getPassword());
-        Account.getAllAccount().add(account);
-        Account.setLoggedAccount(account);
     }
 
     public void login(String command) {
@@ -369,21 +356,6 @@ public class Request {
         } else
             isInvalidCommand = true;
     }
-
-//    public void doLoginCommand(LoginCommand command) {
-//        for (Account account : Account.getAllAccount()) {
-//            if (account.getUserName().equals(command.getName())) {
-//                if (account.getPassWord().equals(command.getPassword())) {
-//                    Account.setLoggedAccount(account);
-//                    return;
-//                }
-//                Output.getInstance().invalidPassword();
-//                return;
-//            }
-//            Output.getInstance().invalidUsername();
-//        }
-//    }
-
 
     public void majorLogin(String command) {
         for (int i = 0; i < Patterns.majorLoginPatterns.length; i++) {
