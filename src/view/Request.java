@@ -345,6 +345,7 @@ public class Request {
           //  doSignUpCommand(lastSignUpCommand);
         } else
             isInvalidCommand = true;
+
     }
 
     private void doSignUpCommand(SignUpCommand command) {
@@ -364,7 +365,7 @@ public class Request {
         if (matcher.matches()) {
             lastLoginCommand = LoginCommand.USERNAME_PASSWORD;
             lastLoginCommand.setName(matcher.group(1));
-            lastLoginCommand.setPassword(matcher.group());
+            lastLoginCommand.setPassword(matcher.group(2));
         } else
             isInvalidCommand = true;
     }
@@ -477,5 +478,9 @@ public class Request {
 
     public void setInvalidCommand(boolean invalidCommand) {
         isInvalidCommand = invalidCommand;
+    }
+
+    public ArrayList<Menu> getMenus() {
+        return menus;
     }
 }

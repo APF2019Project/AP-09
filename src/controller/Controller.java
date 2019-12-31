@@ -13,10 +13,8 @@ import static view.Menu.MAJOR_LOGIN;
 public class Controller {
     private final static Controller instance = new Controller();
     private boolean endGame = false;
-    private ArrayList<Menu> menus = new ArrayList<>();
 
     private Controller() {
-        menus.add(MAJOR_LOGIN);
     }
 
     public static Controller getInstance() {
@@ -211,6 +209,7 @@ public class Controller {
         }
         if (Request.getInstance().isExit()) {
             exit();
+            Output.getInstance().showMenu(Request.getInstance().getCurrentMenu());
             Request.getInstance().setExit(false);
             return true;
         }
@@ -263,7 +262,7 @@ public class Controller {
             endGame();
             return;
         }
-        menus.remove(menus.size() - 1);
+        Request.getInstance().getMenus().remove(Request.getInstance().getMenus().size() - 1);
     }
 
     public void leaderBoard() {
@@ -307,6 +306,7 @@ public class Controller {
         if (flagOfExistence == 1) {
             Request.getInstance().nextMenu(MAJOR_LOGIN);
             Request.getInstance().nextMenu(MAIN);
+            System.out.println("you logged in :)) ");
         } else
             Output.getInstance().invalidAccount();
     }
@@ -350,7 +350,4 @@ public class Controller {
         this.endGame = endGame;
     }
 
-    public ArrayList<Menu> getMenus() {
-        return menus;
-    }
 }
