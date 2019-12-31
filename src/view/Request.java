@@ -1,5 +1,6 @@
 package view;
 
+import controller.Controller;
 import model.Account;
 import model.card.Card;
 
@@ -22,7 +23,7 @@ public class Request {
     private CollectionCommand lastCollectionCommand;
     private boolean exit;
     private boolean help;
-    private boolean isInvalidCommand = false;
+    private boolean isInvalidCommand ;
 
 
     private Request() {
@@ -35,6 +36,9 @@ public class Request {
 
     public void getRequest() {
         String command = scanner.nextLine();
+        if (command.toLowerCase().equals("show menu")){
+            Output.getInstance().showMenu(getCurrentMenu());
+        }
         if (command.toLowerCase().equals("exit")) {
             exit = true;
             return;
@@ -65,6 +69,7 @@ public class Request {
                 break;
             case SIGN_UP:
                 signUp(command.toLowerCase());
+                break;
             case PROFILE:
                 profile(command.toLowerCase());
                 break;

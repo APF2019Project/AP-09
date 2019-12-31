@@ -286,12 +286,12 @@ public class Controller {
         if (flagOfExistence == 0) {
             Account.getAllAccount().add(new Account(name, password));
             System.out.println("account created :)))))");
+            System.out.println("***********  WELCOME TO THE GAME  ***********");
             Request.getInstance().nextMenu(MAJOR_LOGIN);
             Request.getInstance().nextMenu(MAIN);
 
         } else
             Output.getInstance().invalidSigning();
-
     }
 
     public void loginMenu(LoginCommand loginCommand) {
