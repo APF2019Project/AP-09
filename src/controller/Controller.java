@@ -59,6 +59,26 @@ public class Controller {
                 break;
             case SHOP:
                 shopMenu(request.getLastShopCommand());
+                break;
+            case DAY_AND_POOL_MODE:
+                dayAndPlayMenu(request.getLastDayAndPoolCommand());
+        }
+    }
+
+    private void dayAndPlayMenu(DayAndPoolCommand dayAndPoolCommand) {
+        switch (dayAndPoolCommand){
+            case PLANT:
+                break;
+            case REMOVE:
+                break;
+            case SELECT:
+                break;
+            case END_TURN:
+                break;
+            case SHOW_HAND:
+                break;
+            case SHOW_LAWN:
+                break;
         }
     }
 

@@ -21,6 +21,7 @@ public class Request {
     private ProfileMenuCommand lastProfileMenuCommand;
     private ShopCommand lastShopCommand;
     private CollectionCommand lastCollectionCommand;
+    private DayAndPoolCommand lastDayAndPoolCommand ;
     private boolean exit;
     private boolean help;
     private boolean isInvalidCommand ;
@@ -86,6 +87,31 @@ public class Request {
                 break;
             case PLAY:
                 play(command.toLowerCase());
+                break;
+            case DAY_AND_POOL_MODE:
+                dayAndPoolMode(command.toLowerCase());
+        }
+    }
+
+    private void dayAndPoolMode(String command) {
+        for (int i = 0; i < Patterns.dayAndPoolPlayPatterns.length; ++i) {
+            Matcher matcher = Patterns.dayAndPoolPlayPatterns[i].matcher(command);
+            if (matcher.matches()) {
+                setCommandOfDayAndPool(i, matcher);
+                return;
+            }
+        }
+        isInvalidCommand = true;
+
+    }
+
+    private void setCommandOfDayAndPool(int i, Matcher matcher) {
+        lastDayAndPoolCommand = DayAndPoolCommand.values()[i] ;
+        if (i==3){
+            lastDayAndPoolCommand.setName(matcher.group(1));
+        }else if (i>3){
+            lastDayAndPoolCommand.setRow(Integer.parseInt(matcher.group(1)));
+            lastDayAndPoolCommand.setColumn(Integer.parseInt(matcher.group(2)));
         }
     }
 
@@ -459,5 +485,13 @@ public class Request {
 
     public ArrayList<Menu> getMenus() {
         return menus;
+    }
+
+    public DayAndPoolCommand getLastDayAndPoolCommand() {
+        return lastDayAndPoolCommand;
+    }
+
+    public void setLastDayAndPoolCommand(DayAndPoolCommand lastDayAndPoolCommand) {
+        this.lastDayAndPoolCommand = lastDayAndPoolCommand;
     }
 }
