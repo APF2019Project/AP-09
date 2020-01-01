@@ -84,7 +84,7 @@ public class PlantInGame {
                         for (ZombieInGame zombieInGame : Battle.getRunningBattle().getMap().getCell(row, column).getZombies()) {
                             Zombie zombie = zombieInGame.getZombie();
                             if (zombie.getZombieKind() == ZombieKind.OTHER) {
-                                if (((Other) zombie).getHelmetType() == HelmetType.BUCKETHEAD || zombie.getZombieName().equals("Screen Door Zombie")) {
+                                if (((Other) zombie).getHelmetType() == HelmetType.BUCKETHEAD || zombie.getZombieName().toLowerCase().equals("screen door zombie")) {
                                     zombieInGame.getBulletEffect().setStopTime(3);
                                     readyToFireCounter = 3;
                                     if (((Other) zombie).getHelmetType() == HelmetType.BUCKETHEAD && zombie.getHealthPoint() == 2)
@@ -101,7 +101,7 @@ public class PlantInGame {
 
     public void musketeerAction() {
         Musketeer musketeer = (Musketeer) this.plant;
-        if (musketeer.getPlantName().equals("Scaredy-shroom")) {
+        if (musketeer.getPlantName().toLowerCase().equals("scaredy-shroom")) {
             if (Battle.getRunningBattle().getMap().getCell(this.currentCell.getRow(), this.currentCell.getColumn() - 1).getZombies() != null) {
                 return;
             } else if (Battle.getRunningBattle().getMap().getCell(this.currentCell.getRow(), this.currentCell.getColumn() - 2).getZombies() != null) {
@@ -174,25 +174,30 @@ public class PlantInGame {
         }
     }
 
-    public void otherAction() {
+    public void otherAction()
+    {
 
         //TODO
     }
 
 
-    public Plant getPlant() {
+    public Plant getPlant()
+    {
         return plant;
     }
 
-    public Cell getCurrentCell() {
+    public Cell getCurrentCell()
+    {
         return currentCell;
     }
 
-    public int getReadyToFireCounter() {
+    public int getReadyToFireCounter()
+    {
         return readyToFireCounter;
     }
 
-    public void setReadyToFireCounter(int readyToFireCounter) {
+    public void setReadyToFireCounter(int readyToFireCounter)
+    {
         this.readyToFireCounter = readyToFireCounter;
     }
 }

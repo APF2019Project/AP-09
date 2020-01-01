@@ -22,7 +22,8 @@ public class Musketeer extends Plant {
     }
 
     @Override
-    public <T> ArrayList<T> operate(Class<T> type) {
+    public <T> ArrayList<T> operate(Class<T> type)
+    {
         ArrayList<T> bullets = new ArrayList<>();
         for (int i = 0; i < this.fireRate.getBulletCount(); i++) {
                 Bullet bullet = new Bullet(BulletKind.STRAIGHT_BULLET, this.fireRate, 1, this.speedLimiter, 0);

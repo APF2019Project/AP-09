@@ -8,11 +8,13 @@ public class GraveYard {
     private  ArrayList<ZombieInGame> deadZombies = new ArrayList<>();
 
 
-    public  ArrayList<PlantInGame> getDeadPlants() {
+    public  ArrayList<PlantInGame> getDeadPlants()
+    {
         return deadPlants;
     }
 
-    public  ArrayList<ZombieInGame> getDeadZombies() {
+    public  ArrayList<ZombieInGame> getDeadZombies()
+    {
         return deadZombies;
     }
 }

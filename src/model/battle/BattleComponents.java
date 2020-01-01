@@ -22,7 +22,8 @@ public class BattleComponents {
 
     }
 
-    public void manage() {
+    public void manage()
+    {
         zombieActions();
         plantsActions();
         fruitsActions();
@@ -33,26 +34,30 @@ public class BattleComponents {
     }
 
 
-    private void zombieActions() {
+    private void zombieActions()
+    {
         for (ZombieInGame zombieInGame : this.allZombiesInGame) {
             zombieInGame.action();
         }
     }
 
-    private void plantsActions() {
+    private void plantsActions()
+    {
         for (PlantInGame plantInGame : this.allPlantsInGame) {
             plantInGame.action();
         }
     }
 
 
-    private void fruitsActions() {
+    private void fruitsActions()
+    {
         for (Fruit fruit : this.fruits) {
             fruit.action(null);
         }
     }
 
-    private void checkForDeadPlants() {
+    private void checkForDeadPlants()
+    {
         ArrayList<PlantInGame> deadPlants = new ArrayList<>();
         for (PlantInGame plantInGame : this.allPlantsInGame) {
             if (plantInGame.getPlant().isDead()) {
@@ -64,7 +69,8 @@ public class BattleComponents {
         Battle.getRunningBattle().getGraveYard().getDeadPlants().addAll(deadPlants);
     }
 
-    private void checkForDeadZombies() {
+    private void checkForDeadZombies()
+    {
         ArrayList<ZombieInGame> deadZombies = new ArrayList<>();
         for (ZombieInGame zombieInGame : this.allZombiesInGame) {
             if (zombieInGame.getZombie().isDead()) {
@@ -76,7 +82,8 @@ public class BattleComponents {
         Battle.getRunningBattle().getGraveYard().getDeadZombies().addAll(deadZombies);
     }
 
-    private void checkForDeadFruits() {
+    private void checkForDeadFruits()
+    {
 
         ArrayList<Fruit> deadFruits = new ArrayList<>();
         for (Fruit fruit : this.fruits) {
@@ -112,7 +119,8 @@ public class BattleComponents {
         this.allZombiesInGame.remove(zombieInGame);
     }
 
-    public ZombieInGame findZombieInGame(Zombie zombie) {
+    public ZombieInGame findZombieInGame(Zombie zombie)
+    {
         for (ZombieInGame z : this.allZombiesInGame) {
             if (z.getZombie().equals(zombie)) {
                 return z;
@@ -133,7 +141,8 @@ public class BattleComponents {
         this.allPlantsInGame.remove(plantInGame);
     }
 
-    public PlantInGame findPlantInGame(Plant plant) {
+    public PlantInGame findPlantInGame(Plant plant)
+    {
         for (PlantInGame p : this.allPlantsInGame) {
             if (p.getPlant().equals(plant)) {
                 return p;
