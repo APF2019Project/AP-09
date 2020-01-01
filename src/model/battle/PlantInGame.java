@@ -174,30 +174,25 @@ public class PlantInGame {
         }
     }
 
-    public void otherAction()
-    {
+    public void otherAction() {
 
         //TODO
     }
 
 
-    public Plant getPlant()
-    {
+    public Plant getPlant() {
         return plant;
     }
 
-    public Cell getCurrentCell()
-    {
+    public Cell getCurrentCell() {
         return currentCell;
     }
 
-    public int getReadyToFireCounter()
-    {
+    public int getReadyToFireCounter() {
         return readyToFireCounter;
     }
 
-    public void setReadyToFireCounter(int readyToFireCounter)
-    {
+    public void setReadyToFireCounter(int readyToFireCounter) {
         this.readyToFireCounter = readyToFireCounter;
     }
 }
