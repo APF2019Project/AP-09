@@ -9,10 +9,15 @@ import model.New_Plants.fruits.Explosive;
 import model.New_Plants.fruits.Bullet;
 import model.New_Plants.Plant;
 import model.New_Plants.fruits.Fruit;
+import model.New_Plants.magnetic.Magnet;
+import model.New_Plants.magnetic.Magnetic;
 import model.New_Plants.sunFlower.SunFlower;
 import model.New_Plants.warrior.Catapult;
 import model.New_Plants.warrior.Musketeer;
+import model.New_Zombies.Zombie;
 import model.New_Zombies.ZombieKind;
+import model.New_Zombies.other.HelmetType;
+import model.New_Zombies.other.Other;
 
 import java.util.ArrayList;
 
@@ -63,13 +68,46 @@ public class PlantInGame {
             case OTHER:
                 otherAction();
                 break;
+            case MAGNETIC:
+                magneticAction();
+                break;
             default:
                 break;
         }
     }
 
+    private void magneticAction() {
+        if (readyToFireCounter == 0) {
+            for (int row = this.currentCell.getRow() - 1; row <= this.currentCell.getRow() + 1; ++row) {
+                for (int column = this.currentCell.getColumn() - 1; column <= this.currentCell.getColumn() + 1; ++column) {
+                    if (Battle.getRunningBattle().getMap().getCell(row, column).getZombies() != null) {
+                        for (ZombieInGame zombieInGame : Battle.getRunningBattle().getMap().getCell(row, column).getZombies()) {
+                            Zombie zombie = zombieInGame.getZombie();
+                            if (zombie.getZombieKind() == ZombieKind.OTHER) {
+                                if (((Other) zombie).getHelmetType() == HelmetType.BUCKETHEAD || zombie.getZombieName().toLowerCase().equals("screen door zombie")) {
+                                    zombieInGame.getBulletEffect().setStopTime(3);
+                                    readyToFireCounter = 3;
+                                    if (((Other) zombie).getHelmetType() == HelmetType.BUCKETHEAD && zombie.getHealthPoint() == 2)
+                                        zombie.setHealthPoint(zombie.getHealthPoint() - 1);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } else
+            readyToFireCounter--;
+    }
+
     public void musketeerAction() {
         Musketeer musketeer = (Musketeer) this.plant;
+        if (musketeer.getPlantName().toLowerCase().equals("scaredy-shroom")) {
+            if (Battle.getRunningBattle().getMap().getCell(this.currentCell.getRow(), this.currentCell.getColumn() - 1).getZombies() != null) {
+                return;
+            } else if (Battle.getRunningBattle().getMap().getCell(this.currentCell.getRow(), this.currentCell.getColumn() - 2).getZombies() != null) {
+                return;
+            }
+        }
         int flagOfShooting = 0;
         if (readyToFireCounter == 0) {
             for (int i = -musketeer.getRangeOfAttack(); i <= musketeer.getRangeOfAttack(); i++) {

@@ -147,10 +147,10 @@ public class Request {
             lastProfileMenuCommand.setName(matcher.group(1));
             lastProfileMenuCommand.setPassword(matcher.group(2));
         }
-        doProfileCommand(lastProfileMenuCommand);
+        //doProfileCommand(lastProfileMenuCommand);
     }
 
-    private void doProfileCommand(ProfileMenuCommand command) {
+   /* private void doProfileCommand(ProfileMenuCommand command) {
         switch (command) {
             case CHANGE:
                 change(command);
@@ -168,9 +168,9 @@ public class Request {
                 show(command);
                 break;
         }
-    }
+    }*/
 
-    private void show(ProfileMenuCommand command) {
+   /* private void show(ProfileMenuCommand command) {
         Output.getInstance().printCurrentUserName();
     }
 
@@ -215,7 +215,7 @@ public class Request {
             }
             Output.getInstance().invalidUsername();
         }
-    }
+    }*/
 
     public void collection(String command) {
         for (int i = 0; i < Patterns.collectionPatterns.length; ++i) {
@@ -237,10 +237,10 @@ public class Request {
             lastCollectionCommand.setName(matcher.group(1));
         } else
             lastShopCommand = ShopCommand.values()[i];
-        doCollectionCommand(lastCollectionCommand);
+        //doCollectionCommand(lastCollectionCommand);
     }
 
-    private void doCollectionCommand(CollectionCommand command) {
+    /*private void doCollectionCommand(CollectionCommand command) {
         switch (command) {
             case SHOW_COLLECTION:
                 Output.getInstance().showCollection();
@@ -257,9 +257,9 @@ public class Request {
             case PLAY:
                 break;
         }
-    }
+    }*/
 
-    private void removeCard(CollectionCommand command) {
+   /* private void removeCard(CollectionCommand command) {
         String name = command.getName();
         for (Card card : Account.getLoggedAccount().getDeck()) {
             if (card.getCardName().equals(name)) {
@@ -268,9 +268,9 @@ public class Request {
             }
         }
         Output.getInstance().invalidCard();
-    }
+    }*/
 
-    private void selectCard(CollectionCommand command) {
+  /*  private void selectCard(CollectionCommand command) {
         String name = command.getName();
         for (Card card : Account.getLoggedAccount().getAllCard()) {
             if (card.getCardName().equals(name)) {
@@ -283,7 +283,7 @@ public class Request {
             }
         }
         Output.getInstance().invalidCard();
-    }
+    }*/
 
     public void shop(String command) {
         for (int i = 0; i < Patterns.shopPatterns.length; i++) {
@@ -302,10 +302,10 @@ public class Request {
             lastShopCommand.setName(matcher.group(1));
         } else
             lastShopCommand = ShopCommand.values()[i];
-        doShopCommand(lastShopCommand);
+       // doShopCommand(lastShopCommand);
     }
 
-    private void doShopCommand(ShopCommand shopCommand) {
+   /* private void doShopCommand(ShopCommand shopCommand) {
         switch (shopCommand) {
             case BUY:
                 String cardNameFromConsole = shopCommand.getName();
@@ -339,7 +339,7 @@ public class Request {
         }
 
     }
-
+*/
 
     public void signUp(String command) {
         Matcher matcher = Patterns.signUpPatterns[0].matcher(command);

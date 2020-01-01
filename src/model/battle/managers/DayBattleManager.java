@@ -16,6 +16,7 @@ public class DayBattleManager extends BattleManager {
     private SunGenerator sunGenerator = new SunGenerator();
 
 
+
     @Override
     public void manage() {
         this.sunGenerator.generateSun();
@@ -28,9 +29,11 @@ public class DayBattleManager extends BattleManager {
 
     public void insertPlantCard() {
         if (Battle.getRunningBattle().checkSelectedCellIsValidForInsertPlant(Battle.getRunningBattle().getSelectedCell())) {
-            Cloner cloner = new Cloner();
-            Plant newPlantInGame = cloner.deepClone(((CardOfPlant) Battle.getRunningBattle().getSelectedCard()).getPlant());
-            new PlantInGame(newPlantInGame, Battle.getRunningBattle().getSelectedCell());
+            if (this.insertCardValidation()) {
+                Cloner cloner = new Cloner();
+                Plant newPlantInGame = cloner.deepClone(((CardOfPlant) Battle.getRunningBattle().getSelectedCard()).getPlant());
+                new PlantInGame(newPlantInGame, Battle.getRunningBattle().getSelectedCell());
+            }
         }
     }
 
@@ -58,6 +61,23 @@ public class DayBattleManager extends BattleManager {
         Cloner cloner = new Cloner();
         Zombie newRandomZombie = cloner.deepClone(zombie);
         new ZombieInGame(newRandomZombie, Battle.getRunningBattle().getMap().getCell(randomRow, 18));
+    }
+
+
+    private boolean insertCardValidation() {
+        if (coolDownCheck(((CardOfPlant) Battle.getRunningBattle().getSelectedCard()).getPlant())) {
+            return Battle.getRunningBattle().getPlants().getSun() >= ((CardOfPlant) Battle.getRunningBattle().getSelectedCard()).getPlant().getSunUsage();
+        }
+        return false;
+    }
+
+    private boolean coolDownCheck(Plant plant) {
+        for (CoolDownChecker coolDownChecker : Battle.getRunningBattle().getCoolDownCheckers()) {
+            if (coolDownChecker.getPlantName().equals(plant.getPlantName())) {
+                return coolDownChecker.coolDownCheck();
+            }
+        }
+        return false;
     }
 
 

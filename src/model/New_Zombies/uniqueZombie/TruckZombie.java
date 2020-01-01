@@ -53,6 +53,7 @@ public class TruckZombie extends Zombie {
             this.setAttackPower(1);
             this.setSpeed(2);
             this.setZombieKind(ZombieKind.OTHER);
+            this.setDead(false);
         }
         else{
            TRUCK ZOMBIE DIES

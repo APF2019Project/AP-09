@@ -1,7 +1,5 @@
 package model;
 
-import model.New_Zombies.Zombie;
-import model.New_Plants.Plant;
 import model.card.Card;
 
 import java.util.ArrayList;
