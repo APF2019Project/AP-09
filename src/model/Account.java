@@ -97,11 +97,10 @@ public class Account implements Comparable<Account> {
         YaGson yaGson = new YaGson();
         try {
             Account[] accounts = yaGson.fromJson(new FileReader("json/account.json"), Account[].class);
-            for (int i = 0; i < accounts.length; i += 2) {
-                Account.getAllAccount().add(accounts[i]);
-            }
-            System.out.println(Account.getAllAccount().size());
-
+            if (accounts != null)
+                for (int i = 0; i < accounts.length; i += 2) {
+                    Account.getAllAccount().add(accounts[i]);
+                }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

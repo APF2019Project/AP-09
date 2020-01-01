@@ -31,7 +31,7 @@ public class Controller {
             commandManagement(request, request.getCurrentMenu());
 
         }
-      //  Account.toJson();
+        Account.toJson();
     }
 
     private void commandManagement(Request request, Menu currentMenu) {

@@ -84,7 +84,12 @@ public class Request {
             case LEADER_BOARD:
                 leaderBoard();
                 break;
+            case PLAY:
+                play(command.toLowerCase());
         }
+    }
+
+    private void play(String toLowerCase) {
     }
 
     private void leaderBoard() {
