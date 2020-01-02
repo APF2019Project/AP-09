@@ -102,9 +102,9 @@ public class PlantInGame {
     public void musketeerAction() {
         Musketeer musketeer = (Musketeer) this.plant;
         if (musketeer.getPlantName().toLowerCase().equals("scaredy-shroom")) {
-            if (Battle.getRunningBattle().getMap().getCell(this.currentCell.getRow(), this.currentCell.getColumn() - 1).getZombies() != null) {
+            if (Battle.getRunningBattle().getMap().getCell(this.currentCell.getRow(), this.currentCell.getColumn() +1).getZombies() != null) {
                 return;
-            } else if (Battle.getRunningBattle().getMap().getCell(this.currentCell.getRow(), this.currentCell.getColumn() - 2).getZombies() != null) {
+            } else if (Battle.getRunningBattle().getMap().getCell(this.currentCell.getRow(), this.currentCell.getColumn() + 2).getZombies() != null) {
                 return;
             }
         }

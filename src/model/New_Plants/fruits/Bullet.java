@@ -33,12 +33,12 @@ public class Bullet extends Fruit {
                 if (BulletKind.STRAIGHT_BULLET == bulletKind) {
                     this.getPosition().getZombies().get(0).getZombie().decreaseZombieHealthStraight(damagingPower);
                     if (speedLimiter > 0) {
-                        this.getPosition().getZombies().get(0).getZombie().setSpeedLimited(speedLimiter);
+                        this.getPosition().getZombies().get(0).getBulletEffect().setSpeedLimit(speedLimiter);
                     }
                 } else if (BulletKind.CURVED_BULLET == bulletKind) {
                     this.getPosition().getZombies().get(0).getZombie().decreaseZombieHealthCurve(damagingPower);
                     if (speedLimiter > 0) {
-                        this.getPosition().getZombies().get(0).getZombie().setSpeedLimited(speedLimiter);
+                        this.getPosition().getZombies().get(0).getBulletEffect().setSpeedLimit(speedLimiter);
                     }
                 }
                 if (this.getPosition().getZombies().get(0).getZombie().getHealthPoint() <= 0) {

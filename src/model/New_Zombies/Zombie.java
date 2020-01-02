@@ -30,6 +30,7 @@ abstract public class Zombie implements Cloneable {
         setHasHelmet(hasHelmet);
         setHasArmor(hasArmor);
         setZombieKind(zombieKind);
+        zombies.add(this);
     }
 
     abstract public void attack(Cell currentCell);

@@ -11,7 +11,7 @@ public class Bomb extends Plant {
     private BombBox bombBox;
     private int readyToFireCounter;
 
-    public Bomb(String plantName, int healthPoint, int attackPower, int coolDown, int sunUsage, BombBox bombBox, int readyToFireCounter) {
+    public Bomb(String plantName, int healthPoint, int attackPower, int coolDown, int sunUsage, BombBox bombBox) {
         super(plantName, healthPoint, attackPower, coolDown, sunUsage, PlantKind.BOMB);
         this.bombBox = bombBox;
     }

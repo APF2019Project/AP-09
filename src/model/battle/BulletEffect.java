@@ -17,6 +17,7 @@ public class BulletEffect {
     }
 
     public void setSpeedLimit(int speedLimit) {
+        if (this.speedLimit <= speedLimit)
         this.speedLimit = speedLimit;
     }
 }

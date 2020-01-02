@@ -22,6 +22,7 @@ abstract public class Plant {
         this.coolDown = coolDown;
         this.sunUsage = sunUsage;
         this.plantKind = plantKind;
+        plants.add(this);
     }
 
     public boolean isLilyPad() {
@@ -34,6 +35,9 @@ abstract public class Plant {
 
     public static ArrayList<Plant> getPlants() {
         return plants;
+    }
+    public static void setPlants(ArrayList<Plant> plants) {
+        Plant.plants = plants;
     }
 
     abstract public <T> ArrayList<T> operate(Class<T> type);
