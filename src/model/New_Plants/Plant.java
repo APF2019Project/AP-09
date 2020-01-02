@@ -1,6 +1,7 @@
 package model.New_Plants;
 
 import java.util.ArrayList;
+
 import model.New_Plants.Plant;
 
 abstract public class Plant {
@@ -22,6 +23,14 @@ abstract public class Plant {
         this.coolDown = coolDown;
         this.sunUsage = sunUsage;
         this.plantKind = plantKind;
+    }
+
+    public static Plant getPlant(String plantName) {
+        for (int i = 0; i < Plant.getPlants().size(); i++) {
+            if (Plant.getPlants().get(i).getPlantName().equals(plantName))
+                return Plant.getPlants().get(i);
+        }
+        return null;
     }
 
     public boolean isLilyPad() {

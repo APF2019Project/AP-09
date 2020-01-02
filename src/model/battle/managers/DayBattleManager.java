@@ -16,7 +16,6 @@ public class DayBattleManager extends BattleManager {
     private SunGenerator sunGenerator = new SunGenerator();
 
 
-
     @Override
     public void manage() {
         this.sunGenerator.generateSun();
@@ -66,8 +65,19 @@ public class DayBattleManager extends BattleManager {
 
     private boolean insertCardValidation() {
         if (coolDownCheck(((CardOfPlant) Battle.getRunningBattle().getSelectedCard()).getPlant())) {
-            return Battle.getRunningBattle().getPlants().getSun() >= ((CardOfPlant) Battle.getRunningBattle().getSelectedCard()).getPlant().getSunUsage();
+            if (Battle.getRunningBattle().getSelectedCell().getColumn() % 2 == 1) {
+                if (Battle.getRunningBattle().getPlants().getSun() >= ((CardOfPlant) Battle.getRunningBattle().getSelectedCard()).getPlant().getSunUsage())
+                    return true;
+                else {
+                    System.out.println("Not Enough Sun!");
+                    return false;
+                }
+            } else {
+                System.out.println("Plants Can be planted on odd columns only!");
+                return false;
+            }
         }
+        System.out.println("CoolDown time!");
         return false;
     }
 
