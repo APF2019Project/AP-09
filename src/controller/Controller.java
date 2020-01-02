@@ -66,6 +66,15 @@ public class Controller {
             case PLAY:
                 playMenu(request.getLastPlayCommand(), request.getLastCollectionCommand()) ;
                 break;
+            case PVP_MODE:
+
+                break;
+            case RAIL_MODE:
+                break;
+            case WATER_MODE:
+                break;
+            case ZOMBIE_MODE:
+                break;
         }
     }
 
@@ -117,7 +126,7 @@ public class Controller {
                 Output.getInstance().showHand();
                 break;
             case PLAY:
-                //TODO
+                Request.getInstance().nextMenu(collectionCommand.getNextPlayMenu());
                 break;
             case REMOVE:
                 removeCard(collectionCommand);

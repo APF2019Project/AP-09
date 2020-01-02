@@ -22,7 +22,10 @@ public class Request {
     private ShopCommand lastShopCommand;
     private CollectionCommand lastCollectionCommand;
     private PlayCommand lastPlayCommand ;
-    private DayAndPoolCommand lastDayAndPoolCommand ;
+    private DayAndPoolCommand lastDayCommand ;
+    private ZombieCommand lastZombieCommand ;
+    private RailCommand lastRailCommand ;
+    private PvPCommand lastPvPCommand ;
     private boolean exit;
     private boolean help;
     private boolean isInvalidCommand ;
@@ -89,12 +92,25 @@ public class Request {
             case PLAY:
                 play(command.toLowerCase());
                 break;
-            case DAY_AND_POOL_MODE:
-                dayAndPoolMode(command.toLowerCase());
+            case DAY_MODE:
+                dayMode(command.toLowerCase());
+                break;
+            case ZOMBIE_MODE:
+
+                break;
+            case WATER_MODE:
+
+                break;
+            case RAIL_MODE:
+
+                break;
+            case PVP_MODE:
+
+                break;
         }
     }
 
-    private void dayAndPoolMode(String command) {
+    private void dayMode(String command) {
         for (int i = 0; i < Patterns.dayAndPoolPlayPatterns.length; ++i) {
             Matcher matcher = Patterns.dayAndPoolPlayPatterns[i].matcher(command);
             if (matcher.matches()) {
@@ -107,12 +123,12 @@ public class Request {
     }
 
     private void setCommandOfDayAndPool(int i, Matcher matcher) {
-        lastDayAndPoolCommand = DayAndPoolCommand.values()[i] ;
+        lastDayCommand = DayAndPoolCommand.values()[i] ;
         if (i==3){
-            lastDayAndPoolCommand.setName(matcher.group(1));
+            lastDayCommand.setName(matcher.group(1));
         }else if (i>3){
-            lastDayAndPoolCommand.setRow(Integer.parseInt(matcher.group(1)));
-            lastDayAndPoolCommand.setColumn(Integer.parseInt(matcher.group(2)));
+            lastDayCommand.setRow(Integer.parseInt(matcher.group(1)));
+            lastDayCommand.setColumn(Integer.parseInt(matcher.group(2)));
         }
     }
 
@@ -488,11 +504,11 @@ public class Request {
     }
 
     public DayAndPoolCommand getLastDayAndPoolCommand() {
-        return lastDayAndPoolCommand;
+        return lastDayCommand;
     }
 
-    public void setLastDayAndPoolCommand(DayAndPoolCommand lastDayAndPoolCommand) {
-        this.lastDayAndPoolCommand = lastDayAndPoolCommand;
+    public void setLastDayAndPoolCommand(DayAndPoolCommand lastDayCommand) {
+        this.lastDayCommand = lastDayCommand;
     }
 
     public PlayCommand getLastPlayCommand() {
@@ -501,5 +517,29 @@ public class Request {
 
     public void setLastPlayCommand(PlayCommand lastPlayCommand) {
         this.lastPlayCommand = lastPlayCommand;
+    }
+
+    public ZombieCommand getLastZombieCommand() {
+        return lastZombieCommand;
+    }
+
+    public void setLastZombieCommand(ZombieCommand lastZombieCommand) {
+        this.lastZombieCommand = lastZombieCommand;
+    }
+
+    public RailCommand getLastRailCommand() {
+        return lastRailCommand;
+    }
+
+    public void setLastRailCommand(RailCommand lastRailCommand) {
+        this.lastRailCommand = lastRailCommand;
+    }
+
+    public PvPCommand getLastPvPCommand() {
+        return lastPvPCommand;
+    }
+
+    public void setLastPvPCommand(PvPCommand lastPvPCommand) {
+        this.lastPvPCommand = lastPvPCommand;
     }
 }

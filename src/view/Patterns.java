@@ -74,6 +74,9 @@ public class Patterns {
             Pattern.compile("^(?i)start\\s*$"),
             Pattern.compile("^(?i)end turn\\s*$"),
             Pattern.compile("^(?i)show lawn\\s*$"),
-            Pattern.compile("^(?i)put (\\s+),(\\d+)\\s*$"),
+            Pattern.compile("^(?i)put (\\s+),(\\d+) in row (\\d+)\\s*$"),
+    };
+    static Pattern[] pVpPlayPatterns = new Pattern[]{
+         //todo
     };
 }
