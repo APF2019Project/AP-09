@@ -31,7 +31,7 @@ public class Controller {
             commandManagement(request, request.getCurrentMenu());
 
         }
-      //  Account.toJson();
+        Account.toJson();
     }
 
     private void commandManagement(Request request, Menu currentMenu) {
@@ -59,6 +59,64 @@ public class Controller {
                 break;
             case SHOP:
                 shopMenu(request.getLastShopCommand());
+                break;
+            case DAY_MODE:
+                dayPlayMenu(request.getLastDayAndPoolCommand());
+                break;
+            case PLAY:
+                playMenu(request.getLastPlayCommand(), request.getLastCollectionCommand()) ;
+                break;
+            case PVP_MODE:
+
+                break;
+            case RAIL_MODE:
+                break;
+            case WATER_MODE:
+                break;
+            case ZOMBIE_MODE:
+                break;
+        }
+    }
+
+    private void playMenu(PlayCommand playCommand, CollectionCommand collectionCommand) {
+        switch (playCommand){
+            case DAY:
+                collectionCommand.setNextPlayMenu(Menu.DAY_MODE);
+                Request.getInstance().nextMenu(Menu.COLLECTION);
+                break;
+            case RAIL:
+                collectionCommand.setNextPlayMenu(Menu.RAIL_MODE);
+                Request.getInstance().nextMenu(Menu.COLLECTION);
+                break;
+            case ZOMBIE:
+                collectionCommand.setNextPlayMenu(Menu.ZOMBIE_MODE);
+                Request.getInstance().nextMenu(Menu.COLLECTION);
+                break;
+            case PVP:
+                collectionCommand.setNextPlayMenu(Menu.PVP_MODE);
+                Request.getInstance().nextMenu(Menu.COLLECTION);
+                break;
+            case WATER:
+                collectionCommand.setNextPlayMenu(Menu.WATER_MODE);
+                Request.getInstance().nextMenu(Menu.COLLECTION);
+                break;
+        }
+    }
+
+    private void dayPlayMenu(DayAndPoolCommand dayAndPoolCommand) {
+        switch (dayAndPoolCommand){
+            case PLANT:
+                break;
+            case REMOVE:
+                break;
+            case SELECT:
+                break;
+            case END_TURN:
+                break;
+            case SHOW_HAND:
+                break;
+            case SHOW_LAWN:
+                break;
         }
     }
 
@@ -68,7 +126,7 @@ public class Controller {
                 Output.getInstance().showHand();
                 break;
             case PLAY:
-                //TODO
+                Request.getInstance().nextMenu(collectionCommand.getNextPlayMenu());
                 break;
             case REMOVE:
                 removeCard(collectionCommand);
@@ -240,15 +298,15 @@ public class Controller {
         }
     }
 
-    public void profile() { //todo it's just example ,  fit it into structure
+    public void profile() {
         Request.getInstance().nextMenu(Menu.PROFILE);
     }
 
-    public void play() { //todo don't touch this for now because battle is not ready yet!
+    public void play() {
         Request.getInstance().nextMenu(Menu.PLAY);
     }
 
-    public void shop() { //todo don't touch this it's mine
+    public void shop() {
         Request.getInstance().nextMenu(Menu.SHOP);
     }
 

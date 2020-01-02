@@ -10,23 +10,23 @@ import java.util.ArrayList;
 public class Musketeer extends Plant {
     private FireRate fireRate;
     private int speedLimiter;
-    private  int rangeOfAttack ;
-    private int physicalAttack ;
+    private int rangeOfAttack;
+    private int physicalAttack;
 
     public Musketeer(String plantName, int healthPoint, int attackPower, int coolDown, int sunUsage, int speedLimiter, FireRate fireRate, int rangeOfAttack, int physicalAttack) {
         super(plantName, healthPoint, attackPower, coolDown, sunUsage, PlantKind.MUSKETEER);
         this.speedLimiter = speedLimiter;
         this.fireRate = fireRate;
-        this.rangeOfAttack = rangeOfAttack ;
-        this.physicalAttack = physicalAttack ;
+        this.rangeOfAttack = rangeOfAttack;
+        this.physicalAttack = physicalAttack;
     }
 
     @Override
     public <T> ArrayList<T> operate(Class<T> type) {
         ArrayList<T> bullets = new ArrayList<>();
         for (int i = 0; i < this.fireRate.getBulletCount(); i++) {
-                Bullet bullet = new Bullet(BulletKind.STRAIGHT_BULLET, this.fireRate, 1, this.speedLimiter, 0);
-                bullets.add(type.cast(bullet));
+            Bullet bullet = new Bullet(BulletKind.STRAIGHT_BULLET, this.fireRate, 1, this.speedLimiter, 0);
+            bullets.add(type.cast(bullet));
         }
         return bullets;
     }

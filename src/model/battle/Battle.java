@@ -82,11 +82,6 @@ public class Battle {
         account.setMoney(account.getMoney() + prize);
     }
 
-    public boolean checkSelectedCellForSpace(Cell selectedCell) {
-        return selectedCell.getPlantInGame() == null;
-    }
-
-
     public void lawnMowerActivated(Cell cell) {
         for (int j = 0; j < MAP_COLUMNS_COUNT; ++j) {
             Cell c = this.map.getCell(cell.getRow(), j);

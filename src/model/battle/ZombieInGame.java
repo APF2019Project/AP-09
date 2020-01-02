@@ -160,6 +160,14 @@ public class ZombieInGame {
         //destroys plant
     }
 
+    public BulletEffect getBulletEffect() {
+        return bulletEffect;
+    }
+
+    public void setBulletEffect(BulletEffect bulletEffect) {
+        this.bulletEffect = bulletEffect;
+    }
+
     public Cell getCurrentCell() {
         return currentCell;
     }

@@ -7,7 +7,7 @@ public class Main {
 //        TODO :if you need to change zombie or plant variable and update JSON , first update MakePlantAndZombie class
 //        GetAndSetJSON.getInstance().setJson();
 //        GetAndSetWarriorJSON.getInstance().getJson();
-       // Account.getJson();
+        Account.getJson();
         Controller.getInstance().main();
     }
 

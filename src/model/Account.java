@@ -16,7 +16,7 @@ public class Account implements Comparable<Account> {
     private String userName;
     private String passWord;
     private ArrayList<Card> allCard;
-    private ArrayList<Card> deck ;
+    private ArrayList<Card> deck;
     private int killedZombies;
     private int money;
 
@@ -97,26 +97,26 @@ public class Account implements Comparable<Account> {
         YaGson yaGson = new YaGson();
         try {
             Account[] accounts = yaGson.fromJson(new FileReader("json/account.json"), Account[].class);
-            for (int i = 0; i < accounts.length; i += 2) {
-                Account.getAllAccount().add(accounts[i]);
-            }
-            System.out.println(Account.getAllAccount().size());
-
+            if (accounts != null)
+                for (int i = 0; i < accounts.length; i += 2) {
+                    Account.getAllAccount().add(accounts[i]);
+                }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public void increaseMoney(int n){
-        this.money += n ;
+    public void increaseMoney(int n) {
+        this.money += n;
     }
 
-    public void decreaseMoney(int n){
-        this.money -= n ;
+    public void decreaseMoney(int n) {
+        this.money -= n;
     }
+
     @Override
     public int compareTo(Account o) {
-        return Integer.compare(o.killedZombies ,this.killedZombies);
+        return Integer.compare(o.killedZombies, this.killedZombies);
     }
 
     public ArrayList<Card> getDeck() {

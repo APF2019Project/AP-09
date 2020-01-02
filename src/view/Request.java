@@ -21,6 +21,11 @@ public class Request {
     private ProfileMenuCommand lastProfileMenuCommand;
     private ShopCommand lastShopCommand;
     private CollectionCommand lastCollectionCommand;
+    private PlayCommand lastPlayCommand ;
+    private DayAndPoolCommand lastDayCommand ;
+    private ZombieCommand lastZombieCommand ;
+    private RailCommand lastRailCommand ;
+    private PvPCommand lastPvPCommand ;
     private boolean exit;
     private boolean help;
     private boolean isInvalidCommand ;
@@ -84,7 +89,62 @@ public class Request {
             case LEADER_BOARD:
                 leaderBoard();
                 break;
+            case PLAY:
+                play(command.toLowerCase());
+                break;
+            case DAY_MODE:
+                dayMode(command.toLowerCase());
+                break;
+            case ZOMBIE_MODE:
+
+                break;
+            case WATER_MODE:
+
+                break;
+            case RAIL_MODE:
+
+                break;
+            case PVP_MODE:
+
+                break;
         }
+    }
+
+    private void dayMode(String command) {
+        for (int i = 0; i < Patterns.dayAndPoolPlayPatterns.length; ++i) {
+            Matcher matcher = Patterns.dayAndPoolPlayPatterns[i].matcher(command);
+            if (matcher.matches()) {
+                setCommandOfDayAndPool(i, matcher);
+                return;
+            }
+        }
+        isInvalidCommand = true;
+
+    }
+
+    private void setCommandOfDayAndPool(int i, Matcher matcher) {
+        lastDayCommand = DayAndPoolCommand.values()[i] ;
+        if (i==3){
+            lastDayCommand.setName(matcher.group(1));
+        }else if (i>3){
+            lastDayCommand.setRow(Integer.parseInt(matcher.group(1)));
+            lastDayCommand.setColumn(Integer.parseInt(matcher.group(2)));
+        }
+    }
+
+    private void play(String command) {
+        for (int i = 0; i < Patterns.playPatterns.length; ++i) {
+            Matcher matcher = Patterns.playPatterns[i].matcher(command);
+            if (matcher.matches()) {
+                setCommandOfPlay(i);
+                return;
+            }
+        }
+        isInvalidCommand = true;
+    }
+
+    private void setCommandOfPlay(int i) {
+        lastPlayCommand = PlayCommand.values()[i] ;
     }
 
     private void leaderBoard() {
@@ -105,20 +165,7 @@ public class Request {
 
     private void setCommandOfMain(int i) {
         lastMainMenuCommand = MainMenuCommand.values()[i];
-        // doMainCommand(lastMainMenuCommand);
     }
-
-  /*  private void doMainCommand(MainMenuCommand command) {
-        switch (command){
-            case PROFILE:
-                break;
-            case SHOP:
-                break;
-            case PLAY:
-                break;
-        }
-    }
-    */
 
     private void profile(String command) {
         for (int i = 0; i < Patterns.profilePatterns.length; ++i) {
@@ -142,10 +189,10 @@ public class Request {
             lastProfileMenuCommand.setName(matcher.group(1));
             lastProfileMenuCommand.setPassword(matcher.group(2));
         }
-        doProfileCommand(lastProfileMenuCommand);
+        //doProfileCommand(lastProfileMenuCommand);
     }
 
-    private void doProfileCommand(ProfileMenuCommand command) {
+   /* private void doProfileCommand(ProfileMenuCommand command) {
         switch (command) {
             case CHANGE:
                 change(command);
@@ -163,9 +210,9 @@ public class Request {
                 show(command);
                 break;
         }
-    }
+    }*/
 
-    private void show(ProfileMenuCommand command) {
+   /* private void show(ProfileMenuCommand command) {
         Output.getInstance().printCurrentUserName();
     }
 
@@ -210,7 +257,7 @@ public class Request {
             }
             Output.getInstance().invalidUsername();
         }
-    }
+    }*/
 
     public void collection(String command) {
         for (int i = 0; i < Patterns.collectionPatterns.length; ++i) {
@@ -232,10 +279,10 @@ public class Request {
             lastCollectionCommand.setName(matcher.group(1));
         } else
             lastShopCommand = ShopCommand.values()[i];
-        doCollectionCommand(lastCollectionCommand);
+        //doCollectionCommand(lastCollectionCommand);
     }
 
-    private void doCollectionCommand(CollectionCommand command) {
+    /*private void doCollectionCommand(CollectionCommand command) {
         switch (command) {
             case SHOW_COLLECTION:
                 Output.getInstance().showCollection();
@@ -252,9 +299,9 @@ public class Request {
             case PLAY:
                 break;
         }
-    }
+    }*/
 
-    private void removeCard(CollectionCommand command) {
+   /* private void removeCard(CollectionCommand command) {
         String name = command.getName();
         for (Card card : Account.getLoggedAccount().getDeck()) {
             if (card.getCardName().equals(name)) {
@@ -263,9 +310,9 @@ public class Request {
             }
         }
         Output.getInstance().invalidCard();
-    }
+    }*/
 
-    private void selectCard(CollectionCommand command) {
+  /*  private void selectCard(CollectionCommand command) {
         String name = command.getName();
         for (Card card : Account.getLoggedAccount().getAllCard()) {
             if (card.getCardName().equals(name)) {
@@ -278,7 +325,7 @@ public class Request {
             }
         }
         Output.getInstance().invalidCard();
-    }
+    }*/
 
     public void shop(String command) {
         for (int i = 0; i < Patterns.shopPatterns.length; i++) {
@@ -297,10 +344,10 @@ public class Request {
             lastShopCommand.setName(matcher.group(1));
         } else
             lastShopCommand = ShopCommand.values()[i];
-        doShopCommand(lastShopCommand);
+       // doShopCommand(lastShopCommand);
     }
 
-    private void doShopCommand(ShopCommand shopCommand) {
+   /* private void doShopCommand(ShopCommand shopCommand) {
         switch (shopCommand) {
             case BUY:
                 String cardNameFromConsole = shopCommand.getName();
@@ -334,7 +381,7 @@ public class Request {
         }
 
     }
-
+*/
 
     public void signUp(String command) {
         Matcher matcher = Patterns.signUpPatterns[0].matcher(command);
@@ -454,5 +501,45 @@ public class Request {
 
     public ArrayList<Menu> getMenus() {
         return menus;
+    }
+
+    public DayAndPoolCommand getLastDayAndPoolCommand() {
+        return lastDayCommand;
+    }
+
+    public void setLastDayAndPoolCommand(DayAndPoolCommand lastDayCommand) {
+        this.lastDayCommand = lastDayCommand;
+    }
+
+    public PlayCommand getLastPlayCommand() {
+        return lastPlayCommand;
+    }
+
+    public void setLastPlayCommand(PlayCommand lastPlayCommand) {
+        this.lastPlayCommand = lastPlayCommand;
+    }
+
+    public ZombieCommand getLastZombieCommand() {
+        return lastZombieCommand;
+    }
+
+    public void setLastZombieCommand(ZombieCommand lastZombieCommand) {
+        this.lastZombieCommand = lastZombieCommand;
+    }
+
+    public RailCommand getLastRailCommand() {
+        return lastRailCommand;
+    }
+
+    public void setLastRailCommand(RailCommand lastRailCommand) {
+        this.lastRailCommand = lastRailCommand;
+    }
+
+    public PvPCommand getLastPvPCommand() {
+        return lastPvPCommand;
+    }
+
+    public void setLastPvPCommand(PvPCommand lastPvPCommand) {
+        this.lastPvPCommand = lastPvPCommand;
     }
 }
