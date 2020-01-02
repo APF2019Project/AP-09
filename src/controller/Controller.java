@@ -60,12 +60,41 @@ public class Controller {
             case SHOP:
                 shopMenu(request.getLastShopCommand());
                 break;
-            case DAY_AND_POOL_MODE:
-                dayAndPlayMenu(request.getLastDayAndPoolCommand());
+            case DAY_MODE:
+                dayPlayMenu(request.getLastDayAndPoolCommand());
+                break;
+            case PLAY:
+                playMenu(request.getLastPlayCommand(), request.getLastCollectionCommand()) ;
+                break;
         }
     }
 
-    private void dayAndPlayMenu(DayAndPoolCommand dayAndPoolCommand) {
+    private void playMenu(PlayCommand playCommand, CollectionCommand collectionCommand) {
+        switch (playCommand){
+            case DAY:
+                collectionCommand.setNextPlayMenu(Menu.DAY_MODE);
+                Request.getInstance().nextMenu(Menu.COLLECTION);
+                break;
+            case RAIL:
+                collectionCommand.setNextPlayMenu(Menu.RAIL_MODE);
+                Request.getInstance().nextMenu(Menu.COLLECTION);
+                break;
+            case ZOMBIE:
+                collectionCommand.setNextPlayMenu(Menu.ZOMBIE_MODE);
+                Request.getInstance().nextMenu(Menu.COLLECTION);
+                break;
+            case PVP:
+                collectionCommand.setNextPlayMenu(Menu.PVP_MODE);
+                Request.getInstance().nextMenu(Menu.COLLECTION);
+                break;
+            case WATER:
+                collectionCommand.setNextPlayMenu(Menu.WATER_MODE);
+                Request.getInstance().nextMenu(Menu.COLLECTION);
+                break;
+        }
+    }
+
+    private void dayPlayMenu(DayAndPoolCommand dayAndPoolCommand) {
         switch (dayAndPoolCommand){
             case PLANT:
                 break;
@@ -260,15 +289,15 @@ public class Controller {
         }
     }
 
-    public void profile() { //todo it's just example ,  fit it into structure
+    public void profile() {
         Request.getInstance().nextMenu(Menu.PROFILE);
     }
 
-    public void play() { //todo don't touch this for now because battle is not ready yet!
+    public void play() {
         Request.getInstance().nextMenu(Menu.PLAY);
     }
 
-    public void shop() { //todo don't touch this it's mine
+    public void shop() {
         Request.getInstance().nextMenu(Menu.SHOP);
     }
 

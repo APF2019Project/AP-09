@@ -21,6 +21,7 @@ public class Request {
     private ProfileMenuCommand lastProfileMenuCommand;
     private ShopCommand lastShopCommand;
     private CollectionCommand lastCollectionCommand;
+    private PlayCommand lastPlayCommand ;
     private DayAndPoolCommand lastDayAndPoolCommand ;
     private boolean exit;
     private boolean help;
@@ -115,7 +116,19 @@ public class Request {
         }
     }
 
-    private void play(String toLowerCase) {
+    private void play(String command) {
+        for (int i = 0; i < Patterns.playPatterns.length; ++i) {
+            Matcher matcher = Patterns.playPatterns[i].matcher(command);
+            if (matcher.matches()) {
+                setCommandOfPlay(i);
+                return;
+            }
+        }
+        isInvalidCommand = true;
+    }
+
+    private void setCommandOfPlay(int i) {
+        lastPlayCommand = PlayCommand.values()[i] ;
     }
 
     private void leaderBoard() {
@@ -136,20 +149,7 @@ public class Request {
 
     private void setCommandOfMain(int i) {
         lastMainMenuCommand = MainMenuCommand.values()[i];
-        // doMainCommand(lastMainMenuCommand);
     }
-
-  /*  private void doMainCommand(MainMenuCommand command) {
-        switch (command){
-            case PROFILE:
-                break;
-            case SHOP:
-                break;
-            case PLAY:
-                break;
-        }
-    }
-    */
 
     private void profile(String command) {
         for (int i = 0; i < Patterns.profilePatterns.length; ++i) {
@@ -493,5 +493,13 @@ public class Request {
 
     public void setLastDayAndPoolCommand(DayAndPoolCommand lastDayAndPoolCommand) {
         this.lastDayAndPoolCommand = lastDayAndPoolCommand;
+    }
+
+    public PlayCommand getLastPlayCommand() {
+        return lastPlayCommand;
+    }
+
+    public void setLastPlayCommand(PlayCommand lastPlayCommand) {
+        this.lastPlayCommand = lastPlayCommand;
     }
 }
