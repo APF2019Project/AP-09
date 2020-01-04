@@ -30,7 +30,7 @@ public class MakePlantAndZombie {
         new Other("Zombie", 2, 1, 2,0, true, false, false, false, HelmetType.NONE); //Zombie
         new Other("FootballZombie", 4, 1, 3,0, true, false, false, true, HelmetType.NONE); //Football Zombie
         new Other("BucketheadZombie", 3, 1, 2,0,true, false, true, false, HelmetType.BUCKETHEAD); //BucketHead Zombie
-       // new Zombie("ConeheadZombie", 3, 1,2, 0, true, false, true, false, HelmetType.CONEHEAD); //ConeHead Zombie
+        new Other("ConeheadZombie", 3, 1,2, 0, true, false, true, false, HelmetType.CONEHEAD); //ConeHead Zombie
         new TruckZombie("Zomboni", 3, 0, 2, 0, true, false, false, false, true);//Zomboni
         new TruckZombie("CatapultZombie", 3, 0, 2, 0, true, false, false, false, false);//Catapult Zombie
         new BungeeZombie("BungeeZombie", 3,0,0, 0, true, false, false, false);//Bungee Zombie
