@@ -42,6 +42,11 @@ public class Account implements Comparable<Account> {
         Account.allAccount = allAccount;
     }
 
+    public static void removeAccount(Account account) {
+        int i = allAccount.indexOf(account);
+        allAccount.remove(i);
+    }
+
     public String getUserName() {
         return userName;
     }
