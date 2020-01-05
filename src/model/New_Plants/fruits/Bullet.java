@@ -31,21 +31,34 @@ public class Bullet extends Fruit {
         for (int i = 0; i < bulletSpeed + 1; i++) {
             if (this.getPosition().getZombies() != null) {
                 if (BulletKind.STRAIGHT_BULLET == bulletKind) {
-                    this.getPosition().getZombies().get(0).getZombie().decreaseZombieHealthStraight(damagingPower);
-                    if (speedLimiter > 0) {
-                        this.getPosition().getZombies().get(0).getBulletEffect().setSpeedLimit(speedLimiter);
-                    }
-                } else if (BulletKind.CURVED_BULLET == bulletKind) {
+                    int counter =0 ;
+                    while (counter<this.getPosition().getZombies().size()){
+                        if (!this.getPosition().getZombies().get(counter).getZombie().getZombieName().equals("BalloonZombie")){
+                            this.getPosition().getZombies().get(counter).getZombie().decreaseZombieHealthStraight(damagingPower);
+                            if (speedLimiter > 0) {
+                                this.getPosition().getZombies().get(counter).getBulletEffect().setSpeedLimit(speedLimiter);
+                            }
+                            if (this.getPosition().getZombies().get(counter).getZombie().getHealthPoint() <= 0) {
+                                this.getPosition().getZombies().get(counter).getZombie().setDead(true);
+                            }
+                            this.setDead(true);
+                            return;
+                        } else
+                            counter++ ;
+                        }
+                    }else if (BulletKind.CURVED_BULLET == bulletKind) {
                     this.getPosition().getZombies().get(0).getZombie().decreaseZombieHealthCurve(damagingPower);
                     if (speedLimiter > 0) {
                         this.getPosition().getZombies().get(0).getBulletEffect().setSpeedLimit(speedLimiter);
                     }
+                    if (this.getPosition().getZombies().get(0).getZombie().getHealthPoint() <= 0) {
+                        this.getPosition().getZombies().get(0).getZombie().setDead(true);
+                    }
+                    this.setDead(true);
                 }
-                if (this.getPosition().getZombies().get(0).getZombie().getHealthPoint() <= 0) {
-                    this.getPosition().getZombies().get(0).getZombie().setDead(true);
-                }
-                this.setDead(true);
-            } else {
+
+
+                } else {
                 if (this.getPosition().getColumn() == Constants.MAP_COLUMNS_COUNT - 1) {
                     this.setDead(true);
                 }else
