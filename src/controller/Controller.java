@@ -45,9 +45,6 @@ public class Controller {
             case SIGN_UP:
                 signUp(request.getLastSignUpCommand());
                 break;
-            case LEADER_BOARD:
-                leaderBoard();
-                break;
             case MAIN:
                 mainMenu(request.getLastMainMenuCommand());
                 break;
@@ -262,7 +259,7 @@ public class Controller {
                 Output.getInstance().showMenu(Menu.SIGN_UP);
                 break;
             case LEADER_BOARD:
-                Request.getInstance().nextMenu(Menu.LEADER_BOARD);
+                leaderBoard();
                 break;
         }
     }
@@ -338,7 +335,7 @@ public class Controller {
         for (Account account : Account.getAllAccount()) {
             Output.getInstance().printLeaderBoard(account);
         }
-        Request.getInstance().nextMenu(Menu.LEADER_BOARD);
+
     }
 
     public void signUp(SignUpCommand signUpCommand) {
@@ -352,6 +349,7 @@ public class Controller {
         }
         if (flagOfExistence == 0) {
             Account account = new Account(name, password);
+            Account.getAllAccount().add(account);
             Account.setLoggedAccount(account);
             System.out.println("account created :)))))");
             System.out.println("***********  WELCOME TO THE GAME  ***********");
