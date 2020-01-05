@@ -16,6 +16,7 @@ public class Output {
                 majorLoginHelp();
                 break;
             case MAIN:
+                mainHelp();
                 break;
             case SHOP:
                 shopHelp();
@@ -28,12 +29,18 @@ public class Output {
         }
     }
 
+    private void mainHelp() {
+        System.out.println("*** Profile ***");
+        System.out.println("*** Shop ***");
+        System.out.println("*** Play ***");
+    }
+
     private void profileHelp() {
-        System.out.println("change your account");
-        System.out.println("rename your username");
-        System.out.println("delete your profile");
-        System.out.println("show your username");
-        System.out.println("create new profile");
+        System.out.println("*** change your account ***");
+        System.out.println("*** rename your username ***");
+        System.out.println("*** delete your profile ***");
+        System.out.println("*** show your username ***");
+        System.out.println("*** create new profile ***");
     }
 
     public static Output getInstance() {
@@ -141,5 +148,9 @@ public class Output {
 
     public void cannotSelectMoreCards() {
         System.out.println("cannot select more cards");
+    }
+
+    public void successfullyDeleted() {
+        System.out.println("Successfully deleted");
     }
 }

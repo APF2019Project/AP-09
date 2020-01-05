@@ -197,9 +197,18 @@ public class Controller {
         String name = profileMenuCommand.getName();
         String password = profileMenuCommand.getPassword();
         int flagOfExistence = 0;
-        for (Account account : Account.getAllAccount()) {
+        ArrayList<Account> accounts = Account.getAllAccount();
+        for (Account account : accounts) {
             if (account.getUserName().equals(name) && account.getPassWord().equals(password)) {
-                Account.getAllAccount().remove(account);
+                Output.getInstance().successfullyDeleted();
+                Account.removeAccount(account);
+                if(name.equals(Account.getLoggedAccount().getUserName())) {
+                    Request.getInstance().nextMenu(MAJOR_LOGIN);
+                    Account.setLoggedAccount(null);
+                    System.out.println("*** MAJOR_LOGIN Menu ***");
+                }
+                flagOfExistence = 1;
+                break;
             }
         }
         if (flagOfExistence != 1)
@@ -299,6 +308,7 @@ public class Controller {
     }
 
     public void profile() {
+        System.out.println("*** Profile ***");
         Request.getInstance().nextMenu(Menu.PROFILE);
     }
 
@@ -341,7 +351,8 @@ public class Controller {
             }
         }
         if (flagOfExistence == 0) {
-            Account.getAllAccount().add(new Account(name, password));
+            Account account = new Account(name, password);
+            Account.setLoggedAccount(account);
             System.out.println("account created :)))))");
             System.out.println("***********  WELCOME TO THE GAME  ***********");
             Request.getInstance().nextMenu(MAJOR_LOGIN);
