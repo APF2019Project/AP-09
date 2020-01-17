@@ -21,9 +21,11 @@ public class Account implements Comparable<Account> {
     private int money;
 
     public Account(String userName, String passWord) {
-        allAccount.add(this);
-        this.userName = userName;
-        this.passWord = passWord;
+            allAccount.add(this);
+            this.userName = userName;
+            this.passWord = passWord;
+            allCard.add(Card.targetCard("Peashooter"));
+            // todo do the rest for zombies and plants
     }
 
     public static Account getLoggedAccount() {

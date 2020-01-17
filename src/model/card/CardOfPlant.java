@@ -2,7 +2,10 @@ package model.card;
 
 import model.New_Plants.Plant;
 
+import java.util.ArrayList;
+
 public class CardOfPlant extends Card {
+    private static ArrayList<CardOfPlant> plantCards = new ArrayList<>();
     private Plant plant;
 
     public CardOfPlant(Plant plant) {
@@ -10,6 +13,10 @@ public class CardOfPlant extends Card {
         this.plant = plant;
         this.setCardName(plant.getPlantName());
         calculatePrice();
+    }
+
+    public static ArrayList<CardOfPlant> getPlantCards() {
+        return plantCards;
     }
 
     public Plant getPlant() {
@@ -22,7 +29,7 @@ public class CardOfPlant extends Card {
 
     public static void defineAllCards() {
         for (Plant plant : Plant.getPlants()) {
-            Card.getCards().add(new CardOfPlant(plant));
+            plantCards.add(new CardOfPlant(plant));
         }
     }
 

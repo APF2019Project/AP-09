@@ -2,8 +2,15 @@ package model.card;
 
 import model.New_Zombies.Zombie;
 
+import java.util.ArrayList;
+
 public class CardOfZombie extends Card {
+    private static ArrayList<CardOfZombie> zombieCards = new ArrayList<>();
     private Zombie zombie;
+
+    public static ArrayList<CardOfZombie> getZombieCards() {
+        return zombieCards;
+    }
 
     public Zombie getZombie() {
         return zombie;
@@ -22,7 +29,7 @@ public class CardOfZombie extends Card {
 
     public static void defineAllCards() {
         for (Zombie zombie : Zombie.getZombies()) {
-            Card.getCards().add(new CardOfZombie(zombie));
+            zombieCards.add(new CardOfZombie(zombie));
         }
     }
 

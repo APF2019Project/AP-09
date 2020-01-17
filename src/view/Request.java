@@ -86,9 +86,6 @@ public class Request {
             case MAIN:
                 main(command.toLowerCase());
                 break;
-            case LEADER_BOARD:
-                leaderBoard();
-                break;
             case PLAY:
                 play(command.toLowerCase());
                 break;
@@ -145,11 +142,6 @@ public class Request {
 
     private void setCommandOfPlay(int i) {
         lastPlayCommand = PlayCommand.values()[i] ;
-    }
-
-    private void leaderBoard() {
-        //Output.getInstance().printLeaderBoard();
-        //TODO need to fix leaderBoardPrint method
     }
 
     private void main(String command) {

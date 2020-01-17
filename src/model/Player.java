@@ -51,4 +51,7 @@ public class Player {
         return false;
     }
 
+    public ArrayList<Card> getDeck() {
+        return deck;
+    }
 }

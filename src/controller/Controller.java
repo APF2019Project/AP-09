@@ -1,6 +1,10 @@
 package controller;
 
+import model.GameMode;
+import model.Player;
+import model.battle.Battle;
 import model.card.Card;
+import model.card.CardOfZombie;
 import view.*;
 import model.Account;
 
@@ -79,6 +83,11 @@ public class Controller {
         switch (playCommand){
             case DAY:
                 collectionCommand.setNextPlayMenu(Menu.DAY_MODE);
+                Player player = new Player() ;
+                player.setAccount(Account.getLoggedAccount());
+                Player AI = new Player() ;
+                AI.getDeck().addAll(CardOfZombie.getZombieCards());
+                Battle battle = new Battle(player,AI, GameMode.DAY,3);
                 Request.getInstance().nextMenu(Menu.COLLECTION);
                 break;
             case RAIL:

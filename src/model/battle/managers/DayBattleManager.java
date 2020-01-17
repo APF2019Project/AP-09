@@ -55,8 +55,8 @@ public class DayBattleManager extends BattleManager {
     private void generateRandomZombie() {
         Random random = new Random();
         int randomRow = random.nextInt(6);
-        int randomCard = random.nextInt(Battle.getRunningBattle().getZombies().getAccount().getDeck().size());
-        Zombie zombie = ((CardOfZombie) Battle.getRunningBattle().getZombies().getAccount().getDeck().get(randomCard)).getZombie();
+        int randomCard = random.nextInt(Battle.getRunningBattle().getZombies().getDeck().size());
+        Zombie zombie = ((CardOfZombie) Battle.getRunningBattle().getZombies().getDeck().get(randomCard)).getZombie();
         Cloner cloner = new Cloner();
         Zombie newRandomZombie = cloner.deepClone(zombie);
         new ZombieInGame(newRandomZombie, Battle.getRunningBattle().getMap().getCell(randomRow, 18));

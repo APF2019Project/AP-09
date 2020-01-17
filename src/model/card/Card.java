@@ -9,6 +9,16 @@ abstract public class Card {
     private CardType cardType;
     private String cardName;
 
+    public static Card targetCard(String cardName){
+        if (cards.stream().anyMatch(card -> card.getCardName().equals(cardName))) {
+            Card card = (Card) Card.cards.stream().filter(card1 -> card1.getCardName().equals(cardName)).toArray()[0];
+            return card ;
+        }
+        else
+            return null;
+
+    }
+
     public Card(CardType cardType) {
         this.cardType = cardType;
     }
