@@ -112,6 +112,7 @@ public class Controller {
     private void dayPlayMenu(DayAndPoolCommand dayAndPoolCommand) {
         switch (dayAndPoolCommand){
             case PLANT:
+
                 break;
             case REMOVE:
                 break;
@@ -133,6 +134,7 @@ public class Controller {
                 break;
             case PLAY:
                 Request.getInstance().nextMenu(collectionCommand.getNextPlayMenu());
+                Output.getInstance().showMenu(Request.getInstance().getCurrentMenu());
                 break;
             case REMOVE:
                 removeCard(collectionCommand);
@@ -162,8 +164,12 @@ public class Controller {
         Account account = Account.getLoggedAccount();
         for(Card card : account.getAllCard()){
             if(card.getCardName().equals(collectionCommand.getName())){
-                account.getDeck().add(card);
-                System.out.println("you have selected a card");
+                if (account.getDeck().size()<7){
+                    account.getDeck().add(card);
+                    System.out.println("you have selected a card");
+                    return;
+                }else
+                    System.out.println("out of index");
                 return;
             }
         }
@@ -383,6 +389,7 @@ public class Controller {
             Request.getInstance().nextMenu(MAJOR_LOGIN);
             Request.getInstance().nextMenu(MAIN);
             System.out.println("you logged in :)) ");
+            Output.getInstance().showMenu(Request.getInstance().getCurrentMenu());
         } else
             Output.getInstance().invalidAccount();
     }
